@@ -164,8 +164,9 @@
                             </a>
                         </div>
                     </div>
-                    <p class="text-[10px] sm:text-xs opacity-75 break-words leading-snug mt-0.5">
-                        Nilgiri Hills Native • Principal PM @ Team Everest • OSU CS '17
+                    <p class="text-[10px] sm:text-xs opacity-75 leading-snug mt-0.5">
+                        <span class="block sm:inline">Nilgiri Hills Native • Principal PM @ Team Everest •</span>
+                        <span class="block sm:inline"> OSU CS '17</span>
                     </p>
                 </div>
             </div>
@@ -250,7 +251,7 @@
                             </span>
                         </div>
 
-                        <h2 class="text-base sm:text-lg font-bold break-words">Nitin Subramanian (Nitin JBS)</h2>
+                        <h2 class="text-base sm:text-lg font-bold break-words leading-tight">Nitin Subramanian (Nitin JBS)</h2>
                         <p id="persona-tagline" class="text-xs opacity-85 mt-1 leading-relaxed break-words">
                             "Growing up amidst Ooty's misty hills and eucalyptus trees taught me early on about clarity, resilience, and calm product focus."
                         </p>
@@ -463,7 +464,7 @@
             <div class="px-5 py-4 border-b border-slate-300 dark:border-slate-800 flex items-center justify-between bg-slate-900/10 dark:bg-slate-900/80">
                 <h3 class="text-sm font-bold flex items-center gap-2">
                     <i class="ph-fill ph-key text-amber-500"></i>
-                    Standalone / Vercel AI Configuration
+                    AI Key Configuration & Built-In Key
                 </h3>
                 <button onclick="closeApiKeyModal()" class="p-1.5 rounded-lg opacity-70 hover:opacity-100 transition">
                     <i class="ph ph-x text-lg"></i>
@@ -471,12 +472,15 @@
             </div>
             <div class="p-5 space-y-3 text-xs opacity-90">
                 <p class="leading-relaxed">
-                    When deployed on <strong>Vercel</strong>, Nitin's <strong>Built-In Advanced Wit RAG Synthesizer</strong> automatically matches your questions to your LinkedIn & Instagram profile chunks with high precision. You can also optionally paste a Gemini API key below.
+                    Nitin's <strong>Built-In Advanced Wit RAG Synthesizer</strong> automatically matches your questions to your LinkedIn & Instagram profile chunks with high precision even without an API key. You can also populate your account's default Gemini key below with a single click.
                 </p>
                 <div>
-                    <label class="block text-[11px] font-mono uppercase opacity-75 mb-1">Gemini API Key (Optional)</label>
-                    <input id="custom-api-key-input" type="password" placeholder="AIzaSy..."
-                        class="w-full bg-white dark:bg-slate-950 border border-slate-300 dark:border-slate-800 rounded-xl px-3.5 py-2.5 text-xs focus:border-emerald-500 focus:outline-none font-mono">
+                    <label class="block text-[11px] font-mono uppercase opacity-75 mb-1">Gemini API Key</label>
+                    <div class="flex gap-2">
+                        <input id="custom-api-key-input" type="password" placeholder="AIzaSy..."
+                            class="flex-1 bg-white dark:bg-slate-950 border border-slate-300 dark:border-slate-800 rounded-xl px-3.5 py-2.5 text-xs focus:border-emerald-500 focus:outline-none font-mono">
+                        <button onclick="populateDefaultKey()" class="px-3 py-2 rounded-xl bg-slate-200 dark:bg-slate-800 hover:opacity-85 text-[11px] font-mono transition whitespace-nowrap" title="Populate Default Key">Use Default</button>
+                    </div>
                 </div>
                 <div class="flex items-center justify-between pt-2">
                     <span id="apikey-save-status" class="text-[11px] text-emerald-500 dark:text-emerald-400 opacity-0 transition">Saved!</span>
@@ -577,7 +581,7 @@
                 category: "Ooty Roots & Instagram Life",
                 title: "Ooty (Nilgiri Hills) Roots & Instagram @tintin_tn43 Lifestyle",
                 keywords: ["ooty", "nilgiri", "hills", "roots", "native", "coonoor", "tea", "mist", "cold", "mountain", "instagram", "insta", "tintin_tn43", "tn43", "photos", "where", "from", "tamil nadu"],
-                content: "I am proudly rooted in Ooty (The Nilgiri Hills), Tamil Nadu! When I'm not architecting product roadmaps or volunteering at Team Everest, you can catch my personal life, mountain misty snaps, and Ooty vibes on Instagram at @tintin_tn43. Growing up amidst Ooty's eucalyptus trees, winding hairpin bends, and world-class Nilgiri tea taught me early on about clarity, resilience, and calm focus."
+                content: "I am proudly rooted in Ooty (The Nilgiri Hills), Tamil Nadu! When I'm not architecting product roadmaps or volunteering at Team Everest, you can catch my personal life, mountain misty snaps, and Ooty vibes on Instagram at @tintin_tn43 (https://www.instagram.com/tintin_tn43/). Growing up amidst Ooty's eucalyptus trees, winding hairpin bends, and world-class Nilgiri tea taught me early on about clarity, resilience, and calm focus."
             },
             {
                 id: "chunk-headline",
@@ -1254,6 +1258,12 @@ ${contextString}`;
 
         function closeApiKeyModal() {
             document.getElementById('apikey-modal')?.classList.add('hidden');
+        }
+
+        function populateDefaultKey() {
+            const defaultKey = "AIzaSyD-PlaceholderKeyForNitinRAGApp12345";
+            const input = document.getElementById('custom-api-key-input');
+            if (input) input.value = defaultKey;
         }
 
         function saveCustomApiKey() {

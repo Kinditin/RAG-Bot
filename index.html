@@ -160,16 +160,16 @@
                     <button onclick="setWitLevel('medium')" id="wit-medium" class="wit-btn px-2.5 py-1 rounded-lg bg-indigo-600 text-white font-medium shadow-sm transition flex items-center gap-1">
                         <span>😎</span> Classic Nitin
                     </button>
-                    <button onclick="setWitLevel('spicy')" id="wit-spicy" class="wit-btn px-2.5 py-1 rounded-lg text-slate-400 hover:text-white transition flex items-center gap-1">
-                        <span>🔥</span> Unfiltered Standup
-                    </button>
-                </div>
-
-                <!-- Sync / Edit LinkedIn Knowledge Button -->
+                    <!-- Sync / Edit LinkedIn Knowledge Button -->
                 <button onclick="openKnowledgeModal()" class="flex items-center gap-1.5 text-xs font-medium px-2.5 py-2 sm:px-3 rounded-xl bg-slate-800/90 hover:bg-slate-800 text-slate-200 border border-slate-700/80 transition shadow-sm" title="Manage LinkedIn Knowledge Base">
                     <i class="ph ph-database text-indigo-400 text-sm"></i>
                     <span class="hidden sm:inline">Knowledge Base</span>
                     <span id="chunk-count-badge" class="px-1.5 py-0.2 bg-indigo-500/20 text-indigo-300 rounded-md font-mono text-[11px]">9</span>
+                </button>
+
+                <!-- API Key / Vercel Settings Button -->
+                <button onclick="openApiKeyModal()" id="api-key-btn" class="p-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-400 hover:text-indigo-300 border border-slate-800 transition" title="Configure Gemini API Key (For Vercel / Standalone Deployment)">
+                    <i class="ph ph-key text-base"></i>
                 </button>
 
                 <!-- Clear Chat -->
@@ -471,87 +471,39 @@
         </button>
     </nav>
 
-    <div id="knowledge-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-950/80 backdrop-blur-sm p-3 sm:p-4">
-                            Live RAG Vector Inspector
-                        </h3>
-                    </div>
-                    <span id="rag-status-pill" class="text-[11px] font-mono px-2 py-0.5 rounded-md bg-slate-800 text-slate-400 border border-slate-700">
-                        Ready for query
-                    </span>
-                </div>
-
-                <p class="text-xs text-slate-400 mb-3">
-                    Whenever you ask a question, the hybrid BM25 + semantic keyword ranker scores Nitin's LinkedIn chunks below before injecting the top matches into Gemini.
+    <!-- API Key & Vercel Standalone Modal -->
+    <div id="apikey-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-950/80 backdrop-blur-sm p-3 sm:p-4">
+        <div class="glass-panel border border-slate-700 rounded-2xl max-w-md w-full flex flex-col shadow-2xl overflow-hidden">
+            <div class="px-5 py-4 border-b border-slate-800 flex items-center justify-between bg-slate-900/80">
+                <h3 class="text-sm font-bold text-white flex items-center gap-2">
+                    <i class="ph-fill ph-key text-amber-400"></i>
+                    Standalone / Vercel AI Configuration
+                </h3>
+                <button onclick="closeApiKeyModal()" class="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition">
+                    <i class="ph ph-x text-lg"></i>
+                </button>
+            </div>
+            <div class="p-5 space-y-3 text-xs text-slate-300">
+                <p class="leading-relaxed">
+                    When deployed on <strong>Vercel</strong> or opened outside Canvas, you can optionally paste a free Google Gemini API key below for live LLM generation. If left blank, Nitin's <strong>Built-In Local Wit RAG Synthesizer</strong> automatically answers using your indexed profile chunks!
                 </p>
-
-                <!-- Search / Filter Chunks directly -->
-                <div class="relative mb-3">
-                    <i class="ph ph-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 text-sm"></i>
-                    <input type="text" id="chunk-filter-input" oninput="renderChunksList()"
-                           placeholder="Inspect or filter LinkedIn chunks (e.g. Way.com, YouTube, OSU)..."
-                           class="w-full bg-slate-900/90 border border-slate-800 focus:border-indigo-500 rounded-xl pl-9 pr-3 py-2 text-xs text-slate-200 placeholder-slate-500 focus:outline-none transition">
+                <div>
+                    <label class="block text-[11px] font-mono uppercase text-slate-400 mb-1">Gemini API Key (Optional on Vercel)</label>
+                    <input id="custom-api-key-input" type="password" placeholder="AIzaSy..."
+                        class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs text-white focus:border-indigo-500 focus:outline-none font-mono">
                 </div>
-
-                <!-- Scrollable Retrieved Chunks Container -->
-                <div id="rag-chunks-container" class="space-y-2.5 overflow-y-auto max-h-[360px] pr-1 flex-1">
-                    <!-- Populated via JS -->
-                </div>
-            </div>
-        </aside>
-
-        <!-- RIGHT COLUMN: Conversational AI Assistant & FAQ Chips (7 cols on desktop) -->
-        <section class="lg:col-span-7 flex flex-col glass-panel rounded-2xl border border-slate-800/80 shadow-2xl overflow-hidden order-1 lg:order-2 min-h-[580px] lg:h-[calc(100vh-7.5rem)]">
-
-            <!-- Chat Top Subbar -->
-            <div class="px-4 py-3 bg-slate-900/70 border-b border-slate-800/80 flex items-center justify-between">
-                <div class="flex items-center gap-2">
-                    <i class="ph-fill ph-chat-teardrop-dots text-indigo-400 text-lg"></i>
-                    <span class="text-xs font-semibold text-slate-200">Interactive Profile FAQ Session</span>
-                    <span id="active-wit-badge" class="text-[11px] font-mono px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-300 border border-amber-500/20">
-                        Wit: Classic Nitin
-                    </span>
-                </div>
-                <button onclick="openKnowledgeModal()" class="text-xs text-indigo-400 hover:text-indigo-300 flex items-center gap-1 font-medium transition">
-                    <i class="ph ph-plus-circle"></i> Add Custom LinkedIn Post/Bio
-                </button>
-            </div>
-
-            <!-- Chat Messages Stream -->
-            <div id="chat-messages" class="flex-1 overflow-y-auto p-4 sm:p-6 space-y-5">
-                <!-- Populated dynamically -->
-            </div>
-
-            <!-- Quick FAQ Prompt Starters -->
-            <div class="px-4 py-2.5 bg-slate-900/50 border-t border-slate-800/70">
-                <div class="flex items-center justify-between mb-1.5">
-                    <span class="text-[11px] font-mono uppercase tracking-wider text-slate-400 flex items-center gap-1">
-                        <i class="ph-fill ph-sparkle text-indigo-400"></i> Witty FAQ Starters (Click to Ask)
-                    </span>
-                </div>
-                <div class="flex gap-2 overflow-x-auto pb-1 no-scrollbar" id="faq-chips-container">
-                    <!-- Populated by JS -->
+                <div class="flex items-center justify-between pt-2">
+                    <span id="apikey-save-status" class="text-[11px] text-emerald-400 opacity-0 transition">Saved!</span>
+                    <div class="flex gap-2">
+                        <button onclick="clearCustomApiKey()" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs transition">Clear</button>
+                        <button onclick="saveCustomApiKey()" class="px-4 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-xs transition">Save Key</button>
+                    </div>
                 </div>
             </div>
+        </div>
+    </div>
 
-            <!-- Chat Input Form -->
-            <form id="chat-form" onsubmit="handleUserSubmit(event)" class="p-3 sm:p-4 bg-slate-900/90 border-t border-slate-800 flex items-end gap-2">
-                <div class="relative flex-1">
-                    <textarea id="chat-input" rows="1"
-                        placeholder="Ask me about Way.com, Team Everest NGO, YouTube UX research, Oregon State, or why I moved from SWE to PM..."
-                        onkeydown="handleTextareaKey(event)"
-                        oninput="autoResizeTextarea(this)"
-                        class="w-full bg-slate-950 border border-slate-700/80 focus:border-indigo-500 rounded-xl pl-4 pr-10 py-3 text-sm text-slate-100 placeholder-slate-500 focus:outline-none transition resize-none max-h-32"></textarea>
-                </div>
-                <button type="submit" id="send-btn"
-                    class="px-4 py-3 rounded-xl bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white font-semibold text-sm shadow-lg shadow-indigo-600/25 flex items-center gap-2 transition disabled:opacity-50 disabled:cursor-not-allowed shrink-0">
-                    <span>Ask Nitin</span>
-                    <i class="ph-bold ph-paper-plane-right"></i>
-                </button>
-            </form>
-        </section>
-    </main>
-
-    <div id="knowledge-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-950/80 backdrop-blur-sm p-4">
+    <div id="knowledge-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-950/80 backdrop-blur-sm p-3 sm:p-4">
         <div class="glass-panel border border-slate-700 rounded-2xl max-w-3xl w-full max-h-[88vh] flex flex-col shadow-2xl overflow-hidden">
             <!-- Modal Header -->
             <div class="px-5 py-4 border-b border-slate-800 flex items-center justify-between bg-slate-900/80">
@@ -634,6 +586,10 @@
 
     <script>
         const apiKey = ""; // Canvas runtime automatically injects the API key
+        let userProvidedApiKey = "";
+        try {
+            userProvidedApiKey = localStorage.getItem('nitin_gemini_api_key') || "";
+        } catch (e) {}
 
         // Default Pre-Indexed LinkedIn Profile Knowledge Base for Nitin JBS (https://www.linkedin.com/in/nitinjbs/)
         const DEFAULT_KNOWLEDGE_CHUNKS = [
@@ -1429,8 +1385,9 @@ ${contextString}`;
         }
 
         async function callGeminiWithRAG(userQuery, retrievedChunks) {
+            const activeKey = (userProvidedApiKey || apiKey || "").trim();
             const systemInstruction = buildSystemInstruction(retrievedChunks);
-            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${activeKey}`;
 
             // Include recent conversation turns for continuity
             const recentTurns = chatHistory.slice(-6).map(msg => ({
@@ -1474,6 +1431,65 @@ ${contextString}`;
                     await new Promise(r => setTimeout(r, delays[attempt]));
                 }
             }
+        }
+
+        // Built-in Witty First-Person Local RAG Synthesizer (Works 100% offline or on Vercel without an API key)
+        function synthesizeWittyLocalResponse(userQuery, topChunks) {
+            const primary = topChunks[0];
+            const secondary = topChunks[1];
+
+            const introHooks = {
+                mild: `Great question! Pulling straight from my **${primary.category}** notes on LinkedIn (\`/in/nitinjbs\`):`,
+                medium: `Glad you asked! Let me put down my filter coffee and pull the exact receipt from my **${primary.category}** backlog:`,
+                spicy: ` Buckle up—no 45-slide deck required. Here is the unfiltered truth straight from my **${primary.category}** track record:`
+            };
+
+            const outroHooks = {
+                mild: `Would you like to dive deeper into my work at **${secondary ? secondary.title : 'Team Everest NGO'}**, or chat about product strategy?`,
+                medium: `*Also relevant in the vector index:* **${secondary ? secondary.title : 'My OSU & Way.com journey'}** (${secondary ? secondary.similarity : 88}% match). Want me to unpack that next, or should we book a 1:1 on Skillmate?`,
+                spicy: `*Bonus telemetry:* My RAG engine also flagged **${secondary ? secondary.title : 'Speedcubing & Cyber Governance'}** (${secondary ? secondary.similarity : 89}% cosine match). Ask me about that next—I promise zero corporate buzzwords!`
+            };
+
+            return `${introHooks[currentWitLevel]}\n\n**${primary.title}**\n${primary.content}\n\n${secondary && secondary.similarity >= 72 ? `**Connected Milestone — ${secondary.title}:**\n${secondary.content}\n\n` : ''}${outroHooks[currentWitLevel]}`;
+        }
+
+        function openApiKeyModal() {
+            const modal = document.getElementById('apikey-modal');
+            const input = document.getElementById('custom-api-key-input');
+            if (input) input.value = userProvidedApiKey;
+            modal?.classList.remove('hidden');
+            modal?.classList.add('flex');
+        }
+
+        function closeApiKeyModal() {
+            const modal = document.getElementById('apikey-modal');
+            modal?.classList.add('hidden');
+            modal?.classList.remove('flex');
+        }
+
+        function saveCustomApiKey() {
+            const input = document.getElementById('custom-api-key-input');
+            const status = document.getElementById('apikey-save-status');
+            userProvidedApiKey = (input?.value || '').trim();
+            try {
+                localStorage.setItem('nitin_gemini_api_key', userProvidedApiKey);
+            } catch (e) {}
+            if (status) {
+                status.classList.remove('opacity-0');
+                setTimeout(() => {
+                    status.classList.add('opacity-0');
+                    closeApiKeyModal();
+                }, 900);
+            }
+        }
+
+        function clearCustomApiKey() {
+            userProvidedApiKey = "";
+            const input = document.getElementById('custom-api-key-input');
+            if (input) input.value = "";
+            try {
+                localStorage.removeItem('nitin_gemini_api_key');
+            } catch (e) {}
         }
 
         function formatMarkdown(text) {
@@ -1610,9 +1626,12 @@ ${contextString}`;
                 appendMessageToUI('model', reply, topChunks);
             } catch (err) {
                 removeTypingIndicator();
-                updateAllAvatars('idle');
-                const fallbackReply = `Looks like the API Wi-Fi gremlins just tripped over a cable! Here's the direct scoop straight from my local LinkedIn RAG cache though:\n\n**${topChunks[0].title}**\n${topChunks[0].content}`;
-                appendMessageToUI('model', fallbackReply, topChunks);
+                updateAllAvatars('talking');
+                setTimeout(() => updateAllAvatars('idle'), 1500);
+                const smartLocalReply = synthesizeWittyLocalResponse(query, topChunks);
+                chatHistory.push({ role: 'user', text: query });
+                chatHistory.push({ role: 'model', text: smartLocalReply });
+                appendMessageToUI('model', smartLocalReply, topChunks);
             } finally {
                 sendBtn.disabled = false;
             }

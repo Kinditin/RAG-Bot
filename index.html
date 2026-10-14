@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ask Nitin.AI — Witty LinkedIn Profile RAG Assistant</title>
+    <title>Ask Nitin.AI — Witty LinkedIn & Instagram RAG Assistant</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -132,9 +132,9 @@
 </head>
 <body class="theme-medium font-sans antialiased min-h-[100dvh] flex flex-col overflow-x-hidden pb-safe-nav lg:pb-0 transition-colors duration-500">
 
-    <header class="sticky top-0 z-30 glass-panel border-b px-3 py-2 sm:px-6 sm:py-3 transition-colors duration-500">
+    <header class="sticky top-0 z-30 glass-panel border-b px-3 py-2.5 sm:px-6 sm:py-3 transition-colors duration-500">
         <div class="max-w-7xl mx-auto flex items-center justify-between gap-2 sm:gap-4">
-            <div class="flex items-center gap-2 sm:gap-3.5 min-w-0 flex-1">
+            <div class="flex items-center gap-2.5 sm:gap-3.5 min-w-0 flex-1">
                 <div class="relative group cursor-pointer shrink-0" onclick="cycleWitLevel()" title="Tap to cycle Nitin's Wit Persona!">
                     <div id="header-avatar-ring" class="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-tr from-emerald-500 via-teal-500 to-cyan-500 p-0.5 shadow-lg shadow-emerald-500/25 transition-all duration-300 group-hover:scale-105">
                         <div id="header-avatar-container" class="w-full h-full bg-slate-900 rounded-[14px] flex items-center justify-center overflow-hidden">
@@ -149,12 +149,20 @@
                             <span class="break-words">Nitin JBS</span>
                             <span class="text-[9px] sm:text-xs font-mono uppercase px-1.5 sm:px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 border border-emerald-500/35 shrink-0">Ooty Hills 🌲</span>
                         </h1>
-                        <a href="https://www.linkedin.com/in/nitinjbs/" target="_blank" rel="noopener noreferrer"
-                           class="text-emerald-700 dark:text-emerald-300 hover:opacity-85 transition-colors text-xs sm:text-sm flex items-center gap-1 bg-emerald-500/10 px-1.5 sm:px-2 py-0.5 rounded-lg border border-emerald-500/25 shrink-0"
-                           title="Open Nitin's LinkedIn Profile">
-                            <i class="ph-fill ph-linkedin-logo"></i>
-                            <span class="hidden sm:inline text-xs font-medium">/in/nitinjbs</span>
-                        </a>
+                        <div class="flex items-center gap-1.5 flex-wrap">
+                            <a href="https://www.linkedin.com/in/nitinjbs/" target="_blank" rel="noopener noreferrer"
+                               class="text-emerald-700 dark:text-emerald-300 hover:opacity-85 transition-colors text-xs flex items-center gap-1 bg-emerald-500/10 px-2 py-0.5 rounded-lg border border-emerald-500/25 shrink-0"
+                               title="Open Nitin's LinkedIn Profile">
+                                <i class="ph-fill ph-linkedin-logo"></i>
+                                <span class="text-[11px] font-medium">LinkedIn</span>
+                            </a>
+                            <a href="https://www.instagram.com/tintin_tn43/" target="_blank" rel="noopener noreferrer"
+                               class="text-pink-600 dark:text-pink-400 hover:opacity-85 transition-colors text-xs flex items-center gap-1 bg-pink-500/10 px-2 py-0.5 rounded-lg border border-pink-500/25 shrink-0"
+                               title="Open Nitin's Instagram Profile (@tintin_tn43)">
+                                <i class="ph-fill ph-instagram-logo"></i>
+                                <span class="text-[11px] font-medium">Instagram</span>
+                            </a>
+                        </div>
                     </div>
                     <p class="text-[10px] sm:text-xs opacity-75 break-words leading-snug mt-0.5">
                         Nilgiri Hills Native • Principal PM @ Team Everest • OSU CS '17
@@ -178,10 +186,10 @@
                     </button>
                 </div>
 
-                <button onclick="openKnowledgeModal()" class="flex items-center gap-1 text-xs font-medium px-2 py-1.5 sm:px-3 sm:py-2 rounded-xl bg-slate-900/10 dark:bg-slate-800/90 hover:opacity-85 border border-slate-300 dark:border-slate-700 transition shadow-sm" title="Manage LinkedIn Knowledge Base">
+                <button onclick="openKnowledgeModal()" class="flex items-center gap-1 text-xs font-medium px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-xl bg-slate-900/10 dark:bg-slate-800/90 hover:opacity-85 border border-slate-300 dark:border-slate-700 transition shadow-sm" title="Manage LinkedIn & Instagram RAG Knowledge Base">
                     <i class="ph ph-database text-emerald-500 dark:text-emerald-400 text-sm"></i>
                     <span class="hidden sm:inline">Knowledge Base</span>
-                    <span id="chunk-count-badge" class="px-1.5 py-0.2 bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 rounded-md font-mono text-[10px] sm:text-[11px]">10</span>
+                    <span id="chunk-count-badge" class="px-1.5 py-0.2 bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 rounded-md font-mono text-[10px] sm:text-[11px]">11</span>
                 </button>
 
                 <button onclick="openApiKeyModal()" id="api-key-btn" class="p-1.5 sm:p-2 rounded-xl bg-slate-900/10 dark:bg-slate-900 hover:opacity-85 border border-slate-300 dark:border-slate-800 transition" title="Configure Gemini API Key">
@@ -214,7 +222,7 @@
 
     <main class="flex-1 max-w-7xl w-full mx-auto grid grid-cols-1 lg:grid-cols-12 gap-3 sm:gap-6 p-2 sm:p-6 items-stretch">
 
-        <!-- LEFT COLUMN (Mobile Tab 1: Studio / Avatar & Radar) -->
+        <!-- LEFT COLUMN (Mobile Tab 1 by default: Studio / Avatar & Radar) -->
         <aside id="mobile-panel-studio" class="flex lg:col-span-5 flex-col gap-3.5 sm:gap-4 order-1 min-w-0">
 
             <div id="persona-stage-card" class="glass-panel rounded-2xl p-3.5 sm:p-5 shadow-xl relative overflow-hidden transition-all duration-500">
@@ -320,7 +328,7 @@
                                 <text x="110" y="14" text-anchor="middle" fill="currentColor" font-size="8.5" font-family="JetBrains Mono" font-weight="600">PRODUCT STRATEGY</text>
                                 <text x="191" y="83" text-anchor="start" fill="currentColor" font-size="8" font-family="JetBrains Mono">SWE & ARCH</text>
                                 <text x="162" y="184" text-anchor="middle" fill="currentColor" font-size="8" font-family="JetBrains Mono">UX & RESEARCH</text>
-                                <text x="58" y="184" text-anchor="middle" fill="currentColor" font-size="8" font-family="JetBrains Mono">OOTY & NGO</text>
+                                <text x="58" y="184" text-anchor="middle" fill="currentColor" font-size="8" font-family="JetBrains Mono">OOTY & INSTA</text>
                                 <text x="29" y="83" text-anchor="end" fill="currentColor" font-size="8" font-family="JetBrains Mono">AI & CYBER</text>
                             </svg>
                             <span id="radar-caption" class="text-[10px] font-mono text-emerald-700 dark:text-emerald-300 mt-1 text-center font-medium">
@@ -362,7 +370,7 @@
                     <div class="relative mb-2.5">
                         <i class="ph ph-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 opacity-50 text-sm"></i>
                         <input type="text" id="chunk-filter-input" oninput="renderChunksList()"
-                               placeholder="Filter chunks (e.g. Ooty, Way.com, YouTube, OSU)..."
+                               placeholder="Filter chunks (e.g. Ooty, Instagram, Way.com, Team Everest)..."
                                class="w-full bg-slate-900/5 dark:bg-slate-900/90 border border-slate-300 dark:border-slate-800 focus:border-emerald-500 rounded-xl pl-9 pr-3 py-2 text-xs placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none transition">
                     </div>
                     <div id="rag-chunks-container" class="space-y-2.5 overflow-y-auto max-h-[360px] pr-1 flex-1"></div>
@@ -379,7 +387,7 @@
                         <!-- Smiley Avatar -->
                     </div>
                     <div class="min-w-0 flex items-center gap-1.5 flex-wrap">
-                        <span class="text-xs font-semibold truncate">Interactive Profile FAQ</span>
+                        <span class="text-xs font-semibold truncate">Interactive Profile FAQ RAG</span>
                         <span id="active-wit-badge" class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-800 dark:text-amber-300 border border-amber-500/20 shrink-0">
                             😊 Classic Nitin
                         </span>
@@ -390,7 +398,7 @@
                         <i class="ph-fill ph-chart-polar"></i> <span>Studio</span>
                     </button>
                     <button onclick="openKnowledgeModal()" class="text-[11px] sm:text-xs text-emerald-700 dark:text-emerald-400 hover:opacity-85 flex items-center gap-1 font-medium transition px-1.5 py-1 rounded-lg hover:bg-slate-900/10">
-                        <i class="ph ph-plus-circle"></i> <span class="hidden sm:inline">Add LinkedIn Post/Bio</span><span class="sm:hidden">Add Bio</span>
+                        <i class="ph ph-plus-circle"></i> <span class="hidden sm:inline">Add Bio/Insta Post</span><span class="sm:hidden">Add Bio</span>
                     </button>
                 </div>
             </div>
@@ -409,7 +417,7 @@
             <form id="chat-form" onsubmit="handleUserSubmit(event)" class="p-2.5 sm:p-4 bg-slate-900/10 dark:bg-slate-900/95 border-t border-slate-300/40 dark:border-slate-800 flex items-end gap-2 shrink-0">
                 <div class="relative flex-1 min-w-0">
                     <textarea id="chat-input" rows="1"
-                        placeholder="Ask about Ooty roots, Way.com, Team Everest, YouTube, OSU..."
+                        placeholder="Ask about Ooty roots, Instagram @tintin_tn43, Way.com, Team Everest..."
                         onkeydown="handleTextareaKey(event)"
                         oninput="autoResizeTextarea(this)"
                         class="w-full bg-white dark:bg-slate-950 border border-slate-300 dark:border-slate-700/80 focus:border-emerald-500 rounded-xl pl-3 pr-3 py-2.5 sm:py-3 text-base sm:text-sm placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none transition resize-none max-h-24 leading-snug"></textarea>
@@ -463,7 +471,7 @@
             </div>
             <div class="p-5 space-y-3 text-xs opacity-90">
                 <p class="leading-relaxed">
-                    When deployed on <strong>Vercel</strong>, Nitin's <strong>Built-In Advanced Wit RAG Synthesizer</strong> automatically matches your questions to your LinkedIn profile chunks with high precision. You can also optionally paste a Gemini API key below.
+                    When deployed on <strong>Vercel</strong>, Nitin's <strong>Built-In Advanced Wit RAG Synthesizer</strong> automatically matches your questions to your LinkedIn & Instagram profile chunks with high precision. You can also optionally paste a Gemini API key below.
                 </p>
                 <div>
                     <label class="block text-[11px] font-mono uppercase opacity-75 mb-1">Gemini API Key (Optional)</label>
@@ -487,10 +495,10 @@
                 <div>
                     <h3 class="text-base font-bold flex items-center gap-2">
                         <i class="ph-fill ph-database text-emerald-600 dark:text-emerald-400"></i>
-                        LinkedIn Profile RAG Knowledge Base (`linkedin.com/in/nitinjbs`)
+                        LinkedIn & Instagram Profile RAG Knowledge Base (`nitinjbs` & `@tintin_tn43`)
                     </h3>
                     <p class="text-xs opacity-75 mt-0.5">
-                        View, edit, or paste raw text directly from your LinkedIn "About", "Experience", or recent posts to expand the RAG vector index.
+                        View, edit, or paste raw text from your LinkedIn profile or Instagram posts (`@tintin_tn43`) to expand the RAG vector index.
                     </p>
                 </div>
                 <button onclick="closeKnowledgeModal()" class="p-1.5 rounded-lg opacity-70 hover:opacity-100 transition">
@@ -501,18 +509,18 @@
             <div class="p-5 overflow-y-auto space-y-5 flex-1">
                 <div class="bg-emerald-500/10 border border-emerald-500/30 rounded-xl p-4">
                     <h4 class="text-xs font-mono uppercase tracking-wider text-emerald-700 dark:text-emerald-300 font-semibold mb-3 flex items-center gap-1.5">
-                        <i class="ph-fill ph-plus-circle"></i> Inject New LinkedIn Section or Post
+                        <i class="ph-fill ph-plus-circle"></i> Inject New LinkedIn / Instagram Chunk
                     </h4>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
                         <div>
                             <label class="block text-xs opacity-75 mb-1">Section Title / Role</label>
-                            <input id="new-chunk-title" type="text" placeholder="e.g., Featured Post on AI Agents / Product Strategy"
+                            <input id="new-chunk-title" type="text" placeholder="e.g., Instagram Post on Ooty Mist / Product Strategy"
                                 class="w-full bg-white dark:bg-slate-950 border border-slate-300 dark:border-slate-800 rounded-lg px-3 py-2 text-xs focus:border-emerald-500 focus:outline-none">
                         </div>
                         <div>
                             <label class="block text-xs opacity-75 mb-1">Category Tag</label>
                             <select id="new-chunk-category" class="w-full bg-white dark:bg-slate-950 border border-slate-300 dark:border-slate-800 rounded-lg px-3 py-2 text-xs focus:border-emerald-500 focus:outline-none">
-                                <option value="Ooty Roots & Background">Ooty Roots & Background</option>
+                                <option value="Ooty Roots & Instagram Life">Ooty Roots & Instagram Life</option>
                                 <option value="Experience">Experience</option>
                                 <option value="Leadership & NGO">Leadership & NGO</option>
                                 <option value="Education">Education</option>
@@ -523,8 +531,8 @@
                         </div>
                     </div>
                     <div class="mb-3">
-                        <label class="block text-xs opacity-75 mb-1">Content / Raw LinkedIn Copy</label>
-                        <textarea id="new-chunk-content" rows="3" placeholder="Paste any new milestone, LinkedIn summary, or witty anecdote here..."
+                        <label class="block text-xs opacity-75 mb-1">Content / Raw Social Copy</label>
+                        <textarea id="new-chunk-content" rows="3" placeholder="Paste any new milestone, Instagram post caption from @tintin_tn43, or witty anecdote here..."
                             class="w-full bg-white dark:bg-slate-950 border border-slate-300 dark:border-slate-800 rounded-lg p-3 text-xs focus:border-emerald-500 focus:outline-none"></textarea>
                     </div>
                     <div class="flex justify-between items-center">
@@ -565,18 +573,18 @@
 
         const DEFAULT_KNOWLEDGE_CHUNKS = [
             {
-                id: "chunk-ooty-roots",
-                category: "Ooty Roots & Background",
-                title: "Ooty (Nilgiri Hills) Origins & Mountain Clarity Mindset",
-                keywords: ["ooty", "nilgiri", "hills", "roots", "native", "coonoor", "tea", "mist", "cold", "mountain", "where", "from", "tamil nadu"],
-                content: "I am proudly rooted in Ooty (The Nilgiri Hills), Tamil Nadu! Growing up amidst Ooty's misty eucalyptus trees, winding hairpin bends, and world-class Nilgiri tea taught me early on about clarity, resilience, and calm focus. Whether I'm debugging production code or architecting product roadmaps at Team Everest and Way.com, I bring that same grounded, mountain-fresh perspective to every challenge."
+                id: "chunk-ooty-insta",
+                category: "Ooty Roots & Instagram Life",
+                title: "Ooty (Nilgiri Hills) Roots & Instagram @tintin_tn43 Lifestyle",
+                keywords: ["ooty", "nilgiri", "hills", "roots", "native", "coonoor", "tea", "mist", "cold", "mountain", "instagram", "insta", "tintin_tn43", "tn43", "photos", "where", "from", "tamil nadu"],
+                content: "I am proudly rooted in Ooty (The Nilgiri Hills), Tamil Nadu! When I'm not architecting product roadmaps or volunteering at Team Everest, you can catch my personal life, mountain misty snaps, and Ooty vibes on Instagram at @tintin_tn43. Growing up amidst Ooty's eucalyptus trees, winding hairpin bends, and world-class Nilgiri tea taught me early on about clarity, resilience, and calm focus."
             },
             {
                 id: "chunk-headline",
                 category: "Identity & Headline",
                 title: "Headline & Core Persona (linkedin.com/in/nitinjbs)",
                 keywords: ["who", "nitin", "jbs", "subramanian", "headline", "about", "summary", "role", "current", "bio", "introduce", "yourself", "summary", "profile"],
-                content: "Nitin JBS (Nitin Subramanian) is a Principal Product Manager at Team Everest NGO, CTO & Strategic Advisor in AI & Technology Governance, ISAC Certified Cyber Crime Intervention Officer, and former Product Manager & Senior Software Engineer at Way.com. Hailing from Ooty, he blends 15+ years of hardcore software engineering, UX research at YouTube, and product leadership with an unapologetically witty, zero-fluff approach."
+                content: "Nitin JBS (Nitin Subramanian) is a Principal Product Manager at Team Everest NGO, CTO & Strategic Advisor in AI & Technology Governance, ISAC Certified Cyber Crime Intervention Officer, and former Product Manager & Senior Software Engineer at Way.com. Hailing from Ooty (active on Instagram @tintin_tn43), he blends 15+ years of hardcore software engineering, UX research at YouTube, and product leadership with an unapologetically witty, zero-fluff approach."
             },
             {
                 id: "chunk-teameverest",
@@ -704,7 +712,7 @@
                         <circle cx="36" cy="43" r="5" fill="#0f172a"/>
                         <circle cx="64" cy="43" r="5" fill="#0f172a"/>
                         <path d="M32,56 Q50,72 68,56" stroke="#0f172a" stroke-width="5.5" fill="none" stroke-linecap="round"/>
-                        <text x="68" y="78" font-size="20">🧊</text>
+                        <text x="68" y="78" font-size="20">📸</text>
                     </svg>
                 `
             },
@@ -744,12 +752,12 @@
 
         const CAREER_TIMELINE = [
             {
-                year: "Roots",
-                role: "Ooty (Nilgiri Hills) Origin & Tea Country Focus",
-                org: "Nilgiri Hills, Tamil Nadu",
-                badge: "Mountain Roots",
-                color: "text-emerald-700 dark:text-emerald-300 border-emerald-500/30 bg-emerald-500/10",
-                query: "Tell me about your Ooty roots in the Nilgiri hills and how it shapes your perspective!"
+                year: "Roots & Insta",
+                role: "Ooty (Nilgiri Hills) & Instagram @tintin_tn43",
+                org: "Nilgiri Hills & IG",
+                badge: "Ooty Vibe",
+                color: "text-pink-600 dark:text-pink-400 border-pink-500/30 bg-pink-500/10",
+                query: "Tell me about your Ooty roots and your Instagram lifestyle at @tintin_tn43!"
             },
             {
                 year: "Present",
@@ -861,7 +869,7 @@
                     'from-emerald-500 to-teal-400',
                     'from-teal-500 to-green-400',
                     'from-green-500 to-emerald-400',
-                    'from-slate-600 to-emerald-400'
+                    'from-pink-500 to-emerald-400'
                 ];
                 const grad = barColors[idx] || barColors[3];
                 return `
@@ -976,7 +984,7 @@
         }
 
         const FAQ_STARTERS = [
-            "Tell me about your Ooty (Nilgiri Hills) roots!",
+            "Tell me about your Ooty (Nilgiri Hills) roots & Instagram @tintin_tn43!",
             "Give me the 60-second witty pitch on who Nitin JBS is!",
             "How did you climb from Software Engineer to PM at Way.com?",
             "What do you do as Principal PM at Team Everest NGO?",
@@ -986,7 +994,7 @@
 
         function initKnowledgeBase() {
             try {
-                const saved = localStorage.getItem('nitin_rag_chunks_v4');
+                const saved = localStorage.getItem('nitin_rag_chunks_v5');
                 if (saved) {
                     knowledgeChunks = JSON.parse(saved);
                 } else {
@@ -1001,7 +1009,7 @@
 
         function saveKnowledgeBase() {
             try {
-                localStorage.setItem('nitin_rag_chunks_v4', JSON.stringify(knowledgeChunks));
+                localStorage.setItem('nitin_rag_chunks_v5', JSON.stringify(knowledgeChunks));
             } catch (e) {}
             updateChunkBadge();
             renderChunksList();
@@ -1037,8 +1045,8 @@
                     if (matches) score += Math.min(matches.length * 4, 12);
                 });
 
-                if (chunk.id === 'chunk-ooty-roots' && (cleanQuery.includes('ooty') || cleanQuery.includes('nilgiri') || cleanQuery.includes('hills') || cleanQuery.includes('roots') || cleanQuery.includes('coonoor') || cleanQuery.includes('tea'))) {
-                    score += 50;
+                if (chunk.id === 'chunk-ooty-insta' && (cleanQuery.includes('ooty') || cleanQuery.includes('nilgiri') || cleanQuery.includes('instagram') || cleanQuery.includes('insta') || cleanQuery.includes('tintin_tn43') || cleanQuery.includes('tn43') || cleanQuery.includes('hills') || cleanQuery.includes('roots') || cleanQuery.includes('coonoor') || cleanQuery.includes('tea'))) {
+                    score += 65;
                 }
                 if (chunk.id === 'chunk-headline' && (cleanQuery.includes('who') || cleanQuery.includes('nitin') || cleanQuery.includes('pitch') || cleanQuery.includes('summary') || cleanQuery.includes('jbs'))) {
                     score += 40;
@@ -1169,33 +1177,32 @@
 
         function buildSystemInstruction(retrievedChunks) {
             const witInstructions = {
-                mild: "Speak in first-person ('I', 'my') as Nitin JBS. Keep your tone warm, articulate, insightful, and lightly humorous—highlighting your Ooty Nilgiri roots with mountain-fresh clarity.",
-                medium: "Speak in first-person ('I', 'my') as Nitin JBS. Use your signature pleasant, witty, self-aware, and welcoming writing style! Drop clever analogies about growing up in Ooty's misty hills, software engineering vs. product management, sprint backlogs, YouTube UX research, OSU grad school, and NGO impact.",
-                spicy: "Speak in first-person ('I', 'my') as Nitin JBS in peak witty LinkedIn creator mode! Be playfully roasting of tech buzzwords, bad PRDs, and scope creep while delivering rock-solid facts from your Ooty origins and professional career."
+                mild: "Speak in first-person ('I', 'my') as Nitin JBS. Keep your tone warm, articulate, insightful, and lightly humorous—highlighting your Ooty Nilgiri roots and Instagram @tintin_tn43 lifestyle with mountain-fresh clarity.",
+                medium: "Speak in first-person ('I', 'my') as Nitin JBS. Use your signature pleasant, witty, self-aware, and welcoming writing style! Drop clever analogies about growing up in Ooty's misty hills, sharing snaps on Instagram (@tintin_tn43), software engineering vs. product management, sprint backlogs, YouTube UX research, OSU grad school, and NGO impact.",
+                spicy: "Speak in first-person ('I', 'my') as Nitin JBS in peak witty LinkedIn creator mode! Be playfully roasting of tech buzzwords, bad PRDs, and scope creep while delivering rock-solid facts from your Ooty origins, Instagram @tintin_tn43, and professional career."
             };
 
             const contextString = retrievedChunks.map((c, idx) =>
                 `[CHUNK ${idx + 1} | ${c.category} | ${c.title} | Match: ${c.similarity}%]\n${c.content}`
             ).join('\n\n');
 
-            return `You are the official AI Personal Assistant & Digital Twin of Nitin JBS (Nitin Subramanian), answering questions directly from his LinkedIn Profile (https://www.linkedin.com/in/nitinjbs/).
+            return `You are the official AI Personal Assistant & Digital Twin of Nitin JBS (Nitin Subramanian), answering questions directly from his LinkedIn Profile (https://www.linkedin.com/in/nitinjbs/) and Instagram (@tintin_tn43).
 
 PERSONA & WRITING STYLE:
 ${witInstructions[currentWitLevel]}
 
 STRICT RAG GROUNDING RULES:
 1. Always answer in the FIRST PERSON ("I", "me", "my") as Nitin JBS.
-2. Ground all factual claims strictly in the RETRIEVED LINKEDIN KNOWLEDGE CHUNKS below.
+2. Ground all factual claims strictly in the RETRIEVED LINKEDIN & INSTAGRAM KNOWLEDGE CHUNKS below.
 3. Keep responses punchy, engaging, well-formatted with clean bullet points or bold highlights where helpful.
 
-RETRIEVED LINKEDIN KNOWLEDGE CHUNKS:
+RETRIEVED PROFILE KNOWLEDGE CHUNKS:
 ${contextString}`;
         }
 
         async function callGeminiWithRAG(userQuery, retrievedChunks) {
             const activeKey = (userProvidedApiKey || apiKey || "").trim();
             if (!activeKey) {
-                // If no API key is set, fall back to our advanced local RAG synthesizer which mimics Gemini precisely
                 throw new Error("No API key configured; using local synthesis.");
             }
             const systemInstruction = buildSystemInstruction(retrievedChunks);
@@ -1229,12 +1236,12 @@ ${contextString}`;
             const secondary = topChunks[1];
 
             const introHooks = {
-                mild: `Vanakkam from the Nilgiri hills! Pulling straight from my **${primary.category}** notes on LinkedIn (\`/in/nitinjbs\`), with a touch of Ooty mountain clarity:`,
-                medium: `Great question! Welcoming that question with open arms (and a breath of crisp mountain air from Ooty)—here is the exact receipt from my career backlog:`,
+                mild: `Vanakkam from the Nilgiri hills! Pulling straight from my **${primary.category}** notes on LinkedIn and Instagram (\`@tintin_tn43\`), with a touch of Ooty mountain clarity:`,
+                medium: `Great question! Welcoming that question with open arms (and a breath of crisp mountain air from Ooty, plus some IG highlights from @tintin_tn43)—here is the exact receipt from my career and personal life backlog:`,
                 spicy: ` Buckle up—no 45-slide deck required. Here is the unfiltered truth straight from my **${primary.category}** track record:`
             };
 
-            return `${introHooks[currentWitLevel]}\n\n**${primary.title}**\n${primary.content}\n\n${secondary && secondary.similarity >= 72 ? `**Connected Milestone — ${secondary.title}:**\n${secondary.content}\n\n` : ''}Would you like to explore more of my Ooty background, my journey at Way.com, or my NGO work at Team Everest?`;
+            return `${introHooks[currentWitLevel]}\n\n**${primary.title}**\n${primary.content}\n\n${secondary && secondary.similarity >= 72 ? `**Connected Milestone — ${secondary.title}:**\n${secondary.content}\n\n` : ''}Would you like to explore more of my Ooty background, my Instagram snaps (@tintin_tn43), my journey at Way.com, or my NGO work at Team Everest?`;
         }
 
         function openApiKeyModal() {
@@ -1471,7 +1478,7 @@ ${contextString}`;
             chatHistory = [];
             const container = document.getElementById('chat-messages');
             container.innerHTML = '';
-            const welcomeText = `Vanakkam & hello from the misty hills of Ooty! 👋 I'm **Nitin JBS's AI Twin**—welcoming you with mountain-fresh clarity and wired directly into my LinkedIn knowledge base (\`/in/nitinjbs\`).\n\nWhether you're curious about my **Ooty roots in the Nilgiris**, how I climbed from **Software Engineer to Product Manager at Way.com**, what I'm building as **Principal PM at Team Everest NGO**, or why I'm a **Certified Cyber Crime Intervention Officer**—ask away!\n\n*Pro-tip: Watch the **Live RAG Vector Inspector** light up as I pull exact career chunks.*`;
+            const welcomeText = `Vanakkam & hello from the misty hills of Ooty! 👋 I'm **Nitin JBS's AI Twin**—welcoming you with mountain-fresh clarity and wired directly into my LinkedIn & Instagram (\`@tintin_tn43\`) knowledge base.\n\nWhether you're curious about my **Ooty roots in the Nilgiris**, my **Instagram lifestyle snaps (@tintin_tn43)**, how I climbed from **Software Engineer to Product Manager at Way.com**, what I'm building as **Principal PM at Team Everest NGO**, or why I'm a **Certified Cyber Crime Intervention Officer**—ask away!\n\n*Pro-tip: Watch the **Live RAG Vector Inspector** light up as I pull exact profile chunks.*`;
             appendMessageToUI('model', welcomeText, []);
             renderChunksList();
         }

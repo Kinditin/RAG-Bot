@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en" class="light" id="app-root-html">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -34,13 +34,12 @@
         }
     </script>
     <style>
-        /* Custom Scrollbars */
         ::-webkit-scrollbar {
             width: 6px;
             height: 6px;
         }
         ::-webkit-scrollbar-track {
-            background: rgba(15, 23, 42, 0.6);
+            background: rgba(15, 23, 42, 0.08);
         }
         ::-webkit-scrollbar-thumb {
             background: rgba(99, 102, 241, 0.35);
@@ -50,13 +49,45 @@
             background: rgba(99, 102, 241, 0.6);
         }
 
-        /* Subtle glassmorphism and glow animations */
-        .glass-panel {
-            background: rgba(15, 23, 42, 0.75);
+        /* Adaptive Theme 1: Lighter Warm Daylight (Polite PM) */
+        body.theme-mild {
+            background: linear-gradient(135deg, #f0fdf4 0%, #f0f9ff 50%, #e0f2fe 100%);
+            color: #0f172a;
+        }
+        body.theme-mild .glass-panel {
+            background: rgba(255, 255, 255, 0.88);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(14, 165, 233, 0.22);
+            box-shadow: 0 10px 30px -5px rgba(14, 165, 233, 0.1);
         }
+
+        /* Adaptive Theme 2: Mild Pleasant Dusk / Lavender-Breeze (Classic Nitin) */
+        body.theme-medium {
+            background: linear-gradient(135deg, #eef2ff 0%, #e0e7ff 50%, #e2e8f0 100%);
+            color: #1e1b4b;
+        }
+        body.theme-medium .glass-panel {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(99, 102, 241, 0.25);
+            box-shadow: 0 10px 30px -5px rgba(99, 102, 241, 0.12);
+        }
+
+        /* Adaptive Theme 3: Deep Dark Obsidian & Ember (Spicy Standup Wit) */
+        body.theme-spicy {
+            background: linear-gradient(135deg, #090d16 0%, #0f172a 50%, #171007 100%);
+            color: #f8fafc;
+        }
+        body.theme-spicy .glass-panel {
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(245, 158, 11, 0.28);
+            box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.45);
+        }
+
         .chunk-highlight {
             animation: pulseBorder 1.8s ease-out;
         }
@@ -74,29 +105,12 @@
             40% { transform: scale(1); opacity: 1; }
         }
 
-        /* Expressive Human Avatar Animations */
         @keyframes avatarFloat {
             0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-4px) rotate(1deg); }
-        }
-        @keyframes avatarTalk {
-            0%, 100% { transform: scaleY(1); }
-            50% { transform: scaleY(1.35); }
-        }
-        @keyframes eyeBlink {
-            0%, 94%, 98%, 100% { transform: scaleY(1); }
-            96% { transform: scaleY(0.1); }
-        }
-        @keyframes radarPulse {
-            0%, 100% { opacity: 0.55; transform: scale(1); }
-            50% { opacity: 0.85; transform: scale(1.02); }
+            50% { transform: translateY(-3px) rotate(0.8deg); }
         }
         .avatar-float {
-            animation: avatarFloat 4s ease-in-out infinite;
-        }
-        .avatar-eye {
-            transform-origin: center;
-            animation: eyeBlink 4.5s infinite;
+            animation: avatarFloat 4.2s ease-in-out infinite;
         }
         .radar-polygon {
             transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -104,7 +118,6 @@
         .bar-fill {
             transition: width 0.7s cubic-bezier(0.22, 1, 0.36, 1);
         }
-        /* Hide scrollbars for horizontal chip strips */
         .no-scrollbar::-webkit-scrollbar {
             display: none;
         }
@@ -112,40 +125,39 @@
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
-        /* Safe area padding for modern mobile browsers */
         .pb-safe-nav {
-            padding-bottom: calc(4.5rem + env(safe-area-inset-bottom, 0px));
+            padding-bottom: calc(4.75rem + env(safe-area-inset-bottom, 0px));
         }
     </style>
 </head>
-<body class="bg-slate-950 text-slate-100 font-sans antialiased selection:bg-indigo-500 selection:text-white min-h-[100dvh] flex flex-col overflow-x-hidden bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-indigo-950/40 via-slate-950 to-slate-950 pb-safe-nav lg:pb-0">
+<body class="theme-medium font-sans antialiased min-h-[100dvh] flex flex-col overflow-x-hidden pb-safe-nav lg:pb-0 transition-colors duration-500">
 
-    <header class="sticky top-0 z-30 glass-panel border-b border-slate-800/80 px-3 py-2 sm:px-6 sm:py-3">
+    <header class="sticky top-0 z-30 glass-panel border-b px-3 py-2 sm:px-6 sm:py-3 transition-colors duration-500">
         <div class="max-w-7xl mx-auto flex items-center justify-between gap-2 sm:gap-3">
-            <!-- Left: Expressive Mini Human Avatar + Identity -->
+            <!-- Left: Avatar & Identity -->
             <div class="flex items-center gap-2 sm:gap-3.5 min-w-0 flex-1">
                 <div class="relative group cursor-pointer shrink-0" onclick="cycleWitLevel()" title="Tap to cycle Nitin's Wit Persona!">
                     <div id="header-avatar-ring" class="w-9 h-9 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-tr from-indigo-500 via-violet-500 to-amber-400 p-0.5 shadow-lg shadow-indigo-500/25 transition-all duration-300 group-hover:scale-105">
                         <div id="header-avatar-svg" class="w-full h-full bg-slate-900 rounded-[14px] flex items-center justify-center overflow-hidden">
-                            <!-- Populated dynamically with expressive human SVG -->
+                            <!-- Populated dynamically -->
                         </div>
                     </div>
-                    <span id="header-mood-emoji" class="absolute -bottom-1 -right-1 w-4 h-4 sm:w-5 sm:h-5 bg-slate-900 border border-slate-700 rounded-full flex items-center justify-center text-[9px] sm:text-[11px] shadow" title="Current Wit Mood">😎</span>
+                    <span id="header-mood-emoji" class="absolute -bottom-1 -right-1 w-4 h-4 sm:w-5 sm:h-5 bg-white border border-slate-300 rounded-full flex items-center justify-center text-[9px] sm:text-[11px] shadow">😎</span>
                 </div>
                 <div class="min-w-0 flex-1">
                     <div class="flex items-center gap-1.5 sm:gap-2 flex-nowrap">
-                        <h1 class="font-bold text-sm sm:text-lg tracking-tight text-white flex items-center gap-1.5 truncate">
+                        <h1 class="font-bold text-sm sm:text-lg tracking-tight flex items-center gap-1.5 truncate">
                             <span class="truncate">Nitin JBS</span>
-                            <span class="text-[9px] sm:text-xs font-mono uppercase px-1.5 sm:px-2 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 shrink-0">RAG v3.0</span>
+                            <span class="text-[9px] sm:text-xs font-mono uppercase px-1.5 sm:px-2 py-0.5 rounded-full bg-indigo-500/20 text-indigo-600 dark:text-indigo-300 border border-indigo-500/30 shrink-0">RAG v3.0</span>
                         </h1>
                         <a href="https://www.linkedin.com/in/nitinjbs/" target="_blank" rel="noopener noreferrer"
-                           class="text-sky-400 hover:text-sky-300 transition-colors text-xs sm:text-sm flex items-center gap-1 bg-sky-500/10 px-1.5 sm:px-2 py-0.5 rounded-lg border border-sky-500/20 shrink-0"
+                           class="text-sky-600 dark:text-sky-400 hover:opacity-85 transition-colors text-xs sm:text-sm flex items-center gap-1 bg-sky-500/10 px-1.5 sm:px-2 py-0.5 rounded-lg border border-sky-500/25 shrink-0"
                            title="Open Nitin's LinkedIn Profile">
                             <i class="ph-fill ph-linkedin-logo"></i>
                             <span class="hidden sm:inline text-xs font-medium">/in/nitinjbs</span>
                         </a>
                     </div>
-                    <p class="text-[10px] sm:text-xs text-slate-400 truncate mt-0.5">
+                    <p class="text-[10px] sm:text-xs opacity-75 truncate mt-0.5">
                         Principal PM @ Team Everest NGO • Ex-PM @ Way.com • OSU CS '17
                     </p>
                 </div>
@@ -153,54 +165,54 @@
 
             <!-- Right: Wit Level Control & Knowledge Base Editor Button -->
             <div class="flex items-center gap-1 sm:gap-2.5 shrink-0">
-                <!-- Desktop Wit Mode Selector with Avatar Mood Icons -->
-                <div class="hidden md:flex items-center bg-slate-900/90 border border-slate-800 rounded-xl p-1 text-xs">
-                    <span class="px-2.5 py-1 text-slate-400 font-medium flex items-center gap-1">
-                        <i class="ph-fill ph-mask-happy text-amber-400 text-sm"></i> Persona:
+                <!-- Desktop Wit Mode Selector -->
+                <div class="hidden md:flex items-center bg-slate-900/10 dark:bg-slate-900/90 border border-slate-300 dark:border-slate-800 rounded-xl p-1 text-xs">
+                    <span class="px-2.5 py-1 font-medium flex items-center gap-1 opacity-80">
+                        <i class="ph-fill ph-mask-happy text-amber-500 text-sm"></i> Persona:
                     </span>
-                    <button onclick="setWitLevel('mild')" id="wit-mild" class="wit-btn px-2.5 py-1 rounded-lg text-slate-400 hover:text-white transition flex items-center gap-1">
+                    <button onclick="setWitLevel('mild')" id="wit-mild" class="wit-btn px-2.5 py-1 rounded-lg opacity-75 hover:opacity-100 transition flex items-center gap-1">
                         <span>☕</span> Polite PM
                     </button>
                     <button onclick="setWitLevel('medium')" id="wit-medium" class="wit-btn px-2.5 py-1 rounded-lg bg-indigo-600 text-white font-medium shadow-sm transition flex items-center gap-1">
-                        <span>😎</span> Classic Nitin
+                        <span>😊</span> Classic Nitin
                     </button>
-                    <button onclick="setWitLevel('spicy')" id="wit-spicy" class="wit-btn px-2.5 py-1 rounded-lg text-slate-400 hover:text-white transition flex items-center gap-1">
-                        <span>🔥</span> Unfiltered Standup
+                    <button onclick="setWitLevel('spicy')" id="wit-spicy" class="wit-btn px-2.5 py-1 rounded-lg opacity-75 hover:opacity-100 transition flex items-center gap-1">
+                        <span>🔥</span> Standup Wit
                     </button>
                 </div>
 
-                <!-- Sync / Edit LinkedIn Knowledge Button -->
-                <button onclick="openKnowledgeModal()" class="flex items-center gap-1 text-xs font-medium px-2 py-1.5 sm:px-3 sm:py-2 rounded-xl bg-slate-800/90 hover:bg-slate-800 text-slate-200 border border-slate-700/80 transition shadow-sm" title="Manage LinkedIn Knowledge Base">
-                    <i class="ph ph-database text-indigo-400 text-sm"></i>
+                <!-- Knowledge Base -->
+                <button onclick="openKnowledgeModal()" class="flex items-center gap-1 text-xs font-medium px-2 py-1.5 sm:px-3 sm:py-2 rounded-xl bg-slate-900/10 dark:bg-slate-800/90 hover:opacity-85 border border-slate-300 dark:border-slate-700 transition shadow-sm" title="Manage LinkedIn Knowledge Base">
+                    <i class="ph ph-database text-indigo-500 dark:text-indigo-400 text-sm"></i>
                     <span class="hidden sm:inline">Knowledge Base</span>
-                    <span id="chunk-count-badge" class="px-1.5 py-0.2 bg-indigo-500/20 text-indigo-300 rounded-md font-mono text-[10px] sm:text-[11px]">9</span>
+                    <span id="chunk-count-badge" class="px-1.5 py-0.2 bg-indigo-500/20 text-indigo-600 dark:text-indigo-300 rounded-md font-mono text-[10px] sm:text-[11px]">9</span>
                 </button>
 
-                <!-- API Key / Vercel Settings Button -->
-                <button onclick="openApiKeyModal()" id="api-key-btn" class="p-1.5 sm:p-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-400 hover:text-indigo-300 border border-slate-800 transition" title="Configure Gemini API Key (For Vercel / Standalone Deployment)">
+                <!-- API Key Settings -->
+                <button onclick="openApiKeyModal()" id="api-key-btn" class="p-1.5 sm:p-2 rounded-xl bg-slate-900/10 dark:bg-slate-900 hover:opacity-85 border border-slate-300 dark:border-slate-800 transition" title="Configure Gemini API Key">
                     <i class="ph ph-key text-sm sm:text-base"></i>
                 </button>
 
                 <!-- Clear Chat -->
-                <button onclick="resetConversation()" class="p-1.5 sm:p-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-400 hover:text-slate-200 border border-slate-800 transition" title="Reset Conversation">
+                <button onclick="resetConversation()" class="p-1.5 sm:p-2 rounded-xl bg-slate-900/10 dark:bg-slate-900 hover:opacity-85 border border-slate-300 dark:border-slate-800 transition" title="Reset Conversation">
                     <i class="ph ph-arrows-counter-clockwise text-sm sm:text-base"></i>
                 </button>
             </div>
         </div>
 
-        <!-- Mobile-First Quick Persona & Wit Bar (Visible only below md breakpoint) -->
-        <div class="flex md:hidden items-center justify-between gap-2 mt-2 pt-2 border-t border-slate-800/70">
-            <span class="text-[11px] text-slate-400 font-medium flex items-center gap-1 shrink-0">
-                <i class="ph-fill ph-mask-happy text-amber-400"></i> Wit Mode:
+        <!-- Mobile-First Quick Persona & Wit Bar -->
+        <div class="flex md:hidden items-center justify-between gap-2 mt-2 pt-2 border-t border-slate-300/40 dark:border-slate-800/70">
+            <span class="text-[11px] font-medium flex items-center gap-1 shrink-0 opacity-80">
+                <i class="ph-fill ph-mask-happy text-amber-500"></i> Wit Mode:
             </span>
             <div class="grid grid-cols-3 gap-1 flex-1">
-                <button onclick="setWitLevel('mild')" id="mobile-top-wit-mild" class="text-[11px] py-1 px-1.5 rounded-lg bg-slate-900/90 text-slate-400 border border-slate-800 transition flex items-center justify-center gap-1 truncate">
+                <button onclick="setWitLevel('mild')" id="mobile-top-wit-mild" class="text-[11px] py-1 px-1.5 rounded-lg bg-white/60 dark:bg-slate-900/90 border border-slate-300 dark:border-slate-800 transition flex items-center justify-center gap-1 truncate">
                     <span>☕</span> <span>Polite</span>
                 </button>
                 <button onclick="setWitLevel('medium')" id="mobile-top-wit-medium" class="text-[11px] py-1 px-1.5 rounded-lg bg-indigo-600 text-white font-semibold border border-indigo-500 shadow-sm transition flex items-center justify-center gap-1 truncate">
-                    <span>😎</span> <span>Classic</span>
+                    <span>😊</span> <span>Classic</span>
                 </button>
-                <button onclick="setWitLevel('spicy')" id="mobile-top-wit-spicy" class="text-[11px] py-1 px-1.5 rounded-lg bg-slate-900/90 text-slate-400 border border-slate-800 transition flex items-center justify-center gap-1 truncate">
+                <button onclick="setWitLevel('spicy')" id="mobile-top-wit-spicy" class="text-[11px] py-1 px-1.5 rounded-lg bg-white/60 dark:bg-slate-900/90 border border-slate-300 dark:border-slate-800 transition flex items-center justify-center gap-1 truncate">
                     <span>🔥</span> <span>Spicy</span>
                 </button>
             </div>
@@ -209,60 +221,59 @@
 
     <main class="flex-1 max-w-7xl w-full mx-auto grid grid-cols-1 lg:grid-cols-12 gap-3 sm:gap-6 p-2 sm:p-6 items-stretch">
 
-        <!-- LEFT COLUMN: Expressive Human Avatar Stage, Visual Analytics & Live RAG Vector Inspector (5 cols on desktop, toggled on mobile) -->
-        <aside id="mobile-panel-studio" class="hidden lg:flex lg:col-span-5 flex-col gap-3.5 sm:gap-4 order-2 lg:order-1 min-w-0">
+        <!-- LEFT COLUMN (Tab 1 on mobile / Studio on desktop): Avatar, Skill Radar, Career Arc & RAG Inspector -->
+        <aside id="mobile-panel-studio" class="flex lg:col-span-5 flex-col gap-3.5 sm:gap-4 order-1 min-w-0">
 
-            <!-- Interactive Human Avatar & Wit Mood Stage -->
-            <div id="persona-stage-card" class="glass-panel rounded-2xl p-3.5 sm:p-5 border border-slate-800/80 shadow-xl relative overflow-hidden transition-all duration-500">
+            <!-- Interactive Human Avatar & Beach Persona Stage -->
+            <div id="persona-stage-card" class="glass-panel rounded-2xl p-3.5 sm:p-5 shadow-xl relative overflow-hidden transition-all duration-500">
                 <div id="avatar-ambient-glow" class="absolute -right-8 -top-8 w-44 h-44 bg-indigo-500/15 rounded-full blur-3xl pointer-events-none transition-all duration-500"></div>
 
                 <div class="flex flex-col sm:flex-row items-center gap-5 sm:gap-4 relative z-10">
-                    <!-- Expressive Animated Human Avatar Illustration -->
-                    <div class="relative shrink-0 group cursor-pointer mb-1 sm:mb-0" onclick="cycleWitLevel()" title="Click avatar to switch Wit Level">
-                        <div id="hero-avatar-frame" class="w-24 h-24 sm:w-32 sm:h-32 rounded-3xl bg-gradient-to-b from-indigo-500/20 via-slate-900 to-slate-950 border-2 border-indigo-500/50 shadow-2xl flex items-center justify-center overflow-hidden relative transition-all duration-500">
+                    <!-- Welcoming Beach Avatar Illustration (Charismatic, Clean-shaven, Smiling Eyes, Natural Lips, "BEING HUMAN" Style) -->
+                    <div class="relative shrink-0 group cursor-pointer mb-2 sm:mb-0" onclick="cycleWitLevel()" title="Click avatar to switch Wit Level">
+                        <div id="hero-avatar-frame" class="w-28 h-28 sm:w-32 sm:h-32 rounded-3xl bg-gradient-to-b from-indigo-500/20 via-sky-950 to-slate-950 border-2 border-indigo-500/50 shadow-2xl flex items-center justify-center overflow-hidden relative transition-all duration-500">
                             <div id="hero-avatar-container" class="w-full h-full flex items-center justify-center avatar-float">
-                                <!-- Dynamic Expressive Human SVG injected via JS -->
+                                <!-- Dynamic Welcoming Beach SVG -->
                             </div>
                         </div>
-                        <!-- Floating Mood Reaction Bubble -->
-                        <div id="avatar-speech-pill" class="absolute -bottom-2.5 left-1/2 -translate-x-1/2 whitespace-nowrap px-2.5 py-0.5 rounded-full text-[10px] font-mono font-semibold bg-indigo-600 text-white shadow-lg border border-indigo-400/40 flex items-center gap-1 z-20">
-                            <span>😎</span> <span id="avatar-mood-label">Sharp & Witty</span>
+                        <div id="avatar-speech-pill" class="absolute -bottom-3 left-1/2 -translate-x-1/2 whitespace-nowrap px-2.5 py-0.5 rounded-full text-[10px] font-mono font-semibold bg-indigo-600 text-white shadow-lg border border-indigo-400/40 flex items-center gap-1 z-20">
+                            <span>😊</span> <span id="avatar-mood-label">Warm & Welcoming</span>
                         </div>
                     </div>
 
-                    <!-- Human Bio & Live Expression Meter -->
-                    <div class="flex-1 text-center sm:text-left min-w-0 w-full">
+                    <!-- Bio & Live Expression Meter -->
+                    <div class="flex-1 text-center sm:text-left min-w-0 w-full mt-1 sm:mt-0">
                         <div class="flex flex-wrap items-center justify-center sm:justify-start gap-1.5 mb-1.5">
-                            <span class="inline-flex items-center gap-1 text-[10px] font-mono uppercase tracking-wider text-amber-300 bg-amber-500/10 border border-amber-500/20 px-2 py-0.5 rounded-full">
-                                <i class="ph-fill ph-sparkle"></i> Human-Centric AI Twin
+                            <span class="inline-flex items-center gap-1 text-[10px] font-mono uppercase tracking-wider text-amber-600 dark:text-amber-300 bg-amber-500/10 border border-amber-500/20 px-2 py-0.5 rounded-full">
+                                <i class="ph-fill ph-sparkle"></i> Beachside AI Twin
                             </span>
-                            <span id="avatar-state-chip" class="inline-flex items-center gap-1 text-[10px] font-mono text-emerald-300 bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded-full">
-                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span> Listening
+                            <span id="avatar-state-chip" class="inline-flex items-center gap-1 text-[10px] font-mono text-emerald-600 dark:text-emerald-300 bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded-full">
+                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 dark:bg-emerald-400 animate-ping"></span> Online
                             </span>
                         </div>
 
-                        <h2 class="text-base sm:text-lg font-bold text-white truncate">Nitin Subramanian (Nitin JBS)</h2>
-                        <p id="persona-tagline" class="text-xs text-slate-300 mt-1 leading-relaxed">
-                            "Translating chaotic human problems into clean product roadmaps—with a side of filter coffee and dry humor."
+                        <h2 class="text-base sm:text-lg font-bold truncate">Nitin Subramanian (Nitin JBS)</h2>
+                        <p id="persona-tagline" class="text-xs opacity-85 mt-1 leading-relaxed">
+                            "Welcoming human problems with open arms, clean product roadmaps, and a sunny beachside smile."
                         </p>
 
-                        <!-- Interactive Wit Thermometer Bar -->
-                        <div class="mt-3 bg-slate-900/90 border border-slate-800/90 rounded-xl p-2.5">
+                        <!-- Wit Thermometer Bar -->
+                        <div class="mt-3 bg-slate-900/10 dark:bg-slate-900/90 border border-slate-300 dark:border-slate-800 rounded-xl p-2.5">
                             <div class="flex items-center justify-between text-[10px] font-mono mb-1 gap-2">
-                                <span class="text-slate-400 truncate">SASS & WIT THERMOMETER</span>
-                                <span id="wit-meter-text" class="text-indigo-300 font-semibold shrink-0">75% • Classic Nitin</span>
+                                <span class="opacity-75 truncate">SASS & WIT THERMOMETER</span>
+                                <span id="wit-meter-text" class="text-indigo-600 dark:text-indigo-300 font-semibold shrink-0">60% • Classic Nitin</span>
                             </div>
-                            <div class="w-full h-2 bg-slate-950 rounded-full overflow-hidden p-0.5 border border-slate-800">
-                                <div id="wit-meter-bar" class="h-full rounded-full bg-gradient-to-r from-sky-400 via-indigo-500 to-amber-400 transition-all duration-500" style="width: 75%"></div>
+                            <div class="w-full h-2 bg-slate-950/20 dark:bg-slate-950 rounded-full overflow-hidden p-0.5 border border-slate-300 dark:border-slate-800">
+                                <div id="wit-meter-bar" class="h-full rounded-full bg-gradient-to-r from-sky-400 via-indigo-500 to-amber-400 transition-all duration-500" style="width: 60%"></div>
                             </div>
                             <div class="grid grid-cols-3 gap-1 mt-2">
-                                <button onclick="setWitLevel('mild')" id="stage-wit-mild" class="text-[11px] py-1 rounded-lg border border-transparent text-slate-400 hover:text-white transition flex items-center justify-center gap-1">
+                                <button onclick="setWitLevel('mild')" id="stage-wit-mild" class="text-[11px] py-1 rounded-lg border border-transparent opacity-75 hover:opacity-100 transition flex items-center justify-center gap-1">
                                     ☕ Polite
                                 </button>
-                                <button onclick="setWitLevel('medium')" id="stage-wit-medium" class="text-[11px] py-1 rounded-lg bg-indigo-600/30 border border-indigo-500/50 text-indigo-200 font-semibold transition flex items-center justify-center gap-1">
-                                    😎 Classic
+                                <button onclick="setWitLevel('medium')" id="stage-wit-medium" class="text-[11px] py-1 rounded-lg bg-indigo-600/20 border border-indigo-500/40 text-indigo-700 dark:text-indigo-200 font-semibold transition flex items-center justify-center gap-1">
+                                    😊 Classic
                                 </button>
-                                <button onclick="setWitLevel('spicy')" id="stage-wit-spicy" class="text-[11px] py-1 rounded-lg border border-transparent text-slate-400 hover:text-white transition flex items-center justify-center gap-1">
+                                <button onclick="setWitLevel('spicy')" id="stage-wit-spicy" class="text-[11px] py-1 rounded-lg border border-transparent opacity-75 hover:opacity-100 transition flex items-center justify-center gap-1">
                                     🔥 Spicy
                                 </button>
                             </div>
@@ -271,77 +282,69 @@
                 </div>
             </div>
 
-            <!-- Nitin's Visual Studio: Interactive Radar, Career Journey & RAG Telemetry -->
-            <div class="glass-panel rounded-2xl p-3.5 sm:p-5 border border-slate-800/80 flex-1 flex flex-col min-w-0">
-                <!-- Visualization Mode Tabs -->
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 mb-3 pb-2.5 border-b border-slate-800/80">
+            <!-- Visual Studio Hub -->
+            <div class="glass-panel rounded-2xl p-3.5 sm:p-5 flex-1 flex flex-col min-w-0">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 mb-3 pb-2.5 border-b border-slate-300/40 dark:border-slate-800/80">
                     <div class="flex items-center gap-1.5">
-                        <i class="ph-fill ph-chart-polar text-indigo-400 text-base"></i>
-                        <h3 class="text-xs font-mono uppercase tracking-wider text-slate-200 font-semibold">
+                        <i class="ph-fill ph-chart-polar text-indigo-500 dark:text-indigo-400 text-base"></i>
+                        <h3 class="text-xs font-mono uppercase tracking-wider font-semibold">
                             Nitin's Visual Intelligence Hub
                         </h3>
                     </div>
-                    <div class="grid grid-cols-3 sm:flex items-center bg-slate-900 border border-slate-800 rounded-xl p-1 text-[11px] w-full sm:w-auto gap-1">
+                    <div class="grid grid-cols-3 sm:flex items-center bg-slate-900/10 dark:bg-slate-900 border border-slate-300 dark:border-slate-800 rounded-xl p-1 text-[11px] w-full sm:w-auto gap-1">
                         <button onclick="switchVizTab('radar')" id="viz-tab-radar" class="px-2 py-1.5 sm:px-2.5 sm:py-1 rounded-lg bg-indigo-600 text-white font-medium transition flex items-center justify-center gap-1 truncate">
                             <i class="ph ph-polygon shrink-0"></i> <span>Skill Radar</span>
                         </button>
-                        <button onclick="switchVizTab('journey')" id="viz-tab-journey" class="px-2 py-1.5 sm:px-2.5 sm:py-1 rounded-lg text-slate-400 hover:text-white transition flex items-center justify-center gap-1 truncate">
+                        <button onclick="switchVizTab('journey')" id="viz-tab-journey" class="px-2 py-1.5 sm:px-2.5 sm:py-1 rounded-lg opacity-75 hover:opacity-100 transition flex items-center justify-center gap-1 truncate">
                             <i class="ph ph-git-branch shrink-0"></i> <span>Career Arc</span>
                         </button>
-                        <button onclick="switchVizTab('chunks')" id="viz-tab-chunks" class="px-2 py-1.5 sm:px-2.5 sm:py-1 rounded-lg text-slate-400 hover:text-white transition flex items-center justify-center gap-1 truncate">
+                        <button onclick="switchVizTab('chunks')" id="viz-tab-chunks" class="px-2 py-1.5 sm:px-2.5 sm:py-1 rounded-lg opacity-75 hover:opacity-100 transition flex items-center justify-center gap-1 truncate">
                             <i class="ph ph-waveform shrink-0"></i> <span>RAG Vectors</span>
                         </button>
                     </div>
                 </div>
 
-                <!-- TAB 1: Interactive 5-Axis Product & Engineering Skill Radar + Live RAG Confidence Bars -->
+                <!-- TAB 1: Skill Radar & Telemetry -->
                 <div id="viz-panel-radar" class="space-y-3.5">
-                    <div class="grid grid-cols-1 sm:grid-cols-12 gap-3.5 items-center bg-slate-900/60 border border-slate-800/80 rounded-xl p-3">
-                        <!-- SVG Radar Chart with self-contained viewBox so labels never clip or overlap on mobile -->
+                    <div class="grid grid-cols-1 sm:grid-cols-12 gap-3.5 items-center bg-slate-900/5 dark:bg-slate-900/60 border border-slate-300/60 dark:border-slate-800/80 rounded-xl p-3">
                         <div class="sm:col-span-6 flex flex-col items-center justify-center w-full overflow-hidden">
                             <svg id="skill-radar-svg" viewBox="-25 0 270 200" class="w-full max-w-[230px] h-auto aspect-[27/20]">
-                                <!-- Background Pentagons -->
-                                <polygon points="110,25 186,80 157,168 63,168 34,80" fill="none" stroke="rgba(148,163,184,0.18)" stroke-width="1" />
-                                <polygon points="110,50 163,89 143,151 77,151 57,89" fill="none" stroke="rgba(148,163,184,0.15)" stroke-width="1" stroke-dasharray="3 3" />
-                                <polygon points="110,75 140,97 129,133 91,133 80,97" fill="none" stroke="rgba(148,163,184,0.12)" stroke-width="1" />
-                                <!-- Axes lines -->
-                                <line x1="110" y1="105" x2="110" y2="25" stroke="rgba(148,163,184,0.2)" stroke-width="1" />
-                                <line x1="110" y1="105" x2="186" y2="80" stroke="rgba(148,163,184,0.2)" stroke-width="1" />
-                                <line x1="110" y1="105" x2="157" y2="168" stroke="rgba(148,163,184,0.2)" stroke-width="1" />
-                                <line x1="110" y1="105" x2="63" y2="168" stroke="rgba(148,163,184,0.2)" stroke-width="1" />
-                                <line x1="110" y1="105" x2="34" y2="80" stroke="rgba(148,163,184,0.2)" stroke-width="1" />
+                                <polygon points="110,25 186,80 157,168 63,168 34,80" fill="none" stroke="currentColor" stroke-opacity="0.18" stroke-width="1" />
+                                <polygon points="110,50 163,89 143,151 77,151 57,89" fill="none" stroke="currentColor" stroke-opacity="0.15" stroke-width="1" stroke-dasharray="3 3" />
+                                <polygon points="110,75 140,97 129,133 91,133 80,97" fill="none" stroke="currentColor" stroke-opacity="0.12" stroke-width="1" />
+                                <line x1="110" y1="105" x2="110" y2="25" stroke="currentColor" stroke-opacity="0.2" stroke-width="1" />
+                                <line x1="110" y1="105" x2="186" y2="80" stroke="currentColor" stroke-opacity="0.2" stroke-width="1" />
+                                <line x1="110" y1="105" x2="157" y2="168" stroke="currentColor" stroke-opacity="0.2" stroke-width="1" />
+                                <line x1="110" y1="105" x2="63" y2="168" stroke="currentColor" stroke-opacity="0.2" stroke-width="1" />
+                                <line x1="110" y1="105" x2="34" y2="80" stroke="currentColor" stroke-opacity="0.2" stroke-width="1" />
 
-                                <!-- Dynamic Active Data Polygon -->
                                 <polygon id="radar-data-polygon" class="radar-polygon"
                                          points="110,30 180,82 153,162 68,160 42,83"
                                          fill="rgba(99, 102, 241, 0.28)"
                                          stroke="#818cf8"
                                          stroke-width="2.2" />
 
-                                <!-- Vertex Dots -->
                                 <circle id="radar-dot-0" cx="110" cy="30" r="4" fill="#fbbf24" />
                                 <circle id="radar-dot-1" cx="180" cy="82" r="4" fill="#818cf8" />
                                 <circle id="radar-dot-2" cx="153" cy="162" r="4" fill="#34d399" />
                                 <circle id="radar-dot-3" cx="68" cy="160" r="4" fill="#f472b6" />
                                 <circle id="radar-dot-4" cx="42" cy="83" r="4" fill="#38bdf8" />
 
-                                <!-- Labels neatly inside extended viewBox (-25 to 245) -->
-                                <text x="110" y="14" text-anchor="middle" fill="#e2e8f0" font-size="8.5" font-family="JetBrains Mono" font-weight="600">PRODUCT STRATEGY</text>
-                                <text x="191" y="83" text-anchor="start" fill="#cbd5e1" font-size="8" font-family="JetBrains Mono">SWE & ARCH</text>
-                                <text x="162" y="184" text-anchor="middle" fill="#cbd5e1" font-size="8" font-family="JetBrains Mono">UX & RESEARCH</text>
-                                <text x="58" y="184" text-anchor="middle" fill="#cbd5e1" font-size="8" font-family="JetBrains Mono">NGO & MENTOR</text>
-                                <text x="29" y="83" text-anchor="end" fill="#cbd5e1" font-size="8" font-family="JetBrains Mono">AI & CYBER</text>
+                                <text x="110" y="14" text-anchor="middle" fill="currentColor" font-size="8.5" font-family="JetBrains Mono" font-weight="600">PRODUCT STRATEGY</text>
+                                <text x="191" y="83" text-anchor="start" fill="currentColor" font-size="8" font-family="JetBrains Mono">SWE & ARCH</text>
+                                <text x="162" y="184" text-anchor="middle" fill="currentColor" font-size="8" font-family="JetBrains Mono">UX & RESEARCH</text>
+                                <text x="58" y="184" text-anchor="middle" fill="currentColor" font-size="8" font-family="JetBrains Mono">NGO & MENTOR</text>
+                                <text x="29" y="83" text-anchor="end" fill="currentColor" font-size="8" font-family="JetBrains Mono">AI & CYBER</text>
                             </svg>
-                            <span id="radar-caption" class="text-[10px] font-mono text-indigo-300 mt-1 text-center">
+                            <span id="radar-caption" class="text-[10px] font-mono text-indigo-600 dark:text-indigo-300 mt-1 text-center font-medium">
                                 Tap Wit Modes above to shift skill focus!
                             </span>
                         </div>
 
-                        <!-- Interactive Domain Breakdown Bars -->
                         <div class="sm:col-span-6 space-y-2 w-full">
-                            <div class="text-[11px] font-semibold text-slate-200 mb-1 flex items-center justify-between">
+                            <div class="text-[11px] font-semibold mb-1 flex items-center justify-between">
                                 <span>Core DNA Distribution</span>
-                                <span class="text-[10px] font-mono text-amber-400">15+ Yrs</span>
+                                <span class="text-[10px] font-mono text-amber-500 dark:text-amber-400">15+ Yrs</span>
                             </div>
                             <div class="space-y-2" id="dna-bars-list">
                                 <!-- Populated via JS -->
@@ -349,102 +352,90 @@
                         </div>
                     </div>
 
-                    <!-- Live RAG Query Telemetry Visualizer -->
-                    <div class="bg-slate-900/70 border border-slate-800/80 rounded-xl p-3">
+                    <!-- Live RAG Telemetry -->
+                    <div class="bg-slate-900/5 dark:bg-slate-900/70 border border-slate-300/60 dark:border-slate-800/80 rounded-xl p-3">
                         <div class="flex items-center justify-between gap-2 mb-2">
-                            <span class="text-[10px] sm:text-[11px] font-mono uppercase tracking-wider text-slate-300 font-semibold flex items-center gap-1.5 truncate">
-                                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0"></span>
+                            <span class="text-[10px] sm:text-[11px] font-mono uppercase tracking-wider font-semibold flex items-center gap-1.5 truncate">
+                                <span class="w-2 h-2 rounded-full bg-emerald-500 dark:bg-emerald-400 animate-pulse shrink-0"></span>
                                 <span class="truncate">Live Semantic Retrieval</span>
                             </span>
-                            <span id="rag-status-pill" class="text-[10px] font-mono px-2 py-0.5 rounded-md bg-slate-800 text-slate-400 border border-slate-700 shrink-0">
+                            <span id="rag-status-pill" class="text-[10px] font-mono px-2 py-0.5 rounded-md bg-slate-900/10 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 shrink-0">
                                 Ready for query
                             </span>
                         </div>
-                        <div id="rag-telemetry-bars" class="space-y-2">
-                            <!-- Visual horizontal similarity bars populated dynamically -->
-                        </div>
+                        <div id="rag-telemetry-bars" class="space-y-2"></div>
                     </div>
                 </div>
 
-                <!-- TAB 2: Interactive Visual Career Arc Timeline (CIT -> HCL -> OSU -> YouTube -> Way.com -> Team Everest) -->
+                <!-- TAB 2: Career Arc Timeline -->
                 <div id="viz-panel-journey" class="hidden space-y-2.5 overflow-y-auto max-h-[420px] pr-1">
-                    <p class="text-xs text-slate-400 mb-2">
+                    <p class="text-xs opacity-75 mb-2">
                         Tap any milestone node to ask Nitin's AI Twin for the behind-the-scenes story:
                     </p>
-                    <div id="career-timeline-container" class="relative pl-5 border-l-2 border-indigo-500/30 space-y-3 py-1 ml-2">
-                        <!-- Populated via JS -->
-                    </div>
+                    <div id="career-timeline-container" class="relative pl-5 border-l-2 border-indigo-500/40 space-y-3 py-1 ml-2"></div>
                 </div>
 
-                <!-- TAB 3: Raw Vector Inspector & Filter -->
+                <!-- TAB 3: Raw Vector Inspector -->
                 <div id="viz-panel-chunks" class="hidden flex-1 flex flex-col">
                     <div class="relative mb-2.5">
-                        <i class="ph ph-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 text-sm"></i>
+                        <i class="ph ph-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 opacity-50 text-sm"></i>
                         <input type="text" id="chunk-filter-input" oninput="renderChunksList()"
                                placeholder="Filter chunks (e.g. Way.com, YouTube, OSU)..."
-                               class="w-full bg-slate-900/90 border border-slate-800 focus:border-indigo-500 rounded-xl pl-9 pr-3 py-2 text-xs text-slate-200 placeholder-slate-500 focus:outline-none transition">
+                               class="w-full bg-slate-900/5 dark:bg-slate-900/90 border border-slate-300 dark:border-slate-800 focus:border-indigo-500 rounded-xl pl-9 pr-3 py-2 text-xs placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none transition">
                     </div>
-                    <div id="rag-chunks-container" class="space-y-2.5 overflow-y-auto max-h-[360px] pr-1 flex-1">
-                        <!-- Populated via JS -->
-                    </div>
+                    <div id="rag-chunks-container" class="space-y-2.5 overflow-y-auto max-h-[360px] pr-1 flex-1"></div>
                 </div>
             </div>
         </aside>
 
-        <!-- RIGHT COLUMN: Conversational AI Assistant & FAQ Chips (7 cols on desktop, primary view on mobile) -->
-        <section id="mobile-panel-chat" class="flex lg:col-span-7 flex-col glass-panel rounded-2xl border border-slate-800/80 shadow-2xl overflow-hidden order-1 lg:order-2 h-[calc(100dvh-13.25rem)] md:h-[calc(100dvh-10.5rem)] lg:h-[calc(100vh-7.5rem)] min-h-[380px] min-w-0">
+        <!-- RIGHT COLUMN (Tab 2 on mobile / Chat Panel on desktop): Conversational AI Assistant -->
+        <section id="mobile-panel-chat" class="hidden lg:flex lg:col-span-7 flex-col glass-panel rounded-2xl shadow-2xl overflow-hidden order-2 h-[calc(100dvh-13.25rem)] md:h-[calc(100dvh-10.5rem)] lg:h-[calc(100vh-7.5rem)] min-h-[380px] min-w-0">
 
             <!-- Chat Top Subbar -->
-            <div class="px-3 py-2 sm:px-4 sm:py-3 bg-slate-900/70 border-b border-slate-800/80 flex items-center justify-between gap-2 shrink-0">
+            <div class="px-3 py-2 sm:px-4 sm:py-3 bg-slate-900/5 dark:bg-slate-900/70 border-b border-slate-300/40 dark:border-slate-800/80 flex items-center justify-between gap-2 shrink-0">
                 <div class="flex items-center gap-2 min-w-0">
-                    <div id="chat-subbar-avatar" onclick="switchMobilePrimaryView('studio')" class="w-7 h-7 rounded-lg bg-slate-800 border border-indigo-500/40 overflow-hidden flex items-center justify-center shrink-0 cursor-pointer" title="Tap to view Nitin's Visual Studio">
-                        <!-- Mini human SVG -->
-                    </div>
+                    <div id="chat-subbar-avatar" onclick="switchMobilePrimaryView('studio')" class="w-7 h-7 rounded-lg bg-slate-800 border border-indigo-500/40 overflow-hidden flex items-center justify-center shrink-0 cursor-pointer" title="Tap to view Nitin's Visual Studio"></div>
                     <div class="min-w-0 flex items-center gap-1.5 flex-wrap">
-                        <span class="text-xs font-semibold text-slate-200 truncate">Interactive Profile FAQ</span>
-                        <span id="active-wit-badge" class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-300 border border-amber-500/20 shrink-0">
-                            😎 Classic Nitin
+                        <span class="text-xs font-semibold truncate">Interactive Profile FAQ</span>
+                        <span id="active-wit-badge" class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-700 dark:text-amber-300 border border-amber-500/20 shrink-0">
+                            😊 Classic Nitin
                         </span>
                     </div>
                 </div>
                 <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
-                    <button onclick="switchMobilePrimaryView('studio')" class="lg:hidden text-[11px] px-2 py-1 rounded-lg bg-indigo-500/15 text-indigo-300 border border-indigo-500/30 flex items-center gap-1 font-medium">
-                        <i class="ph-fill ph-chart-polar"></i> <span>Visuals</span>
+                    <button onclick="switchMobilePrimaryView('studio')" class="lg:hidden text-[11px] px-2 py-1 rounded-lg bg-indigo-500/15 text-indigo-700 dark:text-indigo-300 border border-indigo-500/30 flex items-center gap-1 font-medium">
+                        <i class="ph-fill ph-chart-polar"></i> <span>Studio</span>
                     </button>
-                    <button onclick="openKnowledgeModal()" class="text-[11px] sm:text-xs text-indigo-400 hover:text-indigo-300 flex items-center gap-1 font-medium transition px-1.5 py-1 rounded-lg hover:bg-slate-800/60">
+                    <button onclick="openKnowledgeModal()" class="text-[11px] sm:text-xs text-indigo-600 dark:text-indigo-400 hover:opacity-85 flex items-center gap-1 font-medium transition px-1.5 py-1 rounded-lg hover:bg-slate-900/10">
                         <i class="ph ph-plus-circle"></i> <span class="hidden sm:inline">Add LinkedIn Post/Bio</span><span class="sm:hidden">Add Bio</span>
                     </button>
                 </div>
             </div>
 
             <!-- Chat Messages Stream -->
-            <div id="chat-messages" class="flex-1 overflow-y-auto p-3 sm:p-6 space-y-3.5 sm:space-y-5">
-                <!-- Populated dynamically -->
-            </div>
+            <div id="chat-messages" class="flex-1 overflow-y-auto p-3 sm:p-6 space-y-3.5 sm:space-y-5"></div>
 
             <!-- Quick FAQ Prompt Starters -->
-            <div class="px-3 py-2 sm:px-4 sm:py-2.5 bg-slate-900/60 border-t border-slate-800/70 shrink-0">
+            <div class="px-3 py-2 sm:px-4 sm:py-2.5 bg-slate-900/5 dark:bg-slate-900/60 border-t border-slate-300/40 dark:border-slate-800/70 shrink-0">
                 <div class="flex items-center justify-between mb-1">
-                    <span class="text-[10px] font-mono uppercase tracking-wider text-slate-400 flex items-center gap-1">
-                        <i class="ph-fill ph-sparkle text-indigo-400"></i> Witty FAQ Starters (Swipe & Tap)
+                    <span class="text-[10px] font-mono uppercase tracking-wider opacity-75 flex items-center gap-1">
+                        <i class="ph-fill ph-sparkle text-indigo-500 dark:text-indigo-400"></i> Witty FAQ Starters (Swipe & Tap)
                     </span>
                 </div>
-                <div class="flex gap-2 overflow-x-auto pb-0.5 no-scrollbar" id="faq-chips-container">
-                    <!-- Populated by JS -->
-                </div>
+                <div class="flex gap-2 overflow-x-auto pb-0.5 no-scrollbar" id="faq-chips-container"></div>
             </div>
 
             <!-- Chat Input Form -->
-            <form id="chat-form" onsubmit="handleUserSubmit(event)" class="p-2.5 sm:p-4 bg-slate-900/95 border-t border-slate-800 flex items-end gap-2 shrink-0">
+            <form id="chat-form" onsubmit="handleUserSubmit(event)" class="p-2.5 sm:p-4 bg-slate-900/10 dark:bg-slate-900/95 border-t border-slate-300/40 dark:border-slate-800 flex items-end gap-2 shrink-0">
                 <div class="relative flex-1 min-w-0">
                     <textarea id="chat-input" rows="1"
                         placeholder="Ask about Way.com, Team Everest, YouTube, OSU..."
                         onkeydown="handleTextareaKey(event)"
                         oninput="autoResizeTextarea(this)"
-                        class="w-full bg-slate-950 border border-slate-700/80 focus:border-indigo-500 rounded-xl pl-3 pr-3 py-2.5 sm:py-3 text-base sm:text-sm text-slate-100 placeholder-slate-500 focus:outline-none transition resize-none max-h-24 leading-snug"></textarea>
+                        class="w-full bg-white dark:bg-slate-950 border border-slate-300 dark:border-slate-700/80 focus:border-indigo-500 rounded-xl pl-3 pr-3 py-2.5 sm:py-3 text-base sm:text-sm placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none transition resize-none max-h-24 leading-snug"></textarea>
                 </div>
                 <button type="submit" id="send-btn"
-                    class="px-3.5 py-2.5 sm:px-4 sm:py-3 rounded-xl bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white font-semibold text-xs sm:text-sm shadow-lg shadow-indigo-600/25 flex items-center justify-center gap-1.5 sm:gap-2 transition disabled:opacity-50 disabled:cursor-not-allowed shrink-0 h-[42px] sm:h-auto">
+                    class="px-3.5 py-2.5 sm:px-4 sm:py-3 rounded-xl bg-gradient-to-r from-indigo-600 to-violet-600 hover:opacity-90 text-white font-semibold text-xs sm:text-sm shadow-lg shadow-indigo-600/25 flex items-center justify-center gap-1.5 sm:gap-2 transition disabled:opacity-50 disabled:cursor-not-allowed shrink-0 h-[42px] sm:h-auto">
                     <span>Ask</span>
                     <span class="hidden sm:inline">Nitin</span>
                     <i class="ph-bold ph-paper-plane-right"></i>
@@ -453,58 +444,58 @@
         </section>
     </main>
 
-    <!-- Mobile Bottom Navigation Bar -->
-    <nav class="lg:hidden fixed bottom-0 inset-x-0 z-40 bg-slate-950/95 backdrop-blur-xl border-t border-slate-800/90 px-2 py-1.5 flex items-center justify-around shadow-2xl">
-        <button type="button" onclick="switchMobilePrimaryView('chat')" id="mob-nav-chat"
-                class="flex-1 py-1.5 rounded-xl flex flex-col items-center justify-center gap-0.5 text-indigo-400 bg-indigo-500/10 font-semibold transition">
-            <i class="ph-fill ph-chat-teardrop-dots text-lg"></i>
-            <span class="text-[10px]">Ask Nitin AI</span>
-        </button>
-        <button type="button" onclick="switchMobilePrimaryView('studio', 'radar')" id="mob-nav-studio"
-                class="flex-1 py-1.5 rounded-xl flex flex-col items-center justify-center gap-0.5 text-slate-400 hover:text-slate-200 transition">
+    <!-- Mobile Bottom Navigation Bar: Tab 1 is Avatar & Studio (Home), Tab 2 is Ask Nitin AI -->
+    <nav class="lg:hidden fixed bottom-0 inset-x-0 z-40 bg-white/95 dark:bg-slate-950/95 backdrop-blur-xl border-t border-slate-300 dark:border-slate-800/90 px-2.5 py-2 flex items-center justify-around shadow-2xl">
+        <button type="button" onclick="switchMobilePrimaryView('studio')" id="mob-nav-studio"
+                class="flex-1 py-1.5 rounded-xl flex flex-col items-center justify-center gap-0.5 text-indigo-600 dark:text-indigo-400 bg-indigo-500/10 font-semibold transition">
             <i class="ph-fill ph-chart-polar text-lg"></i>
             <span class="text-[10px]">Avatar & Radar</span>
         </button>
+        <button type="button" onclick="switchMobilePrimaryView('chat')" id="mob-nav-chat"
+                class="flex-1 py-1.5 rounded-xl flex flex-col items-center justify-center gap-0.5 opacity-70 hover:opacity-100 transition">
+            <i class="ph-fill ph-chat-teardrop-dots text-lg"></i>
+            <span class="text-[10px]">Ask Nitin AI</span>
+        </button>
         <button type="button" onclick="switchMobilePrimaryView('studio', 'chunks')" id="mob-nav-vectors"
-                class="flex-1 py-1.5 rounded-xl flex flex-col items-center justify-center gap-0.5 text-slate-400 hover:text-slate-200 transition">
+                class="flex-1 py-1.5 rounded-xl flex flex-col items-center justify-center gap-0.5 opacity-70 hover:opacity-100 transition">
             <div class="relative flex items-center justify-center">
                 <i class="ph-fill ph-waveform text-lg"></i>
-                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 absolute -top-0.5 -right-1.5"></span>
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 dark:bg-emerald-400 absolute -top-0.5 -right-1.5"></span>
             </div>
-            <span class="text-[10px]">RAG Vectors</span>
+            <span class="text-[10px]">Vectors</span>
         </button>
         <button type="button" onclick="openKnowledgeModal()" id="mob-nav-kb"
-                class="flex-1 py-1.5 rounded-xl flex flex-col items-center justify-center gap-0.5 text-slate-400 hover:text-slate-200 transition">
+                class="flex-1 py-1.5 rounded-xl flex flex-col items-center justify-center gap-0.5 opacity-70 hover:opacity-100 transition">
             <i class="ph-fill ph-database text-lg"></i>
             <span class="text-[10px]">Knowledge</span>
         </button>
     </nav>
 
-    <!-- API Key & Vercel Standalone Modal -->
+    <!-- API Key Modal -->
     <div id="apikey-modal" class="fixed inset-0 z-[60] hidden items-center justify-center bg-slate-950/85 backdrop-blur-sm p-3 sm:p-4">
-        <div class="glass-panel border border-slate-700 rounded-2xl max-w-md w-full flex flex-col shadow-2xl overflow-hidden">
-            <div class="px-5 py-4 border-b border-slate-800 flex items-center justify-between bg-slate-900/80">
-                <h3 class="text-sm font-bold text-white flex items-center gap-2">
-                    <i class="ph-fill ph-key text-amber-400"></i>
+        <div class="glass-panel border rounded-2xl max-w-md w-full flex flex-col shadow-2xl overflow-hidden">
+            <div class="px-5 py-4 border-b border-slate-300 dark:border-slate-800 flex items-center justify-between bg-slate-900/10 dark:bg-slate-900/80">
+                <h3 class="text-sm font-bold flex items-center gap-2">
+                    <i class="ph-fill ph-key text-amber-500"></i>
                     Standalone / Vercel AI Configuration
                 </h3>
-                <button onclick="closeApiKeyModal()" class="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition">
+                <button onclick="closeApiKeyModal()" class="p-1.5 rounded-lg opacity-70 hover:opacity-100 transition">
                     <i class="ph ph-x text-lg"></i>
                 </button>
             </div>
-            <div class="p-5 space-y-3 text-xs text-slate-300">
+            <div class="p-5 space-y-3 text-xs opacity-90">
                 <p class="leading-relaxed">
                     When deployed on <strong>Vercel</strong> or opened outside Canvas, you can optionally paste a free Google Gemini API key below for live LLM generation. If left blank, Nitin's <strong>Built-In Local Wit RAG Synthesizer</strong> automatically answers using your indexed profile chunks!
                 </p>
                 <div>
-                    <label class="block text-[11px] font-mono uppercase text-slate-400 mb-1">Gemini API Key (Optional on Vercel)</label>
+                    <label class="block text-[11px] font-mono uppercase opacity-75 mb-1">Gemini API Key (Optional)</label>
                     <input id="custom-api-key-input" type="password" placeholder="AIzaSy..."
-                        class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs text-white focus:border-indigo-500 focus:outline-none font-mono">
+                        class="w-full bg-white dark:bg-slate-950 border border-slate-300 dark:border-slate-800 rounded-xl px-3.5 py-2.5 text-xs focus:border-indigo-500 focus:outline-none font-mono">
                 </div>
                 <div class="flex items-center justify-between pt-2">
-                    <span id="apikey-save-status" class="text-[11px] text-emerald-400 opacity-0 transition">Saved!</span>
+                    <span id="apikey-save-status" class="text-[11px] text-emerald-500 dark:text-emerald-400 opacity-0 transition">Saved!</span>
                     <div class="flex gap-2">
-                        <button onclick="clearCustomApiKey()" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs transition">Clear</button>
+                        <button onclick="clearCustomApiKey()" class="px-3 py-1.5 rounded-lg bg-slate-200 dark:bg-slate-800 hover:opacity-85 text-xs transition">Clear</button>
                         <button onclick="saveCustomApiKey()" class="px-4 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-xs transition">Save Key</button>
                     </div>
                 </div>
@@ -512,40 +503,38 @@
         </div>
     </div>
 
+    <!-- Knowledge Base Modal -->
     <div id="knowledge-modal" class="fixed inset-0 z-[60] hidden items-center justify-center bg-slate-950/85 backdrop-blur-sm p-3 sm:p-4">
-        <div class="glass-panel border border-slate-700 rounded-2xl max-w-3xl w-full max-h-[85dvh] flex flex-col shadow-2xl overflow-hidden">
-            <!-- Modal Header -->
-            <div class="px-5 py-4 border-b border-slate-800 flex items-center justify-between bg-slate-900/80">
+        <div class="glass-panel border rounded-2xl max-w-3xl w-full max-h-[85dvh] flex flex-col shadow-2xl overflow-hidden">
+            <div class="px-5 py-4 border-b border-slate-300 dark:border-slate-800 flex items-center justify-between bg-slate-900/10 dark:bg-slate-900/80">
                 <div>
-                    <h3 class="text-base font-bold text-white flex items-center gap-2">
-                        <i class="ph-fill ph-database text-indigo-400"></i>
+                    <h3 class="text-base font-bold flex items-center gap-2">
+                        <i class="ph-fill ph-database text-indigo-500 dark:text-indigo-400"></i>
                         LinkedIn Profile RAG Knowledge Base (`linkedin.com/in/nitinjbs`)
                     </h3>
-                    <p class="text-xs text-slate-400 mt-0.5">
+                    <p class="text-xs opacity-75 mt-0.5">
                         View, edit, or paste raw text directly from your LinkedIn "About", "Experience", or recent posts to expand the RAG vector index.
                     </p>
                 </div>
-                <button onclick="closeKnowledgeModal()" class="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition">
+                <button onclick="closeKnowledgeModal()" class="p-1.5 rounded-lg opacity-70 hover:opacity-100 transition">
                     <i class="ph ph-x text-lg"></i>
                 </button>
             </div>
 
-            <!-- Modal Body -->
             <div class="p-5 overflow-y-auto space-y-5 flex-1">
-                <!-- Add New Chunk Form -->
-                <div class="bg-slate-900/90 border border-indigo-500/30 rounded-xl p-4">
-                    <h4 class="text-xs font-mono uppercase tracking-wider text-indigo-300 font-semibold mb-3 flex items-center gap-1.5">
+                <div class="bg-indigo-500/10 border border-indigo-500/30 rounded-xl p-4">
+                    <h4 class="text-xs font-mono uppercase tracking-wider text-indigo-600 dark:text-indigo-300 font-semibold mb-3 flex items-center gap-1.5">
                         <i class="ph-fill ph-plus-circle"></i> Inject New LinkedIn Section or Post
                     </h4>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
                         <div>
-                            <label class="block text-xs text-slate-400 mb-1">Section Title / Role</label>
+                            <label class="block text-xs opacity-75 mb-1">Section Title / Role</label>
                             <input id="new-chunk-title" type="text" placeholder="e.g., Featured Post on AI Agents / Product Strategy"
-                                class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white focus:border-indigo-500 focus:outline-none">
+                                class="w-full bg-white dark:bg-slate-950 border border-slate-300 dark:border-slate-800 rounded-lg px-3 py-2 text-xs focus:border-indigo-500 focus:outline-none">
                         </div>
                         <div>
-                            <label class="block text-xs text-slate-400 mb-1">Category Tag</label>
-                            <select id="new-chunk-category" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white focus:border-indigo-500 focus:outline-none">
+                            <label class="block text-xs opacity-75 mb-1">Category Tag</label>
+                            <select id="new-chunk-category" class="w-full bg-white dark:bg-slate-950 border border-slate-300 dark:border-slate-800 rounded-lg px-3 py-2 text-xs focus:border-indigo-500 focus:outline-none">
                                 <option value="Experience">Experience</option>
                                 <option value="Leadership & NGO">Leadership & NGO</option>
                                 <option value="Education">Education</option>
@@ -556,37 +545,33 @@
                         </div>
                     </div>
                     <div class="mb-3">
-                        <label class="block text-xs text-slate-400 mb-1">Content / Raw LinkedIn Copy</label>
+                        <label class="block text-xs opacity-75 mb-1">Content / Raw LinkedIn Copy</label>
                         <textarea id="new-chunk-content" rows="3" placeholder="Paste any new milestone, LinkedIn summary, or witty anecdote here..."
-                            class="w-full bg-slate-950 border border-slate-800 rounded-lg p-3 text-xs text-white focus:border-indigo-500 focus:outline-none"></textarea>
+                            class="w-full bg-white dark:bg-slate-950 border border-slate-300 dark:border-slate-800 rounded-lg p-3 text-xs focus:border-indigo-500 focus:outline-none"></textarea>
                     </div>
                     <div class="flex justify-between items-center">
-                        <span id="chunk-save-feedback" class="text-xs text-emerald-400 opacity-0 transition">Chunk indexed into RAG!</span>
+                        <span id="chunk-save-feedback" class="text-xs text-emerald-500 dark:text-emerald-400 opacity-0 transition">Chunk indexed into RAG!</span>
                         <button onclick="addCustomChunk()" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg text-xs font-semibold transition flex items-center gap-1.5">
                             <i class="ph-bold ph-upload-simple"></i> Index Chunk into RAG
                         </button>
                     </div>
                 </div>
 
-                <!-- Existing Chunks List -->
                 <div>
                     <div class="flex items-center justify-between mb-2">
-                        <h4 class="text-xs font-mono uppercase tracking-wider text-slate-400 font-semibold">
+                        <h4 class="text-xs font-mono uppercase tracking-wider opacity-75 font-semibold">
                             Indexed Profile Chunks
                         </h4>
-                        <button onclick="resetDefaultKnowledge()" class="text-xs text-rose-400 hover:text-rose-300 underline">
+                        <button onclick="resetDefaultKnowledge()" class="text-xs text-rose-500 dark:text-rose-400 hover:underline">
                             Restore Default Profile Data
                         </button>
                     </div>
-                    <div id="modal-chunks-list" class="space-y-2.5">
-                        <!-- Populated by JS -->
-                    </div>
+                    <div id="modal-chunks-list" class="space-y-2.5"></div>
                 </div>
             </div>
 
-            <!-- Modal Footer -->
-            <div class="px-5 py-3 border-t border-slate-800 bg-slate-900/80 flex justify-end">
-                <button onclick="closeKnowledgeModal()" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-white transition">
+            <div class="px-5 py-3 border-t border-slate-300 dark:border-slate-800 bg-slate-900/10 dark:bg-slate-900/80 flex justify-end">
+                <button onclick="closeKnowledgeModal()" class="px-4 py-2 rounded-xl bg-slate-200 dark:bg-slate-800 hover:opacity-85 text-xs font-semibold transition">
                     Done
                 </button>
             </div>
@@ -594,13 +579,12 @@
     </div>
 
     <script>
-        const apiKey = ""; // Canvas runtime automatically injects the API key
+        const apiKey = "";
         let userProvidedApiKey = "";
         try {
             userProvidedApiKey = localStorage.getItem('nitin_gemini_api_key') || "";
         } catch (e) {}
 
-        // Default Pre-Indexed LinkedIn Profile Knowledge Base for Nitin JBS (https://www.linkedin.com/in/nitinjbs/)
         const DEFAULT_KNOWLEDGE_CHUNKS = [
             {
                 id: "chunk-headline",
@@ -667,23 +651,21 @@
             }
         ];
 
-        // Application State
         let knowledgeChunks = [];
         let currentWitLevel = 'medium'; // 'mild' | 'medium' | 'spicy'
         let currentAvatarAction = 'idle'; // 'idle' | 'thinking' | 'talking'
-        let activeVizTab = 'radar'; // 'radar' | 'journey' | 'chunks'
+        let activeVizTab = 'radar';
         let chatHistory = [];
         let lastRetrievedIds = [];
 
-        // Expressive Human Avatar Configurations per Wit Level & Conversational State
         const WIT_PERSONA_CONFIG = {
             mild: {
                 label: "Polite PM",
                 moodTitle: "Warm & Empathetic",
                 emoji: "☕",
-                meterPercent: 38,
+                meterPercent: 35,
                 tagline: "\"Happy to walk you through my roadmap! Let's align on user empathy, clean execution, and measurable social impact.\"",
-                glowColor: "bg-sky-500/15",
+                glowColor: "bg-sky-400/20",
                 frameBorder: "border-sky-400/50",
                 pillBg: "bg-sky-600 border-sky-400/40",
                 radarPoints: "110,32 172,84 155,164 60,165 48,84",
@@ -697,11 +679,11 @@
             },
             medium: {
                 label: "Classic Nitin",
-                moodTitle: "Sharp & Witty",
-                emoji: "😎",
-                meterPercent: 75,
-                tagline: "\"Translating chaotic human problems into clean product roadmaps—with a side of filter coffee and dry humor.\"",
-                glowColor: "bg-indigo-500/20",
+                moodTitle: "Pleasant & Witty",
+                emoji: "😊",
+                meterPercent: 60,
+                tagline: "\"Welcoming human problems with open arms, clean product roadmaps, and a sunny beachside smile.\"",
+                glowColor: "bg-indigo-500/25",
                 frameBorder: "border-indigo-500/60",
                 pillBg: "bg-indigo-600 border-indigo-400/40",
                 radarPoints: "110,28 182,81 153,162 65,162 40,82",
@@ -714,12 +696,12 @@
                 ]
             },
             spicy: {
-                label: "Unfiltered Standup",
+                label: "Standup Wit",
                 moodTitle: "Roasting Buzzwords",
                 emoji: "🔥",
-                meterPercent: 100,
+                meterPercent: 92,
                 tagline: "\"If your feature needs a 45-slide deck to explain why users care, it's probably a bug wearing a tuxedo.\"",
-                glowColor: "bg-amber-500/20",
+                glowColor: "bg-amber-500/25",
                 frameBorder: "border-amber-500/60",
                 pillBg: "bg-gradient-to-r from-amber-600 to-rose-600 border-amber-400/50",
                 radarPoints: "110,25 186,80 156,166 64,164 35,80",
@@ -739,7 +721,7 @@
                 role: "Principal Product Manager & Volunteer",
                 org: "Team Everest NGO & Vidhya Vidhai",
                 badge: "Social Impact",
-                color: "text-emerald-400 border-emerald-500/30 bg-emerald-500/10",
+                color: "text-emerald-500 dark:text-emerald-400 border-emerald-500/30 bg-emerald-500/10",
                 query: "What do you do as Principal PM at Team Everest NGO and Vidhya Vidhai?"
             },
             {
@@ -747,7 +729,7 @@
                 role: "SWE → Systems Analyst → Sr SWE → Architect → PM",
                 org: "Way.com",
                 badge: "5x Career Climb",
-                color: "text-indigo-400 border-indigo-500/30 bg-indigo-500/10",
+                color: "text-indigo-600 dark:text-indigo-400 border-indigo-500/30 bg-indigo-500/10",
                 query: "How did you climb from Software Engineer to System Architect and Product Manager at Way.com?"
             },
             {
@@ -755,7 +737,7 @@
                 role: "UX Research Intern",
                 org: "YouTube (Google)",
                 badge: "User Behavior",
-                color: "text-rose-400 border-rose-500/30 bg-rose-500/10",
+                color: "text-rose-500 dark:text-rose-400 border-rose-500/30 bg-rose-500/10",
                 query: "Tell me about your UX Research internship at YouTube!"
             },
             {
@@ -763,7 +745,7 @@
                 role: "M.S. Computer Science & Grad Teaching Assistant",
                 org: "Oregon State University",
                 badge: "OSU Beavers",
-                color: "text-amber-400 border-amber-500/30 bg-amber-500/10",
+                color: "text-amber-500 dark:text-amber-400 border-amber-500/30 bg-amber-500/10",
                 query: "What was your experience doing your Master's in CS and being a GTA at Oregon State University?"
             },
             {
@@ -771,188 +753,135 @@
                 role: "Software Engineer @ HCL & B.Tech IT @ CIT",
                 org: "HCL Technologies & CIT Coimbatore",
                 badge: "Foundation",
-                color: "text-sky-400 border-sky-500/30 bg-sky-500/10",
+                color: "text-sky-600 dark:text-sky-400 border-sky-500/30 bg-sky-500/10",
                 query: "Tell me about your roots at CIT Coimbatore and HCL Technologies."
             }
         ];
 
-        // Dynamic SVG Generator for Nitin's Expressive Human Avatar
-        function generateHumanAvatarSVG(witLevel = 'medium', action = 'idle', size = 'large') {
-            // Warm South Asian skin tone palette, dark styled hair, smart beard, glasses, and expressive eyes/eyebrows/mouth
+        // Charismatic, Clean-shaven Human SVG Avatar (Open Arms, "BEING HUMAN" tee by ocean waves, natural smiling lips & sparkling smiling eyes)
+        function generateHumanAvatarSVG(witLevel = 'medium', action = 'idle') {
             const bgGradients = {
-                mild: ['#0f172a', '#1e293b', '#38bdf8'],
-                medium: ['#1e1b4b', '#312e81', '#818cf8'],
-                spicy: ['#27120b', '#451a03', '#f59e0b']
+                mild: ['#0ea5e9', '#0284c7', '#38bdf8'],
+                medium: ['#4f46e5', '#312e81', '#818cf8'],
+                spicy: ['#d97706', '#7c2d12', '#f59e0b']
             };
             const [bg1, bg2, accent] = bgGradients[witLevel] || bgGradients.medium;
 
-            // Eyebrows based on wit & action
-            let leftBrow = "M34 44 Q40 41 45 43";
-            let rightBrow = "M55 43 Q60 41 66 44";
-            if (action === 'thinking') {
-                leftBrow = "M34 45 Q40 43 45 44";
-                rightBrow = "M55 40 Q60 36 66 40"; // Inquisitive raised eyebrow
-            } else if (witLevel === 'medium') {
-                leftBrow = "M34 44 Q40 42 45 44";
-                rightBrow = "M55 41 Q60 37 66 41"; // Classic Nitin confident raised brow
-            } else if (witLevel === 'spicy') {
-                leftBrow = "M34 41 Q40 44 45 43";
-                rightBrow = "M55 39 Q61 36 66 41"; // Playful standup arch
-            }
+            // Natural smiling lips and mouth geometry
+            let mouthSvg = `
+                <!-- Natural smiling lip curve with soft upper contour and happy curved lower lip -->
+                <path d="M38 64 Q50 72 62 64 Q50 79 38 64 Z" fill="#e11d48" opacity="0.9"/>
+                <path d="M38 64 Q50 69 62 64" fill="none" stroke="#9f1239" stroke-width="1.8" stroke-linecap="round"/>
+            `;
 
-            // Mouth expression based on wit & action
-            let mouthSvg = '';
             if (action === 'thinking') {
-                mouthSvg = `<circle cx="52" cy="68" r="2.8" fill="#451a03" />`;
+                mouthSvg = `<ellipse cx="50" cy="66" rx="3.5" ry="3.5" fill="#e11d48" />`;
             } else if (action === 'talking') {
                 mouthSvg = `
-                    <path d="M42 65 Q50 74 58 65 Z" fill="#7c2d12" class="animate-pulse"/>
-                    <path d="M44 66 Q50 69 56 66" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round"/>
+                    <ellipse cx="50" cy="66" rx="6.5" ry="5" fill="#e11d48" class="animate-pulse"/>
+                    <path d="M42 65 L58 65" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round"/>
                 `;
-            } else if (witLevel === 'mild') {
-                // Warm polite smile
-                mouthSvg = `<path d="M42 65 Q50 71 58 65" fill="none" stroke="#ffffff" stroke-width="2.4" stroke-linecap="round"/>`;
-            } else if (witLevel === 'medium') {
-                // Asymmetrical witty smirk
+            } else if (witLevel === 'spicy') {
                 mouthSvg = `
-                    <path d="M41 66 Q50 72 60 63" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"/>
-                    <path d="M59 62 Q62 63 61 65" fill="none" stroke="#d97706" stroke-width="1.3" stroke-linecap="round"/>
-                `;
-            } else {
-                // Big standup grin with teeth
-                mouthSvg = `
-                    <path d="M40 64 Q50 75 60 64 Z" fill="#991b1b"/>
-                    <path d="M42 65 L58 65" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round"/>
+                    <path d="M36 62 Q50 78 64 62 Q50 74 36 62 Z" fill="#e11d48"/>
+                    <path d="M37 64 L63 64" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
                 `;
             }
 
-            // Glasses style (Polite: clean rimless/indigo, Classic: sharp dark frames, Spicy: tinted/amber glow frames)
-            const glassesStroke = witLevel === 'spicy' ? '#fbbf24' : (witLevel === 'mild' ? '#93c5fd' : '#e2e8f0');
-            const lensTint = witLevel === 'spicy' ? 'rgba(245, 158, 11, 0.22)' : 'rgba(99, 102, 241, 0.12)';
+            // Smiling eyes with bright reflection sparkles and warm happy crescent lower eyelids
+            let leftEye = `
+                <circle cx="41" cy="45" r="3.2" fill="#0f172a" />
+                <circle cx="42" cy="43.5" r="1.2" fill="#ffffff" />
+                <circle cx="39.5" cy="46" r="0.6" fill="#ffffff" />
+                <!-- Smiling lower eyelid curve -->
+                <path d="M37 47 Q41 49.5 45 47" fill="none" stroke="#b45309" stroke-width="1.2" stroke-linecap="round" opacity="0.6"/>
+            `;
+            let rightEye = `
+                <circle cx="59" cy="45" r="3.2" fill="#0f172a" />
+                <circle cx="60" cy="43.5" r="1.2" fill="#ffffff" />
+                <circle cx="57.5" cy="46" r="0.6" fill="#ffffff" />
+                <!-- Smiling lower eyelid curve -->
+                <path d="M55 47 Q59 49.5 63 47" fill="none" stroke="#b45309" stroke-width="1.2" stroke-linecap="round" opacity="0.6"/>
+            `;
 
-            // Accessory badge on collar / corner
-            let propOverlay = '';
-            if (size === 'large') {
-                if (action === 'thinking') {
-                    // Floating Rubik's cube / thought nodes
-                    propOverlay = `
-                        <g transform="translate(74, 14)">
-                            <rect x="0" y="0" width="14" height="14" rx="3" fill="#4f46e5" stroke="#a5b4fc" stroke-width="1.2"/>
-                            <line x1="7" y1="0" x2="7" y2="14" stroke="#a5b4fc" stroke-width="0.8"/>
-                            <line x1="0" y1="7" x2="14" y2="7" stroke="#a5b4fc" stroke-width="0.8"/>
-                        </g>
-                    `;
-                } else if (witLevel === 'mild') {
-                    // Filter coffee cup icon
-                    propOverlay = `
-                        <g transform="translate(72, 68)">
-                            <rect x="2" y="6" width="14" height="12" rx="3" fill="#38bdf8" stroke="#e0f2fe" stroke-width="1.2"/>
-                            <path d="M16 9 Q20 9 20 12 Q20 15 16 15" fill="none" stroke="#e0f2fe" stroke-width="1.2"/>
-                            <path d="M6 3 Q7 0 8 3 M11 3 Q12 0 13 3" fill="none" stroke="#bae6fd" stroke-width="1.2" stroke-linecap="round"/>
-                        </g>
-                    `;
-                } else if (witLevel === 'medium') {
-                    // Mini Rubik's Cube badge
-                    propOverlay = `
-                        <g transform="translate(73, 68)">
-                            <rect x="0" y="2" width="15" height="15" rx="2.5" fill="#1e1b4b" stroke="#818cf8" stroke-width="1.2"/>
-                            <rect x="2" y="4" width="4.5" height="4.5" fill="#ef4444"/>
-                            <rect x="8.5" y="4" width="4.5" height="4.5" fill="#fbbf24"/>
-                            <rect x="2" y="10.5" width="4.5" height="4.5" fill="#10b981"/>
-                            <rect x="8.5" y="10.5" width="4.5" height="4.5" fill="#3b82f6"/>
-                        </g>
-                    `;
-                } else if (witLevel === 'spicy') {
-                    // Standup Comedy Mic & Fire spark
-                    propOverlay = `
-                        <g transform="translate(73, 64)">
-                            <rect x="5" y="9" width="4" height="12" rx="1.5" fill="#475569"/>
-                            <circle cx="7" cy="6" r="5" fill="#f59e0b" stroke="#fef3c7" stroke-width="1.2"/>
-                            <line x1="3" y1="6" x2="11" y2="6" stroke="#78350f" stroke-width="1"/>
-                        </g>
-                    `;
-                }
+            if (action === 'thinking') {
+                leftEye = `<circle cx="41" cy="45" r="2.8" fill="#0f172a" /><circle cx="42" cy="44" r="1" fill="#ffffff" />`;
+                rightEye = `<circle cx="59" cy="44" r="2.8" fill="#0f172a" /><circle cx="60" cy="43" r="1" fill="#ffffff" />`;
             }
 
-            // Hoodie / Blazer color
-            const jacketColor = witLevel === 'spicy' ? '#7c2d12' : (witLevel === 'mild' ? '#1e3a8a' : '#312e81');
-            const shirtColor = witLevel === 'spicy' ? '#fbbf24' : '#6366f1';
+            // Eyebrows (friendly, upbeat, expressive)
+            let leftBrow = "M32 41 Q39 37 46 40";
+            let rightBrow = "M54 40 Q61 37 68 41";
+            if (witLevel === 'mild') {
+                leftBrow = "M32 42 Q39 39 46 41";
+                rightBrow = "M54 41 Q61 39 68 42";
+            } else if (witLevel === 'spicy') {
+                rightBrow = "M54 37 Q61 32 69 38";
+            }
 
             return `
                 <svg viewBox="0 0 100 100" class="w-full h-full select-none">
                     <defs>
-                        <radialGradient id="avatarBg-${witLevel}-${size}" cx="50%" cy="40%" r="60%">
-                            <stop offset="0%" stop-color="${bg2}" />
-                            <stop offset="100%" stop-color="${bg1}" />
-                        </radialGradient>
+                        <linearGradient id="beachSky-${witLevel}" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stop-color="${bg1}" />
+                            <stop offset="75%" stop-color="${bg2}" />
+                            <stop offset="100%" stop-color="#0f172a" />
+                        </linearGradient>
                         <linearGradient id="skinTone" x1="0%" y1="0%" x2="0%" y2="100%">
-                            <stop offset="0%" stop-color="#e09f67" />
-                            <stop offset="100%" stop-color="#c67d47" />
+                            <stop offset="0%" stop-color="#ffdcbe" />
+                            <stop offset="100%" stop-color="#e2a475" />
                         </linearGradient>
                     </defs>
 
-                    <!-- Background Circle/Square -->
-                    <rect width="100" height="100" fill="url(#avatarBg-${witLevel}-${size})" />
-                    <circle cx="50" cy="48" r="38" fill="${accent}" opacity="0.1" />
+                    <!-- Background Night Ocean Scenery -->
+                    <rect width="100" height="100" fill="url(#beachSky-${witLevel})" />
+                    <!-- Ocean Waves -->
+                    <path d="M0 66 Q25 61 50 66 Q75 71 100 66 L100 100 L0 100 Z" fill="#0369a1" opacity="0.65"/>
+                    <path d="M0 73 Q30 68 60 74 Q85 77 100 73 L100 100 L0 100 Z" fill="#0284c7" opacity="0.85"/>
+                    <!-- Foam Wave Crest -->
+                    <path d="M0 72 Q22 68 48 73 Q72 77 100 72" fill="none" stroke="#e0f2fe" stroke-width="1.8" opacity="0.9"/>
 
-                    <!-- Shoulders & Smart Tech Blazer/Hoodie -->
-                    <path d="M16 100 C16 78 32 73 50 73 C68 73 84 78 84 100 Z" fill="${jacketColor}" />
-                    <!-- Inner T-Shirt / Collar -->
-                    <path d="M38 74 L50 92 L62 74 Z" fill="${shirtColor}" />
-                    <path d="M34 74 L43 96 L30 96 Z" fill="#0f172a" opacity="0.35" />
-                    <path d="M66 74 L57 96 L70 96 Z" fill="#0f172a" opacity="0.35" />
+                    <!-- Welcoming Open Arms & White T-Shirt ("BEING HUMAN" style) -->
+                    <!-- Left Open Arm -->
+                    <path d="M29 74 Q14 70 2 77 Q12 84 29 82 Z" fill="url(#skinTone)"/>
+                    <!-- Right Open Arm -->
+                    <path d="M71 74 Q86 70 98 77 Q88 84 71 82 Z" fill="url(#skinTone)"/>
+                    <!-- White T-Shirt Body -->
+                    <path d="M25 69 C25 64 35 62 50 62 C65 62 75 64 75 69 L78 100 L22 100 Z" fill="#ffffff"/>
+                    <!-- T-Shirt Branding -->
+                    <text x="50" y="80" text-anchor="middle" fill="#0284c7" font-size="5" font-family="Inter" font-weight="800" letter-spacing="0.4">BEING HUMAN</text>
 
                     <!-- Neck -->
-                    <rect x="43" y="65" width="14" height="14" rx="5" fill="#b86f3b" />
+                    <rect x="42" y="58" width="16" height="14" rx="4" fill="#cb8f60" />
 
                     <!-- Ears -->
-                    <circle cx="27" cy="52" r="5" fill="#c67d47" />
-                    <circle cx="73" cy="52" r="5" fill="#c67d47" />
+                    <circle cx="26" cy="48" r="4.5" fill="#e2a475" />
+                    <circle cx="74" cy="48" r="4.5" fill="#e2a475" />
 
-                    <!-- Head Base -->
-                    <rect x="29" y="25" width="42" height="49" rx="20" fill="url(#skinTone)" />
+                    <!-- Head Base (Clean-shaven, positive smiling proportions) -->
+                    <rect x="30" y="22" width="40" height="46" rx="18" fill="url(#skinTone)" />
 
-                    <!-- Cheek Warmth -->
-                    <ellipse cx="36" cy="57" rx="4" ry="2.2" fill="#e11d48" opacity="0.18" />
-                    <ellipse cx="64" cy="57" rx="4" ry="2.2" fill="#e11d48" opacity="0.18" />
+                    <!-- Warm Rosy Cheeks -->
+                    <ellipse cx="35" cy="52" rx="5" ry="3" fill="#f43f5e" opacity="0.22" />
+                    <ellipse cx="65" cy="52" rx="5" ry="3" fill="#f43f5e" opacity="0.22" />
 
-                    <!-- Styled South Asian Wavy Quiff Hair -->
-                    <path d="M27 45 C25 26 36 16 52 17 C67 17 76 26 73 45 C71 35 66 28 50 28 C36 28 30 35 27 45 Z" fill="#171717" />
-                    <path d="M34 23 Q50 12 65 22 Q54 19 38 25 Z" fill="#262626" />
+                    <!-- Neat Modern Short Hair -->
+                    <path d="M28 39 C27 23 37 14 50 14 C63 14 73 23 72 39 C69 30 62 25 50 25 C38 25 31 30 28 39 Z" fill="#18181b" />
+                    <path d="M33 21 Q50 11 67 20 Q52 16 38 22 Z" fill="#27272a" />
 
-                    <!-- Expressive Eyebrows -->
-                    <path d="${leftBrow}" fill="none" stroke="#171717" stroke-width="2.6" stroke-linecap="round" />
-                    <path d="${rightBrow}" fill="none" stroke="#171717" stroke-width="2.6" stroke-linecap="round" />
+                    <!-- Eyebrows -->
+                    <path d="${leftBrow}" fill="none" stroke="#18181b" stroke-width="2.4" stroke-linecap="round" />
+                    <path d="${rightBrow}" fill="none" stroke="#18181b" stroke-width="2.4" stroke-linecap="round" />
 
-                    <!-- Eyes with Blink Animation -->
-                    <g class="avatar-eye">
-                        <circle cx="40" cy="49" r="2.8" fill="#0f172a" />
-                        <circle cx="41" cy="48" r="1" fill="#ffffff" />
-                        <circle cx="60" cy="49" r="2.8" fill="#0f172a" />
-                        <circle cx="61" cy="48" r="1" fill="#ffffff" />
-                    </g>
-
-                    <!-- Signature Glasses -->
-                    <g>
-                        <rect x="32" y="43.5" width="16" height="11" rx="3.5" fill="${lensTint}" stroke="${glassesStroke}" stroke-width="1.8" />
-                        <rect x="52" y="43.5" width="16" height="11" rx="3.5" fill="${lensTint}" stroke="${glassesStroke}" stroke-width="1.8" />
-                        <line x1="48" y1="48" x2="52" y2="48" stroke="${glassesStroke}" stroke-width="1.8" />
-                        <line x1="28" y1="47" x2="32" y2="47.5" stroke="${glassesStroke}" stroke-width="1.5" />
-                        <line x1="68" y1="47.5" x2="72" y2="47" stroke="${glassesStroke}" stroke-width="1.5" />
-                    </g>
+                    <!-- Smiling Eyes with Sparkle -->
+                    ${leftEye}
+                    ${rightEye}
 
                     <!-- Nose -->
-                    <path d="M50 49 L48 57 L52 57.5" fill="none" stroke="#9a5828" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M50 44 L48 52.5 L52 53" fill="none" stroke="#b45309" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
 
-                    <!-- Well-Groomed Beard & Mustache -->
-                    <path d="M30 55 C30 69 40 76 50 76 C60 76 70 69 70 55 C67 62 61 65 50 65 C39 65 33 62 30 55 Z" fill="#1f2937" opacity="0.92" />
-                    <path d="M39 63 Q50 59 61 63" fill="none" stroke="#171717" stroke-width="3" stroke-linecap="round" />
-
-                    <!-- Dynamic Mouth -->
+                    <!-- Natural Smiling Lips -->
                     ${mouthSvg}
-
-                    <!-- Context Prop Overlay -->
-                    ${propOverlay}
                 </svg>
             `;
         }
@@ -961,56 +890,50 @@
             currentAvatarAction = action;
             const cfg = WIT_PERSONA_CONFIG[currentWitLevel];
 
-            // 1. Hero Avatar
             const heroContainer = document.getElementById('hero-avatar-container');
             if (heroContainer) {
-                heroContainer.innerHTML = generateHumanAvatarSVG(currentWitLevel, action, 'large');
+                heroContainer.innerHTML = generateHumanAvatarSVG(currentWitLevel, action);
             }
 
-            // 2. Header Avatar
             const headerSvg = document.getElementById('header-avatar-svg');
             if (headerSvg) {
-                headerSvg.innerHTML = generateHumanAvatarSVG(currentWitLevel, action, 'small');
+                headerSvg.innerHTML = generateHumanAvatarSVG(currentWitLevel, action);
             }
 
-            // 3. Subbar Avatar
             const subbarSvg = document.getElementById('chat-subbar-avatar');
             if (subbarSvg) {
-                subbarSvg.innerHTML = generateHumanAvatarSVG(currentWitLevel, action, 'small');
+                subbarSvg.innerHTML = generateHumanAvatarSVG(currentWitLevel, action);
             }
 
-            // 4. Mood Badges & State Chip
             const moodEmojiEl = document.getElementById('header-mood-emoji');
             if (moodEmojiEl) moodEmojiEl.textContent = cfg.emoji;
 
             const pillEl = document.getElementById('avatar-speech-pill');
             if (pillEl) {
-                pillEl.className = `absolute -bottom-2 left-1/2 -translate-x-1/2 whitespace-nowrap px-2.5 py-0.5 rounded-full text-[10px] font-mono font-semibold text-white shadow-lg border flex items-center gap-1 transition-all ${cfg.pillBg}`;
+                pillEl.className = `absolute -bottom-2.5 left-1/2 -translate-x-1/2 whitespace-nowrap px-2.5 py-0.5 rounded-full text-[10px] font-mono font-semibold text-white shadow-lg border flex items-center gap-1 transition-all ${cfg.pillBg}`;
                 pillEl.innerHTML = `<span>${cfg.emoji}</span> <span>${cfg.moodTitle}</span>`;
             }
 
             const stateChip = document.getElementById('avatar-state-chip');
             if (stateChip) {
                 if (action === 'thinking') {
-                    stateChip.className = "inline-flex items-center gap-1 text-[10px] font-mono text-amber-300 bg-amber-500/15 border border-amber-500/30 px-2 py-0.5 rounded-full";
-                    stateChip.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-ping"></span> Scanning RAG Vectors...`;
+                    stateChip.className = "inline-flex items-center gap-1 text-[10px] font-mono text-amber-600 dark:text-amber-300 bg-amber-500/15 border border-amber-500/30 px-2 py-0.5 rounded-full";
+                    stateChip.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-amber-500 animate-ping"></span> Scanning Vectors...`;
                 } else {
-                    stateChip.className = "inline-flex items-center gap-1 text-[10px] font-mono text-emerald-300 bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded-full";
-                    stateChip.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span> Online (${cfg.label})`;
+                    stateChip.className = "inline-flex items-center gap-1 text-[10px] font-mono text-emerald-600 dark:text-emerald-300 bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded-full";
+                    stateChip.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-emerald-500 dark:bg-emerald-400 animate-ping"></span> Online (${cfg.label})`;
                 }
             }
 
-            // 5. Ambient glow & frame border
             const glowEl = document.getElementById('avatar-ambient-glow');
             if (glowEl) {
                 glowEl.className = `absolute -right-8 -top-8 w-44 h-44 rounded-full blur-3xl pointer-events-none transition-all duration-500 ${cfg.glowColor}`;
             }
             const frameEl = document.getElementById('hero-avatar-frame');
             if (frameEl) {
-                frameEl.className = `w-28 h-28 sm:w-32 sm:h-32 rounded-3xl bg-gradient-to-b from-indigo-500/20 via-slate-900 to-slate-950 border-2 ${cfg.frameBorder} shadow-2xl flex items-center justify-center overflow-hidden relative transition-all duration-500`;
+                frameEl.className = `w-28 h-28 sm:w-32 sm:h-32 rounded-3xl bg-gradient-to-b from-indigo-500/20 via-sky-950 to-slate-950 border-2 ${cfg.frameBorder} shadow-2xl flex items-center justify-center overflow-hidden relative transition-all duration-500`;
             }
 
-            // 6. Tagline & Thermometer
             const taglineEl = document.getElementById('persona-tagline');
             if (taglineEl) taglineEl.textContent = cfg.tagline;
 
@@ -1020,7 +943,6 @@
             const meterBar = document.getElementById('wit-meter-bar');
             if (meterBar) meterBar.style.width = `${cfg.meterPercent}%`;
 
-            // 7. Update Radar Polygon & DNA Bars
             const radarPoly = document.getElementById('radar-data-polygon');
             if (radarPoly) {
                 radarPoly.setAttribute('points', cfg.radarPoints);
@@ -1034,10 +956,10 @@
             container.innerHTML = scores.map(item => `
                 <div>
                     <div class="flex justify-between text-[10px] mb-0.5">
-                        <span class="text-slate-300 truncate pr-2">${escapeHtml(item.label)}</span>
-                        <span class="font-mono text-slate-400">${item.pct}%</span>
+                        <span class="opacity-80 truncate pr-2">${escapeHtml(item.label)}</span>
+                        <span class="font-mono opacity-70">${item.pct}%</span>
                     </div>
-                    <div class="w-full h-1.5 bg-slate-950 rounded-full overflow-hidden">
+                    <div class="w-full h-1.5 bg-slate-900/10 dark:bg-slate-950 rounded-full overflow-hidden">
                         <div class="h-full ${item.color} rounded-full bar-fill" style="width: ${item.pct}%"></div>
                     </div>
                 </div>
@@ -1063,12 +985,12 @@
                 return `
                     <div class="group cursor-pointer" onclick="switchVizTab('chunks')">
                         <div class="flex items-center justify-between text-[10px] mb-0.5">
-                            <span class="font-medium text-slate-200 group-hover:text-indigo-300 transition truncate max-w-[75%]">
-                                <span class="font-mono text-indigo-400">#${idx + 1}</span> ${escapeHtml(c.title)}
+                            <span class="font-medium group-hover:text-indigo-500 transition truncate max-w-[75%]">
+                                <span class="font-mono text-indigo-500 dark:text-indigo-400">#${idx + 1}</span> ${escapeHtml(c.title)}
                             </span>
-                            <span class="font-mono text-emerald-400 font-semibold">${c.similarity}% cosine</span>
+                            <span class="font-mono text-emerald-600 dark:text-emerald-400 font-semibold">${c.similarity}% cosine</span>
                         </div>
-                        <div class="w-full h-2 bg-slate-950 rounded-full overflow-hidden p-0.2 border border-slate-800/80">
+                        <div class="w-full h-2 bg-slate-900/10 dark:bg-slate-950 rounded-full overflow-hidden p-0.2 border border-slate-300/40 dark:border-slate-800/80">
                             <div class="h-full rounded-full bg-gradient-to-r ${grad} bar-fill" style="width: ${c.similarity}%"></div>
                         </div>
                     </div>
@@ -1081,16 +1003,16 @@
             if (!container) return;
             container.innerHTML = CAREER_TIMELINE.map(item => `
                 <div onclick="triggerTimelineQuery('${escapeHtml(item.query.replace(/'/g, "\\'"))}')"
-                     class="relative group cursor-pointer bg-slate-900/75 hover:bg-slate-900 border border-slate-800/90 hover:border-indigo-500/60 rounded-xl p-3 transition-all">
-                    <span class="absolute -left-[27px] top-4 w-3.5 h-3.5 rounded-full bg-slate-950 border-2 border-indigo-400 group-hover:scale-125 group-hover:bg-indigo-400 transition"></span>
+                     class="relative group cursor-pointer bg-slate-900/5 dark:bg-slate-900/75 hover:bg-slate-900/10 dark:hover:bg-slate-900 border border-slate-300/60 dark:border-slate-800/90 hover:border-indigo-500/60 rounded-xl p-3 transition-all">
+                    <span class="absolute -left-[27px] top-4 w-3.5 h-3.5 rounded-full bg-white dark:bg-slate-950 border-2 border-indigo-500 group-hover:scale-125 group-hover:bg-indigo-500 transition"></span>
                     <div class="flex items-center justify-between gap-2 mb-1">
-                        <span class="text-[10px] font-mono text-slate-400">${escapeHtml(item.year)}</span>
+                        <span class="text-[10px] font-mono opacity-75">${escapeHtml(item.year)}</span>
                         <span class="text-[10px] font-mono px-2 py-0.5 rounded-full border ${item.color}">${escapeHtml(item.badge)}</span>
                     </div>
-                    <h4 class="text-xs font-bold text-white group-hover:text-indigo-300 transition">${escapeHtml(item.role)}</h4>
-                    <p class="text-[11px] text-slate-400 flex items-center justify-between mt-0.5">
+                    <h4 class="text-xs font-bold group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition">${escapeHtml(item.role)}</h4>
+                    <p class="text-[11px] opacity-75 flex items-center justify-between mt-0.5">
                         <span>${escapeHtml(item.org)}</span>
-                        <span class="text-[10px] text-indigo-400 opacity-100 sm:opacity-0 group-hover:opacity-100 transition flex items-center gap-0.5">
+                        <span class="text-[10px] text-indigo-600 dark:text-indigo-400 group-hover:opacity-100 transition flex items-center gap-0.5">
                             Ask Nitin <i class="ph-bold ph-arrow-right"></i>
                         </span>
                     </p>
@@ -1105,6 +1027,7 @@
             handleUserSubmit(null, query);
         }
 
+        // Mobile Primary View Switcher: Tab 1 is Studio (Avatar & Radar), Tab 2 is Chat (Ask Nitin AI)
         function switchMobilePrimaryView(view, subTab = null) {
             const chatPanel = document.getElementById('mobile-panel-chat');
             const studioPanel = document.getElementById('mobile-panel-studio');
@@ -1112,8 +1035,8 @@
             const navStudio = document.getElementById('mob-nav-studio');
             const navVectors = document.getElementById('mob-nav-vectors');
 
-            const activeBtnClass = "flex-1 py-1.5 rounded-xl flex flex-col items-center justify-center gap-0.5 text-indigo-400 bg-indigo-500/10 font-semibold transition";
-            const inactiveBtnClass = "flex-1 py-1.5 rounded-xl flex flex-col items-center justify-center gap-0.5 text-slate-400 hover:text-slate-200 transition";
+            const activeBtnClass = "flex-1 py-1.5 rounded-xl flex flex-col items-center justify-center gap-0.5 text-indigo-600 dark:text-indigo-400 bg-indigo-500/10 font-semibold transition";
+            const inactiveBtnClass = "flex-1 py-1.5 rounded-xl flex flex-col items-center justify-center gap-0.5 opacity-70 hover:opacity-100 transition";
 
             if (view === 'chat') {
                 chatPanel?.classList.remove('hidden');
@@ -1134,7 +1057,6 @@
                     switchVizTab(subTab);
                 }
 
-                if (navChat) navChat.className = inactiveBtnClass;
                 if (subTab === 'chunks') {
                     if (navStudio) navStudio.className = inactiveBtnClass;
                     if (navVectors) navVectors.className = activeBtnClass;
@@ -1142,6 +1064,7 @@
                     if (navStudio) navStudio.className = activeBtnClass;
                     if (navVectors) navVectors.className = inactiveBtnClass;
                 }
+                if (navChat) navChat.className = inactiveBtnClass;
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }
         }
@@ -1159,7 +1082,7 @@
                     if (t === tab) {
                         btn.className = "px-2.5 py-1 rounded-lg bg-indigo-600 text-white font-medium transition flex items-center gap-1";
                     } else {
-                        btn.className = "px-2.5 py-1 rounded-lg text-slate-400 hover:text-white transition flex items-center gap-1";
+                        btn.className = "px-2.5 py-1 rounded-lg opacity-75 hover:opacity-100 transition flex items-center gap-1";
                     }
                 }
             });
@@ -1180,7 +1103,6 @@
             "What is your mentorship philosophy & how can I book a 1:1?"
         ];
 
-        // Load chunks from localStorage or fallback to default
         function initKnowledgeBase() {
             try {
                 const saved = localStorage.getItem('nitin_rag_chunks_v1');
@@ -1199,9 +1121,7 @@
         function saveKnowledgeBase() {
             try {
                 localStorage.setItem('nitin_rag_chunks_v1', JSON.stringify(knowledgeChunks));
-            } catch (e) {
-                console.warn('Storage restricted in iframe, keeping in-memory.');
-            }
+            } catch (e) {}
             updateChunkBadge();
             renderChunksList();
             renderModalChunksList();
@@ -1223,45 +1143,23 @@
                 const catLower = chunk.category.toLowerCase();
                 const kwList = (chunk.keywords || []).map(k => k.toLowerCase());
 
-                // Exact phrase boost
                 if (cleanQuery.length > 3 && contentLower.includes(cleanQuery.trim())) {
                     score += 15;
                 }
 
                 tokens.forEach(token => {
-                    // Keyword array match
-                    if (kwList.some(k => k.includes(token) || token.includes(k))) {
-                        score += 6;
-                    }
-                    // Title match
-                    if (titleLower.includes(token)) {
-                        score += 5;
-                    }
-                    // Category match
-                    if (catLower.includes(token)) {
-                        score += 3;
-                    }
-                    // Content term frequency match
+                    if (kwList.some(k => k.includes(token) || token.includes(k))) score += 6;
+                    if (titleLower.includes(token)) score += 5;
+                    if (catLower.includes(token)) score += 3;
                     const regex = new RegExp(`\\b${token}`, 'gi');
                     const matches = contentLower.match(regex);
-                    if (matches) {
-                        score += Math.min(matches.length * 2.5, 8);
-                    }
+                    if (matches) score += Math.min(matches.length * 2.5, 8);
                 });
 
-                // Baseline boost for general "who is nitin / tell me about yourself" queries
-                if (chunk.id === 'chunk-headline') {
-                    score += 2.5;
-                }
+                if (chunk.id === 'chunk-headline') score += 2.5;
 
-                // Normalize into a realistic similarity percentage (62% - 99%)
                 const similarity = score > 0 ? Math.min(99, Math.round(64 + score * 2.2)) : 45;
-
-                return {
-                    ...chunk,
-                    rawScore: score,
-                    similarity
-                };
+                return { ...chunk, rawScore: score, similarity };
             });
 
             scored.sort((a, b) => b.rawScore - a.rawScore);
@@ -1285,7 +1183,6 @@
                 };
             });
 
-            // Sort retrieved chunks to the top
             if (highlightedChunks) {
                 displayList.sort((a, b) => (b.similarity || 0) - (a.similarity || 0));
             }
@@ -1300,23 +1197,23 @@
 
             container.innerHTML = displayList.map(chunk => {
                 const activeClasses = chunk.isRetrieved
-                    ? 'border-indigo-500/80 bg-indigo-950/30 chunk-highlight'
-                    : 'border-slate-800/80 bg-slate-900/60 hover:border-slate-700';
+                    ? 'border-indigo-500/80 bg-indigo-500/10 chunk-highlight'
+                    : 'border-slate-300/60 dark:border-slate-800/80 bg-slate-900/5 dark:bg-slate-900/60 hover:opacity-100';
 
                 const badgeHtml = chunk.isRetrieved
-                    ? `<span class="text-[10px] font-mono font-semibold px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 flex items-center gap-1">
+                    ? `<span class="text-[10px] font-mono font-semibold px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-600 dark:text-emerald-300 border border-emerald-500/30 flex items-center gap-1">
                          <i class="ph-fill ph-check-circle"></i> Retrieved (${chunk.similarity}% match)
                        </span>`
-                    : `<span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-slate-800 text-slate-400">Indexed</span>`;
+                    : `<span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-slate-900/10 dark:bg-slate-800 opacity-75">Indexed</span>`;
 
                 return `
                     <div class="rounded-xl p-3 border transition-all duration-300 ${activeClasses}">
                         <div class="flex items-center justify-between gap-2 mb-1">
-                            <span class="text-[10px] font-mono uppercase tracking-wider text-indigo-400 font-semibold">${escapeHtml(chunk.category)}</span>
+                            <span class="text-[10px] font-mono uppercase tracking-wider text-indigo-600 dark:text-indigo-400 font-semibold">${escapeHtml(chunk.category)}</span>
                             ${badgeHtml}
                         </div>
-                        <h4 class="text-xs font-bold text-slate-100 mb-1">${escapeHtml(chunk.title)}</h4>
-                        <p class="text-xs text-slate-400 leading-relaxed line-clamp-3 hover:line-clamp-none transition-all cursor-pointer" title="Click to expand">${escapeHtml(chunk.content)}</p>
+                        <h4 class="text-xs font-bold mb-1">${escapeHtml(chunk.title)}</h4>
+                        <p class="text-xs opacity-75 leading-relaxed line-clamp-3 hover:line-clamp-none transition-all cursor-pointer" title="Click to expand">${escapeHtml(chunk.content)}</p>
                     </div>
                 `;
             }).join('');
@@ -1326,51 +1223,57 @@
             currentWitLevel = level;
             const cfg = WIT_PERSONA_CONFIG[level];
 
-            // Update desktop header buttons
+            // Update theme class on body
+            const bodyEl = document.getElementById('app-root-html');
+            const bodyTag = document.body;
+            bodyTag.className = `theme-${level} font-sans antialiased min-h-[100dvh] flex flex-col overflow-x-hidden pb-safe-nav lg:pb-0 transition-colors duration-500`;
+            if (level === 'spicy') {
+                bodyEl.classList.remove('light');
+                bodyEl.classList.add('dark');
+            } else {
+                bodyEl.classList.remove('dark');
+                bodyEl.classList.add('light');
+            }
+
             ['mild', 'medium', 'spicy'].forEach(l => {
                 const btn = document.getElementById(`wit-${l}`);
-                const lCfg = WIT_PERSONA_CONFIG[l];
                 if (btn) {
                     if (l === level) {
                         btn.className = "wit-btn px-2.5 py-1 rounded-lg bg-indigo-600 text-white font-medium shadow-sm transition flex items-center gap-1";
                     } else {
-                        btn.className = "wit-btn px-2.5 py-1 rounded-lg text-slate-400 hover:text-white transition flex items-center gap-1";
+                        btn.className = "wit-btn px-2.5 py-1 rounded-lg opacity-75 hover:opacity-100 transition flex items-center gap-1";
                     }
                 }
 
-                // Update stage buttons
                 const stageBtn = document.getElementById(`stage-wit-${l}`);
                 if (stageBtn) {
                     if (l === level) {
-                        stageBtn.className = "text-[11px] py-1 rounded-lg bg-indigo-600/30 border border-indigo-500/50 text-indigo-200 font-semibold transition flex items-center justify-center gap-1";
+                        stageBtn.className = "text-[11px] py-1 rounded-lg bg-indigo-600/20 border border-indigo-500/40 text-indigo-700 dark:text-indigo-200 font-semibold transition flex items-center justify-center gap-1";
                     } else {
-                        stageBtn.className = "text-[11px] py-1 rounded-lg border border-transparent text-slate-400 hover:text-white transition flex items-center justify-center gap-1";
+                        stageBtn.className = "text-[11px] py-1 rounded-lg border border-transparent opacity-75 hover:opacity-100 transition flex items-center justify-center gap-1";
                     }
                 }
 
-                // Update mobile top bar wit buttons
                 const mobTopBtn = document.getElementById(`mobile-top-wit-${l}`);
                 if (mobTopBtn) {
                     if (l === level) {
                         mobTopBtn.className = "text-[11px] py-1 px-2 rounded-lg bg-indigo-600 text-white font-semibold border border-indigo-500 shadow-sm transition flex items-center justify-center gap-1";
                     } else {
-                        mobTopBtn.className = "text-[11px] py-1 px-2 rounded-lg bg-slate-900/90 text-slate-400 border border-slate-800 transition flex items-center justify-center gap-1";
+                        mobTopBtn.className = "text-[11px] py-1 px-2 rounded-lg bg-white/60 dark:bg-slate-900/90 border border-slate-300 dark:border-slate-800 transition flex items-center justify-center gap-1";
                     }
                 }
             });
 
-            // Update badge
             const badge = document.getElementById('active-wit-badge');
             if (badge) badge.textContent = `${cfg.emoji} ${cfg.label}`;
 
-            // Refresh all human avatars & visualizations
             updateAllAvatars('idle');
         }
 
         function buildSystemInstruction(retrievedChunks) {
             const witInstructions = {
                 mild: "Speak in first-person ('I', 'my') as Nitin JBS. Keep your tone warm, articulate, insightful, and lightly humorous—like a seasoned Product Manager chatting over filter coffee.",
-                medium: "Speak in first-person ('I', 'my') as Nitin JBS. Use your signature witty, sharp, self-aware, and high-energy writing style! Drop clever analogies about software engineering vs. product management, sprint backlogs, UX research at YouTube, OSU grad school life, and NGO impact.",
+                medium: "Speak in first-person ('I', 'my') as Nitin JBS. Use your signature pleasant, witty, self-aware, and welcoming writing style! Drop clever analogies about software engineering vs. product management, sprint backlogs, UX research at YouTube, OSU grad school life, and NGO impact.",
                 spicy: "Speak in first-person ('I', 'my') as Nitin JBS in peak witty LinkedIn creator mode! Be playfully roasting of tech buzzwords, bad PRDs, and scope creep while delivering rock-solid, super-accurate facts from your real career."
             };
 
@@ -1385,11 +1288,10 @@ ${witInstructions[currentWitLevel]}
 
 STRICT RAG GROUNDING RULES:
 1. Always answer in the FIRST PERSON ("I", "me", "my") as Nitin JBS.
-2. Ground all factual claims (companies: Team Everest NGO, Way.com, YouTube, Oregon State University, HCL Technologies, Coimbatore Institute of Technology, Skillmate, ISAC Cyber Crime Intervention Officer, LEAP mentorship) strictly in the RETRIEVED LINKEDIN KNOWLEDGE CHUNKS below.
-3. If someone asks something not covered in the chunks, make a witty remark that "Even my backlog doesn't have a ticket for that yet" and pivot smoothly to what IS in your profile (e.g., product management, AI governance, NGO impact, or 1:1 mentoring on Skillmate).
-4. Keep responses punchy, engaging, well-formatted with clean bullet points or bold highlights where helpful, and end with a witty hook or follow-up prompt.
+2. Ground all factual claims strictly in the RETRIEVED LINKEDIN KNOWLEDGE CHUNKS below.
+3. Keep responses punchy, engaging, well-formatted with clean bullet points or bold highlights where helpful.
 
-RETRIEVED LINKEDIN KNOWLEDGE CHUNKS FOR THIS QUERY:
+RETRIEVED LINKEDIN KNOWLEDGE CHUNKS:
 ${contextString}`;
         }
 
@@ -1398,68 +1300,40 @@ ${contextString}`;
             const systemInstruction = buildSystemInstruction(retrievedChunks);
             const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${activeKey}`;
 
-            // Include recent conversation turns for continuity
             const recentTurns = chatHistory.slice(-6).map(msg => ({
                 role: msg.role === 'user' ? 'user' : 'model',
                 parts: [{ text: msg.text }]
             }));
 
-            recentTurns.push({
-                role: 'user',
-                parts: [{ text: userQuery }]
-            });
+            recentTurns.push({ role: 'user', parts: [{ text: userQuery }] });
 
             const payload = {
                 contents: recentTurns,
-                systemInstruction: {
-                    parts: [{ text: systemInstruction }]
-                }
+                systemInstruction: { parts: [{ text: systemInstruction }] }
             };
 
-            const delays = [1000, 2000, 4000, 8000];
-            for (let attempt = 0; attempt <= delays.length; attempt++) {
-                try {
-                    const response = await fetch(apiUrl, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(payload)
-                    });
+            const response = await fetch(apiUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
 
-                    if (!response.ok) {
-                        throw new Error(`HTTP ${response.status}`);
-                    }
-
-                    const result = await response.json();
-                    const text = result?.candidates?.[0]?.content?.parts?.[0]?.text;
-                    if (text) return text;
-                    throw new Error("Empty model response");
-                } catch (err) {
-                    if (attempt === delays.length) {
-                        throw err;
-                    }
-                    await new Promise(r => setTimeout(r, delays[attempt]));
-                }
-            }
+            if (!response.ok) throw new Error(`HTTP ${response.status}`);
+            const result = await response.json();
+            return result?.candidates?.[0]?.content?.parts?.[0]?.text || "Empty model response";
         }
 
-        // Built-in Witty First-Person Local RAG Synthesizer (Works 100% offline or on Vercel without an API key)
         function synthesizeWittyLocalResponse(userQuery, topChunks) {
             const primary = topChunks[0];
             const secondary = topChunks[1];
 
             const introHooks = {
                 mild: `Great question! Pulling straight from my **${primary.category}** notes on LinkedIn (\`/in/nitinjbs\`):`,
-                medium: `Glad you asked! Let me put down my filter coffee and pull the exact receipt from my **${primary.category}** backlog:`,
+                medium: `Glad you asked! Welcoming that question with open arms—here is the exact receipt from my **${primary.category}** backlog:`,
                 spicy: ` Buckle up—no 45-slide deck required. Here is the unfiltered truth straight from my **${primary.category}** track record:`
             };
 
-            const outroHooks = {
-                mild: `Would you like to dive deeper into my work at **${secondary ? secondary.title : 'Team Everest NGO'}**, or chat about product strategy?`,
-                medium: `*Also relevant in the vector index:* **${secondary ? secondary.title : 'My OSU & Way.com journey'}** (${secondary ? secondary.similarity : 88}% match). Want me to unpack that next, or should we book a 1:1 on Skillmate?`,
-                spicy: `*Bonus telemetry:* My RAG engine also flagged **${secondary ? secondary.title : 'Speedcubing & Cyber Governance'}** (${secondary ? secondary.similarity : 89}% cosine match). Ask me about that next—I promise zero corporate buzzwords!`
-            };
-
-            return `${introHooks[currentWitLevel]}\n\n**${primary.title}**\n${primary.content}\n\n${secondary && secondary.similarity >= 72 ? `**Connected Milestone — ${secondary.title}:**\n${secondary.content}\n\n` : ''}${outroHooks[currentWitLevel]}`;
+            return `${introHooks[currentWitLevel]}\n\n**${primary.title}**\n${primary.content}\n\n${secondary && secondary.similarity >= 72 ? `**Connected Milestone — ${secondary.title}:**\n${secondary.content}\n\n` : ''}Would you like to explore more of my career journey or book a 1:1 on Skillmate?`;
         }
 
         function openApiKeyModal() {
@@ -1471,47 +1345,31 @@ ${contextString}`;
         }
 
         function closeApiKeyModal() {
-            const modal = document.getElementById('apikey-modal');
-            modal?.classList.add('hidden');
-            modal?.classList.remove('flex');
+            document.getElementById('apikey-modal')?.classList.add('hidden');
         }
 
         function saveCustomApiKey() {
-            const input = document.getElementById('custom-api-key-input');
+            userProvidedApiKey = (document.getElementById('custom-api-key-input')?.value || '').trim();
+            try { localStorage.setItem('nitin_gemini_api_key', userProvidedApiKey); } catch (e) {}
             const status = document.getElementById('apikey-save-status');
-            userProvidedApiKey = (input?.value || '').trim();
-            try {
-                localStorage.setItem('nitin_gemini_api_key', userProvidedApiKey);
-            } catch (e) {}
             if (status) {
                 status.classList.remove('opacity-0');
-                setTimeout(() => {
-                    status.classList.add('opacity-0');
-                    closeApiKeyModal();
-                }, 900);
+                setTimeout(() => { status.classList.add('opacity-0'); closeApiKeyModal(); }, 900);
             }
         }
 
         function clearCustomApiKey() {
             userProvidedApiKey = "";
-            const input = document.getElementById('custom-api-key-input');
-            if (input) input.value = "";
-            try {
-                localStorage.removeItem('nitin_gemini_api_key');
-            } catch (e) {}
+            document.getElementById('custom-api-key-input').value = "";
+            try { localStorage.removeItem('nitin_gemini_api_key'); } catch (e) {}
         }
 
         function formatMarkdown(text) {
             let safe = escapeHtml(text);
-            // Bold **text**
-            safe = safe.replace(/\*\*(.+?)\*\*/g, '<strong class="text-white font-semibold">$1</strong>');
-            // Italic *text*
-            safe = safe.replace(/\*(.+?)\*/g, '<em class="text-indigo-200">$1</em>');
-            // Inline code `code`
-            safe = safe.replace(/`([^`]+)`/g, '<code class="px-1.5 py-0.5 rounded bg-slate-800 text-amber-300 font-mono text-xs">$1</code>');
-            // Bullet points
-            safe = safe.replace(/^\s*[-*]\s+(.+)$/gm, '<li class="ml-4 list-disc text-slate-200 my-1">$1</li>');
-            // Paragraphs / line breaks
+            safe = safe.replace(/\*\*(.+?)\*\*/g, '<strong class="font-semibold">$1</strong>');
+            safe = safe.replace(/\*(.+?)\*/g, '<em class="text-indigo-600 dark:text-indigo-200">$1</em>');
+            safe = safe.replace(/`([^`]+)`/g, '<code class="px-1.5 py-0.5 rounded bg-slate-900/10 dark:bg-slate-800 text-amber-600 dark:text-amber-300 font-mono text-xs">$1</code>');
+            safe = safe.replace(/^\s*[-*]\s+(.+)$/gm, '<li class="ml-4 list-disc my-1">$1</li>');
             safe = safe.replace(/\n\n/g, '</p><p class="mt-2.5">');
             safe = safe.replace(/\n/g, '<br>');
             return `<p>${safe}</p>`;
@@ -1530,12 +1388,12 @@ ${contextString}`;
                 `;
             } else {
                 const sourcesPills = retrievedChunks.length > 0
-                    ? `<div class="mt-3 pt-2.5 border-t border-slate-800/80 flex flex-wrap items-center gap-1.5">
-                         <span class="text-[10px] font-mono text-slate-400 flex items-center gap-1 mr-1">
-                            <i class="ph-fill ph-git-commit text-indigo-400"></i> Grounded in:
+                    ? `<div class="mt-3 pt-2.5 border-t border-slate-300/40 dark:border-slate-800/80 flex flex-wrap items-center gap-1.5">
+                         <span class="text-[10px] font-mono opacity-75 flex items-center gap-1 mr-1">
+                            <i class="ph-fill ph-git-commit text-indigo-500"></i> Grounded in:
                          </span>
                          ${retrievedChunks.map(c => `
-                            <span class="text-[10px] font-mono px-2 py-0.5 rounded-md bg-slate-950/90 text-indigo-300 border border-indigo-500/20">
+                            <span class="text-[10px] font-mono px-2 py-0.5 rounded-md bg-slate-900/10 dark:bg-slate-950/90 text-indigo-600 dark:text-indigo-300 border border-indigo-500/20">
                                 ${escapeHtml(c.category)} (${c.similarity}%)
                             </span>
                          `).join('')}
@@ -1545,11 +1403,11 @@ ${contextString}`;
                 wrapper.className = "flex items-start gap-3";
                 wrapper.innerHTML = `
                     <div class="w-9 h-9 rounded-2xl bg-gradient-to-tr from-indigo-600 to-amber-400 p-0.5 shrink-0 mt-0.5 shadow-md">
-                        <div class="w-full h-full bg-slate-950 rounded-[14px] flex items-center justify-center overflow-hidden">
-                            ${generateHumanAvatarSVG(currentWitLevel, 'idle', 'small')}
+                        <div class="w-full h-full bg-white dark:bg-slate-950 rounded-[14px] flex items-center justify-center overflow-hidden">
+                            ${generateHumanAvatarSVG(currentWitLevel, 'idle')}
                         </div>
                     </div>
-                    <div class="max-w-[88%] sm:max-w-[82%] bg-slate-900/90 border border-slate-800 rounded-2xl rounded-tl-sm px-4 py-3.5 shadow-md text-xs sm:text-sm text-slate-200 leading-relaxed">
+                    <div class="max-w-[88%] sm:max-w-[82%] glass-panel rounded-2xl rounded-tl-sm px-4 py-3.5 shadow-md text-xs sm:text-sm leading-relaxed">
                         ${formatMarkdown(text)}
                         ${sourcesPills}
                     </div>
@@ -1567,17 +1425,17 @@ ${contextString}`;
             indicator.className = "flex items-start gap-3";
             indicator.innerHTML = `
                 <div class="w-9 h-9 rounded-2xl bg-gradient-to-tr from-indigo-600 to-amber-400 p-0.5 shrink-0 shadow-md">
-                    <div class="w-full h-full bg-slate-950 rounded-[14px] flex items-center justify-center overflow-hidden">
-                        ${generateHumanAvatarSVG(currentWitLevel, 'thinking', 'small')}
+                    <div class="w-full h-full bg-white dark:bg-slate-950 rounded-[14px] flex items-center justify-center overflow-hidden">
+                        ${generateHumanAvatarSVG(currentWitLevel, 'thinking')}
                     </div>
                 </div>
-                <div class="bg-slate-900/90 border border-slate-800 rounded-2xl rounded-tl-sm px-4 py-3 flex items-center gap-2">
+                <div class="glass-panel rounded-2xl rounded-tl-sm px-4 py-3 flex items-center gap-2">
                     <div class="flex space-x-1">
-                        <div class="w-2 h-2 bg-indigo-400 rounded-full typing-dot"></div>
-                        <div class="w-2 h-2 bg-indigo-400 rounded-full typing-dot"></div>
-                        <div class="w-2 h-2 bg-indigo-400 rounded-full typing-dot"></div>
+                        <div class="w-2 h-2 bg-indigo-500 rounded-full typing-dot"></div>
+                        <div class="w-2 h-2 bg-indigo-500 rounded-full typing-dot"></div>
+                        <div class="w-2 h-2 bg-indigo-500 rounded-full typing-dot"></div>
                     </div>
-                    <span class="text-xs font-mono text-slate-400 ml-1">Scoring RAG vectors & adjusting eyebrow arch...</span>
+                    <span class="text-xs font-mono opacity-75 ml-1">Scanning RAG vectors...</span>
                 </div>
             `;
             container.appendChild(indicator);
@@ -1585,8 +1443,7 @@ ${contextString}`;
         }
 
         function removeTypingIndicator() {
-            const el = document.getElementById('typing-indicator');
-            if (el) el.remove();
+            document.getElementById('typing-indicator')?.remove();
         }
 
         async function handleUserSubmit(e, presetQuery = null) {
@@ -1594,7 +1451,6 @@ ${contextString}`;
             const inputEl = document.getElementById('chat-input');
             const sendBtn = document.getElementById('send-btn');
             const query = (presetQuery !== null ? presetQuery : inputEl.value).trim();
-
             if (!query) return;
 
             if (!presetQuery) {
@@ -1602,25 +1458,16 @@ ${contextString}`;
                 inputEl.style.height = 'auto';
             }
 
-            // 1. Render user query
             appendMessageToUI('user', query);
 
-            // 2. Run RAG Retrieval & update Inspector
             const statusPill = document.getElementById('rag-status-pill');
-            if (statusPill) {
-                statusPill.textContent = 'Scoring vectors...';
-                statusPill.className = 'text-[11px] font-mono px-2 py-0.5 rounded-md bg-indigo-500/20 text-indigo-300 border border-indigo-500/30';
-            }
+            if (statusPill) statusPill.textContent = 'Scoring vectors...';
 
             const topChunks = retrieveRelevantChunks(query, 4);
             renderChunksList(topChunks);
 
-            if (statusPill) {
-                statusPill.textContent = `Top ${topChunks.length} chunks injected`;
-                statusPill.className = 'text-[11px] font-mono px-2 py-0.5 rounded-md bg-emerald-500/20 text-emerald-300 border border-emerald-500/30';
-            }
+            if (statusPill) statusPill.textContent = `Top ${topChunks.length} chunks injected`;
 
-            // 3. Call Gemini with retrieved context
             sendBtn.disabled = true;
             updateAllAvatars('thinking');
             showTypingIndicator();
@@ -1651,39 +1498,36 @@ ${contextString}`;
             if (!container) return;
             container.innerHTML = FAQ_STARTERS.map(q => `
                 <button type="button" onclick="handleUserSubmit(null, '${escapeHtml(q.replace(/'/g, "\\'"))}')"
-                    class="shrink-0 text-xs bg-slate-800/90 hover:bg-indigo-600/20 hover:border-indigo-500/50 text-slate-300 hover:text-white border border-slate-700/80 rounded-xl px-3 py-1.5 transition flex items-center gap-1.5">
-                    <i class="ph ph-chat-centered-text text-indigo-400"></i>
+                    class="shrink-0 text-xs bg-slate-900/5 dark:bg-slate-800/90 hover:bg-indigo-600/20 hover:border-indigo-500/50 opacity-80 hover:opacity-100 border border-slate-300 dark:border-slate-700/80 rounded-xl px-3 py-1.5 transition flex items-center gap-1.5">
+                    <i class="ph ph-chat-centered-text text-indigo-500 dark:text-indigo-400"></i>
                     <span>${escapeHtml(q)}</span>
                 </button>
             `).join('');
         }
 
         function openKnowledgeModal() {
-            const modal = document.getElementById('knowledge-modal');
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
+            document.getElementById('knowledge-modal')?.classList.remove('hidden');
+            document.getElementById('knowledge-modal')?.classList.add('flex');
             renderModalChunksList();
         }
 
         function closeKnowledgeModal() {
-            const modal = document.getElementById('knowledge-modal');
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
+            document.getElementById('knowledge-modal')?.classList.add('hidden');
         }
 
         function renderModalChunksList() {
             const container = document.getElementById('modal-chunks-list');
             if (!container) return;
-            container.innerHTML = knowledgeChunks.map((chunk, idx) => `
-                <div class="bg-slate-900/90 border border-slate-800 rounded-xl p-3.5 flex items-start justify-between gap-3">
+            container.innerHTML = knowledgeChunks.map((chunk) => `
+                <div class="bg-slate-900/5 dark:bg-slate-900/90 border border-slate-300 dark:border-slate-800 rounded-xl p-3.5 flex items-start justify-between gap-3">
                     <div class="space-y-1 flex-1">
                         <div class="flex items-center gap-2">
-                            <span class="text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-indigo-500/20 text-indigo-300">${escapeHtml(chunk.category)}</span>
-                            <h5 class="text-xs font-bold text-white">${escapeHtml(chunk.title)}</h5>
+                            <span class="text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-indigo-500/20 text-indigo-600 dark:text-indigo-300">${escapeHtml(chunk.category)}</span>
+                            <h5 class="text-xs font-bold">${escapeHtml(chunk.title)}</h5>
                         </div>
-                        <p class="text-xs text-slate-400 leading-relaxed">${escapeHtml(chunk.content)}</p>
+                        <p class="text-xs opacity-75 leading-relaxed">${escapeHtml(chunk.content)}</p>
                     </div>
-                    <button onclick="deleteChunk('${chunk.id}')" class="p-1.5 text-slate-500 hover:text-rose-400 transition" title="Delete Chunk">
+                    <button onclick="deleteChunk('${chunk.id}')" class="p-1.5 opacity-60 hover:text-rose-500 transition" title="Delete Chunk">
                         <i class="ph ph-trash text-base"></i>
                     </button>
                 </div>
@@ -1691,34 +1535,18 @@ ${contextString}`;
         }
 
         function addCustomChunk() {
-            const titleEl = document.getElementById('new-chunk-title');
-            const catEl = document.getElementById('new-chunk-category');
-            const contentEl = document.getElementById('new-chunk-content');
+            const title = document.getElementById('new-chunk-title').value.trim();
+            const category = document.getElementById('new-chunk-category').value.trim();
+            const content = document.getElementById('new-chunk-content').value.trim();
             const feedbackEl = document.getElementById('chunk-save-feedback');
-
-            const title = titleEl.value.trim();
-            const category = catEl.value.trim();
-            const content = contentEl.value.trim();
 
             if (!title || !content) return;
 
-            const extractedKeywords = (title + " " + content)
-                .toLowerCase()
-                .replace(/[^\w\s]/g, '')
-                .split(/\s+/)
-                .filter(w => w.length > 3)
-                .slice(0, 15);
+            const extractedKeywords = (title + " " + content).toLowerCase().replace(/[^\w\s]/g, '').split(/\s+/).filter(w => w.length > 3).slice(0, 15);
 
-            knowledgeChunks.unshift({
-                id: 'custom-' + Date.now(),
-                category,
-                title,
-                keywords: extractedKeywords,
-                content
-            });
-
-            titleEl.value = '';
-            contentEl.value = '';
+            knowledgeChunks.unshift({ id: 'custom-' + Date.now(), category, title, keywords: extractedKeywords, content });
+            document.getElementById('new-chunk-title').value = '';
+            document.getElementById('new-chunk-content').value = '';
             saveKnowledgeBase();
 
             feedbackEl.classList.remove('opacity-0');
@@ -1739,7 +1567,7 @@ ${contextString}`;
             chatHistory = [];
             const container = document.getElementById('chat-messages');
             container.innerHTML = '';
-            const welcomeText = `Vanakkam & hello! 👋 I'm **Nitin JBS's AI Twin**—wired directly into his LinkedIn knowledge base (\`/in/nitinjbs\`).\n\nWhether you're curious about how I climbed from **Software Engineer to Product Manager at Way.com**, what I'm building as **Principal PM at Team Everest NGO**, my **YouTube UX Research** stint, my **Oregon State CS** days, or why I'm a **Certified Cyber Crime Intervention Officer** who also speed-solves Rubik's cubes—fire away!\n\n*Pro-tip: Watch the **Live RAG Vector Inspector** on the left light up as I pull exact career chunks to answer you.*`;
+            const welcomeText = `Vanakkam & hello! 👋 I'm **Nitin JBS's AI Twin**—welcoming you with open arms and wired directly into my LinkedIn knowledge base (\`/in/nitinjbs\`).\n\nWhether you're curious about how I climbed from **Software Engineer to Product Manager at Way.com**, what I'm building as **Principal PM at Team Everest NGO**, my **YouTube UX Research** stint, or why I'm a **Certified Cyber Crime Intervention Officer**—ask away!\n\n*Pro-tip: Watch the **Live RAG Vector Inspector** light up as I pull exact career chunks.*`;
             appendMessageToUI('model', welcomeText, []);
             renderChunksList();
         }
@@ -1757,15 +1585,9 @@ ${contextString}`;
         }
 
         function escapeHtml(str) {
-            return String(str || '')
-                .replace(/&/g, '&amp;')
-                .replace(/</g, '&lt;')
-                .replace(/>/g, '&gt;')
-                .replace(/"/g, '&quot;')
-                .replace(/'/g, '&#039;');
+            return String(str || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
         }
 
-        // Initialize on Window Load
         window.onload = function () {
             initKnowledgeBase();
             updateAllAvatars('idle');

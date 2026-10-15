@@ -139,45 +139,47 @@
 </head>
 <body class="theme-medium font-sans antialiased min-h-[100dvh] flex flex-col overflow-x-hidden pb-safe-nav lg:pb-0 transition-colors duration-500">
 
-    <header class="sticky top-0 z-30 glass-panel border-b px-3 py-2 sm:px-6 sm:py-3 transition-colors duration-500">
-        <div class="max-w-7xl mx-auto flex items-center justify-between gap-2">
-            <div class="flex items-center gap-2.5 min-w-0 flex-1">
+    <header class="sticky top-0 z-30 glass-panel border-b px-2.5 py-2 sm:px-6 sm:py-3 transition-colors duration-500">
+        <div class="max-w-7xl mx-auto flex items-center justify-between gap-1.5 sm:gap-3">
+            <!-- Left Header Profile Info -->
+            <div class="flex items-center gap-2 min-w-0 flex-1">
                 <div class="relative group cursor-pointer shrink-0" onclick="cycleWitLevel()" title="Tap to cycle Nitin's Wit Persona!">
-                    <div id="header-avatar-ring" class="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-tr from-emerald-500 via-teal-500 to-cyan-500 p-0.5 shadow-lg shadow-emerald-500/25 transition-all duration-300 group-hover:scale-105">
+                    <div id="header-avatar-ring" class="w-9 h-9 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-tr from-emerald-500 via-teal-500 to-cyan-500 p-0.5 shadow-lg shadow-emerald-500/25 transition-all duration-300 group-hover:scale-105">
                         <div id="header-avatar-container" class="w-full h-full bg-slate-900 rounded-[14px] flex items-center justify-center overflow-hidden">
                             <!-- Smiley Avatar -->
                         </div>
                     </div>
-                    <span id="header-mood-emoji" class="absolute -bottom-1 -right-1 w-4 h-4 sm:w-5 sm:h-5 bg-white border border-slate-300 rounded-full flex items-center justify-center text-[9px] sm:text-[11px] shadow">☕</span>
+                    <span id="header-mood-emoji" class="absolute -bottom-1 -right-1 w-3.5 h-3.5 sm:w-5 sm:h-5 bg-white border border-slate-300 rounded-full flex items-center justify-center text-[8px] sm:text-[11px] shadow">☕</span>
                 </div>
                 <div class="min-w-0 flex-1">
                     <div class="flex items-center gap-1.5 flex-wrap">
-                        <h1 class="font-bold text-sm sm:text-lg tracking-tight flex items-center gap-1.5 flex-wrap">
+                        <h1 class="font-bold text-xs sm:text-lg tracking-tight flex items-center gap-1 flex-wrap">
                             <span class="break-words">Nitin JBS</span>
-                            <span class="text-[9px] sm:text-xs font-mono uppercase px-1.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 border border-emerald-500/35 shrink-0">Ooty Hills 🌲</span>
+                            <span class="text-[8px] sm:text-xs font-mono uppercase px-1.5 py-0.2 rounded-full bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 border border-emerald-500/35 shrink-0">Ooty 🌲</span>
                         </h1>
-                        <div class="flex items-center gap-1.5 flex-wrap">
+                        <div class="flex items-center gap-1 flex-wrap">
                             <a href="https://www.linkedin.com/in/nitinjbs/" target="_blank" rel="noopener noreferrer"
-                               class="text-emerald-700 dark:text-emerald-300 hover:opacity-85 transition-colors text-xs flex items-center gap-1 bg-emerald-500/10 px-2 py-0.5 rounded-lg border border-emerald-500/25 shrink-0"
+                               class="text-emerald-700 dark:text-emerald-300 hover:opacity-85 transition-colors text-[10px] flex items-center gap-0.5 bg-emerald-500/10 px-1.5 py-0.5 rounded-md border border-emerald-500/25 shrink-0"
                                title="Open LinkedIn">
                                 <i class="ph-fill ph-linkedin-logo"></i>
-                                <span class="text-[11px] font-medium">LinkedIn</span>
+                                <span class="hidden sm:inline">LinkedIn</span>
                             </a>
                             <a href="https://www.instagram.com/tintin_tn43/" target="_blank" rel="noopener noreferrer"
-                               class="text-pink-600 dark:text-pink-400 hover:opacity-85 transition-colors text-xs flex items-center gap-1 bg-pink-500/10 px-2 py-0.5 rounded-lg border border-pink-500/25 shrink-0"
+                               class="text-pink-600 dark:text-pink-400 hover:opacity-85 transition-colors text-[10px] flex items-center gap-0.5 bg-pink-500/10 px-1.5 py-0.5 rounded-md border border-pink-500/25 shrink-0"
                                title="Open Instagram @tintin_tn43">
                                 <i class="ph-fill ph-instagram-logo"></i>
-                                <span class="text-[11px] font-medium">Instagram</span>
+                                <span class="hidden sm:inline">Instagram</span>
                             </a>
                         </div>
                     </div>
-                    <p class="text-[10px] sm:text-xs opacity-75 leading-tight mt-0.5 break-words">
-                        <span>Nilgiri Hills Native • Principal PM @ Team Everest • OSU CS '17</span>
+                    <p class="text-[9px] sm:text-xs opacity-75 leading-tight mt-0.5 truncate">
+                        <span>Nilgiri Hills • Principal PM @ Team Everest</span>
                     </p>
                 </div>
             </div>
 
-            <div class="flex items-center gap-1.5 shrink-0">
+            <!-- Right Header Actions (Optimized for Mobile & Desktop) -->
+            <div class="flex items-center gap-1 sm:gap-2 shrink-0">
                 <div class="hidden md:flex items-center bg-slate-900/10 dark:bg-slate-900/90 border border-slate-300 dark:border-slate-800 rounded-xl p-1 text-xs">
                     <span class="px-2.5 py-1 font-medium flex items-center gap-1 opacity-80">
                         <i class="ph-fill ph-mask-happy text-emerald-500 text-sm"></i> Persona:
@@ -187,40 +189,41 @@
                     <button onclick="setWitLevel('spicy')" id="wit-spicy" class="wit-btn px-2.5 py-1 rounded-lg opacity-75 hover:opacity-100 transition flex items-center gap-1">🔥 Spicy</button>
                 </div>
 
-                <!-- PWA Install Button (Always available & interactive) -->
-                <button type="button" onclick="triggerPwaInstall()" id="pwa-install-btn" class="flex items-center gap-1 text-xs font-semibold px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:opacity-90 text-white transition shadow-md shrink-0" title="Install App as PWA or Desktop App">
+                <!-- PWA Install Button -->
+                <button type="button" onclick="triggerPwaInstall()" id="pwa-install-btn" class="flex items-center gap-1 text-[11px] sm:text-xs font-semibold px-2 py-1.5 sm:px-3 sm:py-2 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:opacity-90 text-white transition shadow-md shrink-0" title="Install App">
                     <i class="ph-bold ph-download-simple text-sm"></i>
-                    <span class="inline">Install App</span>
+                    <span class="hidden sm:inline">Install</span>
                 </button>
 
-                <button type="button" onclick="openKnowledgeModal()" class="flex items-center gap-1 text-xs font-medium px-2 py-1.5 sm:px-3 sm:py-2 rounded-xl bg-slate-900/10 dark:bg-slate-800/90 hover:opacity-85 border border-slate-300 dark:border-slate-700 transition shadow-sm shrink-0" title="Manage RAG Knowledge Base">
+                <button type="button" onclick="openKnowledgeModal()" class="flex items-center gap-1 text-[11px] sm:text-xs font-medium px-2 py-1.5 sm:px-3 sm:py-2 rounded-xl bg-slate-900/10 dark:bg-slate-800/90 hover:opacity-85 border border-slate-300 dark:border-slate-700 transition shadow-sm shrink-0" title="Knowledge Base">
                     <i class="ph ph-database text-emerald-500 text-sm"></i>
                     <span class="hidden sm:inline">Knowledge</span>
-                    <span id="chunk-count-badge" class="px-1.5 py-0.2 bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 rounded-md font-mono text-[10px]">11</span>
+                    <span id="chunk-count-badge" class="px-1 py-0.2 bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 rounded-md font-mono text-[9px]">11</span>
                 </button>
 
                 <button type="button" onclick="openApiKeyModal()" class="p-1.5 sm:p-2 rounded-xl bg-slate-900/10 dark:bg-slate-900 hover:opacity-85 border border-slate-300 dark:border-slate-800 transition shrink-0" title="Configure Gemini API Key">
-                    <i class="ph ph-key text-sm sm:text-base"></i>
+                    <i class="ph ph-key text-xs sm:text-base"></i>
                 </button>
 
                 <button type="button" onclick="resetConversation()" class="p-1.5 sm:p-2 rounded-xl bg-slate-900/10 dark:bg-slate-900 hover:opacity-85 border border-slate-300 dark:border-slate-800 transition shrink-0" title="Reset Conversation">
-                    <i class="ph ph-arrows-counter-clockwise text-sm sm:text-base"></i>
+                    <i class="ph ph-arrows-counter-clockwise text-xs sm:text-base"></i>
                 </button>
             </div>
         </div>
 
-        <div class="flex md:hidden items-center justify-between gap-1.5 mt-2 pt-2 border-t border-slate-300/40 dark:border-slate-800/70">
-            <span class="text-[10px] font-medium flex items-center gap-1 shrink-0 opacity-80">
+        <!-- Mobile Wit Selector Sub-Bar -->
+        <div class="flex md:hidden items-center justify-between gap-1.5 mt-1.5 pt-1.5 border-t border-slate-300/40 dark:border-slate-800/70">
+            <span class="text-[9px] font-medium flex items-center gap-1 shrink-0 opacity-80">
                 <i class="ph-fill ph-mask-happy text-emerald-500"></i> Wit:
             </span>
             <div class="grid grid-cols-3 gap-1 flex-1">
-                <button type="button" onclick="setWitLevel('mild')" id="mobile-top-wit-mild" class="text-[10px] py-1 px-1 rounded-lg bg-white/60 dark:bg-slate-900 border border-slate-300 dark:border-slate-800 transition flex items-center justify-center gap-0.5 truncate">
+                <button type="button" onclick="setWitLevel('mild')" id="mobile-top-wit-mild" class="text-[9px] py-1 px-1 rounded-lg bg-white/60 dark:bg-slate-900 border border-slate-300 dark:border-slate-800 transition flex items-center justify-center gap-0.5 truncate">
                     <span>☕</span> <span>Polite</span>
                 </button>
-                <button type="button" onclick="setWitLevel('medium')" id="mobile-top-wit-medium" class="text-[10px] py-1 px-1 rounded-lg bg-emerald-600 text-white font-semibold border border-emerald-500 shadow-sm transition flex items-center justify-center gap-0.5 truncate">
+                <button type="button" onclick="setWitLevel('medium')" id="mobile-top-wit-medium" class="text-[9px] py-1 px-1 rounded-lg bg-emerald-600 text-white font-semibold border border-emerald-500 shadow-sm transition flex items-center justify-center gap-0.5 truncate">
                     <span>😊</span> <span>Classic</span>
                 </button>
-                <button type="button" onclick="setWitLevel('spicy')" id="mobile-top-wit-spicy" class="text-[10px] py-1 px-1 rounded-lg bg-white/60 dark:bg-slate-900 border border-slate-300 dark:border-slate-800 transition flex items-center justify-center gap-0.5 truncate">
+                <button type="button" onclick="setWitLevel('spicy')" id="mobile-top-wit-spicy" class="text-[9px] py-1 px-1 rounded-lg bg-white/60 dark:bg-slate-900 border border-slate-300 dark:border-slate-800 transition flex items-center justify-center gap-0.5 truncate">
                     <span>🔥</span> <span>Spicy</span>
                 </button>
             </div>
@@ -229,7 +232,7 @@
 
     <main class="flex-1 max-w-7xl w-full mx-auto grid grid-cols-1 lg:grid-cols-12 gap-3 sm:gap-6 p-2 sm:p-6 items-stretch">
 
-        <!-- LEFT COLUMN (Mobile Tab 1: Avatar & Visual Studio) -->
+        <!-- LEFT COLUMN (Mobile Tab 1: Avatar & Visual Studio - Home Default on Mobile) -->
         <aside id="mobile-panel-studio" class="flex lg:col-span-5 flex-col gap-3.5 sm:gap-4 order-1 min-w-0">
 
             <div id="persona-stage-card" class="glass-panel rounded-2xl p-3.5 sm:p-5 shadow-xl relative overflow-hidden transition-all duration-500">
@@ -433,6 +436,7 @@
         </section>
     </main>
 
+    <!-- Mobile Bottom Navigation (Tab 1 is Studio/Home by default) -->
     <nav class="lg:hidden fixed bottom-0 inset-x-0 z-40 bg-white/95 dark:bg-slate-950/95 backdrop-blur-xl border-t border-slate-300 dark:border-slate-800/90 px-2.5 py-2 flex items-center justify-around shadow-2xl">
         <button type="button" onclick="switchMobilePrimaryView('studio')" id="mob-nav-studio"
                 class="flex-1 py-1.5 rounded-xl flex flex-col items-center justify-center gap-0.5 text-emerald-700 dark:text-emerald-400 bg-emerald-500/10 font-semibold transition">
@@ -571,9 +575,9 @@
             <div class="p-5 space-y-3 text-xs opacity-90 leading-relaxed">
                 <p>You can install this Witty RAG Assistant as a native desktop plugin or mobile app:</p>
                 <ol class="list-decimal pl-4 space-y-2 font-medium">
-                    <li><strong>Google Chrome (Desktop):</strong> Click the install icon (➕ or computer with down arrow) in the right side of your browser address bar, or open the browser menu (⋮) and select <strong>"Install Ask Nitin.AI..."</strong>.</li>
+                    <li><strong>Google Chrome (Desktop):</strong> Click the install icon in your browser address bar, or open the browser menu (⋮) and select <strong>"Install Ask Nitin.AI..."</strong>.</li>
                     <li><strong>Android (Chrome / Brave):</strong> Tap the browser menu (⋮) and choose <strong>"Install app"</strong> or <strong>"Add to Home screen"</strong>.</li>
-                    <li><strong>iPhone / iPad (Safari):</strong> Tap the Share button (<svg class="w-3.5 h-3.5 inline" fill="currentColor" viewBox="0 0 24 24"><path d="M16 5l-4-4-4 4h3v8h2V5h3zm-7 12v2h10v-2H9zm-2-8v11h14V9H7z"/></svg>) and select <strong>"Add to Home Screen"</strong>.</li>
+                    <li><strong>iPhone / iPad (Safari):</strong> Tap the Share button and select <strong>"Add to Home Screen"</strong>.</li>
                 </ol>
                 <div class="pt-2 flex justify-end">
                     <button type="button" onclick="closePwaModal()" class="px-4 py-2 rounded-xl bg-emerald-600 text-white font-semibold text-xs transition">Got It</button>
@@ -1223,9 +1227,9 @@
                 const mobTopBtn = document.getElementById(`mobile-top-wit-${l}`);
                 if (mobTopBtn) {
                     if (l === level) {
-                        mobTopBtn.className = "text-[10px] py-1 px-1 rounded-lg bg-emerald-600 text-white font-semibold border border-emerald-500 shadow-sm transition flex items-center justify-center gap-0.5";
+                        mobTopBtn.className = "text-[9px] py-1 px-1 rounded-lg bg-emerald-600 text-white font-semibold border border-emerald-500 shadow-sm transition flex items-center justify-center gap-0.5";
                     } else {
-                        mobTopBtn.className = "text-[10px] py-1 px-1 rounded-lg bg-white/60 dark:bg-slate-900 border border-slate-300 dark:border-slate-800 transition flex items-center justify-center gap-0.5";
+                        mobTopBtn.className = "text-[9px] py-1 px-1 rounded-lg bg-white/60 dark:bg-slate-900 border border-slate-300 dark:border-slate-800 transition flex items-center justify-center gap-0.5";
                     }
                 }
             });

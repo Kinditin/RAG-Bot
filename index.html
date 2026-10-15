@@ -2,8 +2,18 @@
 <html lang="en" class="light" id="app-root-html">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Ask Nitin.AI — Witty LinkedIn & Instagram RAG Assistant</title>
+    
+    <!-- PWA Meta Tags & Web App Manifest -->
+    <meta name="theme-color" content="#16a34a">
+    <meta name="description" content="AI Personal Assistant & Witty Profile FAQ RAG Assistant for Nitin Subramanian (Nitin JBS) - Ooty, LinkedIn & Instagram @tintin_tn43">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Ask Nitin.AI">
+    <link rel="manifest" href="data:application/manifest+json;charset=utf-8,%7B%22name%22%3A%22Ask%20Nitin.AI%20-%20Witty%20RAG%22%2C%22short_name%22%3A%22AskNitin.AI%22%2C%22start_url%22%3A%22.%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%230f172a%22%2C%22theme_color%22%3A%22%2316a34a%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22https%3A%2F%2Fplacehold.co%2F192x192%2F22c55e%2Fffffff%3Ftext%3DN%22%2C%22sizes%22%3A%22192x192%22%2C%22type%22%3A%22image%2Fpng%22%7D%2C%7B%22src%22%3A%22https%3A%2F%2Fplacehold.co%2F512x512%2F22c55e%2Fffffff%3Ftext%3DN%22%2C%22sizes%22%3A%22512x512%22%2C%22type%22%3A%22image%2Fpng%22%7D%5D%7D">
+
+    <!-- Tailwind CSS & Phosphor Icons -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -35,18 +45,15 @@
     </script>
     <style>
         ::-webkit-scrollbar {
-            width: 6px;
-            height: 6px;
+            width: 5px;
+            height: 5px;
         }
         ::-webkit-scrollbar-track {
-            background: rgba(15, 23, 42, 0.08);
+            background: rgba(15, 23, 42, 0.05);
         }
         ::-webkit-scrollbar-thumb {
             background: rgba(34, 197, 94, 0.35);
             border-radius: 9999px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: rgba(34, 197, 94, 0.6);
         }
 
         /* Adaptive Theme 1: Lighter Warm Daylight / Ooty Tea Mist (Polite PM) */
@@ -55,11 +62,11 @@
             color: #0f172a;
         }
         body.theme-mild .glass-panel {
-            background: rgba(255, 255, 255, 0.90);
+            background: rgba(255, 255, 255, 0.92);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(22, 163, 74, 0.22);
-            box-shadow: 0 10px 30px -5px rgba(22, 163, 74, 0.1);
+            border: 1px solid rgba(22, 163, 74, 0.2);
+            box-shadow: 0 10px 25px -5px rgba(22, 163, 74, 0.08);
         }
 
         /* Adaptive Theme 2: Mild Pleasant Dusk / Nilgiri Pine Mist (Classic Nitin) */
@@ -68,11 +75,11 @@
             color: #1e1b4b;
         }
         body.theme-medium .glass-panel {
-            background: rgba(255, 255, 255, 0.88);
+            background: rgba(255, 255, 255, 0.90);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(34, 197, 94, 0.25);
-            box-shadow: 0 10px 30px -5px rgba(34, 197, 94, 0.12);
+            border: 1px solid rgba(34, 197, 94, 0.22);
+            box-shadow: 0 10px 25px -5px rgba(34, 197, 94, 0.1);
         }
 
         /* Adaptive Theme 3: Deep Dark Obsidian & Pine Night (Spicy Standup Wit) */
@@ -81,11 +88,11 @@
             color: #f8fafc;
         }
         body.theme-spicy .glass-panel {
-            background: rgba(15, 23, 42, 0.90);
+            background: rgba(15, 23, 42, 0.92);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(245, 158, 11, 0.28);
-            box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.45);
+            border: 1px solid rgba(245, 158, 11, 0.25);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
         }
 
         .chunk-highlight {
@@ -126,95 +133,94 @@
             scrollbar-width: none;
         }
         .pb-safe-nav {
-            padding-bottom: calc(5rem + env(safe-area-inset-bottom, 0px));
+            padding-bottom: calc(5.2rem + env(safe-area-inset-bottom, 0px));
         }
     </style>
 </head>
 <body class="theme-medium font-sans antialiased min-h-[100dvh] flex flex-col overflow-x-hidden pb-safe-nav lg:pb-0 transition-colors duration-500">
 
-    <header class="sticky top-0 z-30 glass-panel border-b px-3 py-2.5 sm:px-6 sm:py-3 transition-colors duration-500">
-        <div class="max-w-7xl mx-auto flex items-center justify-between gap-2 sm:gap-4">
-            <div class="flex items-center gap-2.5 sm:gap-3.5 min-w-0 flex-1">
+    <header class="sticky top-0 z-30 glass-panel border-b px-3 py-2 sm:px-6 sm:py-3 transition-colors duration-500">
+        <div class="max-w-7xl mx-auto flex items-center justify-between gap-2">
+            <div class="flex items-center gap-2.5 min-w-0 flex-1">
                 <div class="relative group cursor-pointer shrink-0" onclick="cycleWitLevel()" title="Tap to cycle Nitin's Wit Persona!">
                     <div id="header-avatar-ring" class="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-tr from-emerald-500 via-teal-500 to-cyan-500 p-0.5 shadow-lg shadow-emerald-500/25 transition-all duration-300 group-hover:scale-105">
                         <div id="header-avatar-container" class="w-full h-full bg-slate-900 rounded-[14px] flex items-center justify-center overflow-hidden">
-                            <!-- Smiley Ball Avatar injected dynamically -->
+                            <!-- Smiley Avatar -->
                         </div>
                     </div>
                     <span id="header-mood-emoji" class="absolute -bottom-1 -right-1 w-4 h-4 sm:w-5 sm:h-5 bg-white border border-slate-300 rounded-full flex items-center justify-center text-[9px] sm:text-[11px] shadow">☕</span>
                 </div>
                 <div class="min-w-0 flex-1">
-                    <div class="flex items-center gap-1.5 sm:gap-2 flex-wrap">
+                    <div class="flex items-center gap-1.5 flex-wrap">
                         <h1 class="font-bold text-sm sm:text-lg tracking-tight flex items-center gap-1.5 flex-wrap">
                             <span class="break-words">Nitin JBS</span>
-                            <span class="text-[9px] sm:text-xs font-mono uppercase px-1.5 sm:px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 border border-emerald-500/35 shrink-0">Ooty Hills 🌲</span>
+                            <span class="text-[9px] sm:text-xs font-mono uppercase px-1.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 border border-emerald-500/35 shrink-0">Ooty Hills 🌲</span>
                         </h1>
                         <div class="flex items-center gap-1.5 flex-wrap">
                             <a href="https://www.linkedin.com/in/nitinjbs/" target="_blank" rel="noopener noreferrer"
                                class="text-emerald-700 dark:text-emerald-300 hover:opacity-85 transition-colors text-xs flex items-center gap-1 bg-emerald-500/10 px-2 py-0.5 rounded-lg border border-emerald-500/25 shrink-0"
-                               title="Open Nitin's LinkedIn Profile">
+                               title="Open LinkedIn">
                                 <i class="ph-fill ph-linkedin-logo"></i>
                                 <span class="text-[11px] font-medium">LinkedIn</span>
                             </a>
                             <a href="https://www.instagram.com/tintin_tn43/" target="_blank" rel="noopener noreferrer"
                                class="text-pink-600 dark:text-pink-400 hover:opacity-85 transition-colors text-xs flex items-center gap-1 bg-pink-500/10 px-2 py-0.5 rounded-lg border border-pink-500/25 shrink-0"
-                               title="Open Nitin's Instagram Profile (@tintin_tn43)">
+                               title="Open Instagram @tintin_tn43">
                                 <i class="ph-fill ph-instagram-logo"></i>
                                 <span class="text-[11px] font-medium">Instagram</span>
                             </a>
                         </div>
                     </div>
-                    <p class="text-[10px] sm:text-xs opacity-75 leading-snug mt-0.5">
-                        <span class="block sm:inline">Nilgiri Hills Native • Principal PM @ Team Everest •</span>
-                        <span class="block sm:inline"> OSU CS '17</span>
+                    <p class="text-[10px] sm:text-xs opacity-75 leading-tight mt-0.5 break-words">
+                        <span>Nilgiri Hills Native • Principal PM @ Team Everest • OSU CS '17</span>
                     </p>
                 </div>
             </div>
 
-            <div class="flex items-center gap-1 sm:gap-2.5 shrink-0">
+            <div class="flex items-center gap-1.5 shrink-0">
                 <div class="hidden md:flex items-center bg-slate-900/10 dark:bg-slate-900/90 border border-slate-300 dark:border-slate-800 rounded-xl p-1 text-xs">
                     <span class="px-2.5 py-1 font-medium flex items-center gap-1 opacity-80">
                         <i class="ph-fill ph-mask-happy text-emerald-500 text-sm"></i> Persona:
                     </span>
-                    <button onclick="setWitLevel('mild')" id="wit-mild" class="wit-btn px-2.5 py-1 rounded-lg opacity-75 hover:opacity-100 transition flex items-center gap-1">
-                        <span>☕</span> Polite PM
-                    </button>
-                    <button onclick="setWitLevel('medium')" id="wit-medium" class="wit-btn px-2.5 py-1 rounded-lg bg-emerald-600 text-white font-medium shadow-sm transition flex items-center gap-1">
-                        <span>😊</span> Classic Nitin
-                    </button>
-                    <button onclick="setWitLevel('spicy')" id="wit-spicy" class="wit-btn px-2.5 py-1 rounded-lg opacity-75 hover:opacity-100 transition flex items-center gap-1">
-                        <span>🔥</span> Standup Wit
-                    </button>
+                    <button onclick="setWitLevel('mild')" id="wit-mild" class="wit-btn px-2.5 py-1 rounded-lg opacity-75 hover:opacity-100 transition flex items-center gap-1">☕ Polite</button>
+                    <button onclick="setWitLevel('medium')" id="wit-medium" class="wit-btn px-2.5 py-1 rounded-lg bg-emerald-600 text-white font-medium shadow-sm transition flex items-center gap-1">😊 Classic</button>
+                    <button onclick="setWitLevel('spicy')" id="wit-spicy" class="wit-btn px-2.5 py-1 rounded-lg opacity-75 hover:opacity-100 transition flex items-center gap-1">🔥 Spicy</button>
                 </div>
 
-                <button onclick="openKnowledgeModal()" class="flex items-center gap-1 text-xs font-medium px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-xl bg-slate-900/10 dark:bg-slate-800/90 hover:opacity-85 border border-slate-300 dark:border-slate-700 transition shadow-sm" title="Manage LinkedIn & Instagram RAG Knowledge Base">
-                    <i class="ph ph-database text-emerald-500 dark:text-emerald-400 text-sm"></i>
-                    <span class="hidden sm:inline">Knowledge Base</span>
-                    <span id="chunk-count-badge" class="px-1.5 py-0.2 bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 rounded-md font-mono text-[10px] sm:text-[11px]">11</span>
+                <!-- PWA Install Button (Always available & interactive) -->
+                <button type="button" onclick="triggerPwaInstall()" id="pwa-install-btn" class="flex items-center gap-1 text-xs font-semibold px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:opacity-90 text-white transition shadow-md shrink-0" title="Install App as PWA or Desktop App">
+                    <i class="ph-bold ph-download-simple text-sm"></i>
+                    <span class="inline">Install App</span>
                 </button>
 
-                <button onclick="openApiKeyModal()" id="api-key-btn" class="p-1.5 sm:p-2 rounded-xl bg-slate-900/10 dark:bg-slate-900 hover:opacity-85 border border-slate-300 dark:border-slate-800 transition" title="Configure Gemini API Key">
+                <button type="button" onclick="openKnowledgeModal()" class="flex items-center gap-1 text-xs font-medium px-2 py-1.5 sm:px-3 sm:py-2 rounded-xl bg-slate-900/10 dark:bg-slate-800/90 hover:opacity-85 border border-slate-300 dark:border-slate-700 transition shadow-sm shrink-0" title="Manage RAG Knowledge Base">
+                    <i class="ph ph-database text-emerald-500 text-sm"></i>
+                    <span class="hidden sm:inline">Knowledge</span>
+                    <span id="chunk-count-badge" class="px-1.5 py-0.2 bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 rounded-md font-mono text-[10px]">11</span>
+                </button>
+
+                <button type="button" onclick="openApiKeyModal()" class="p-1.5 sm:p-2 rounded-xl bg-slate-900/10 dark:bg-slate-900 hover:opacity-85 border border-slate-300 dark:border-slate-800 transition shrink-0" title="Configure Gemini API Key">
                     <i class="ph ph-key text-sm sm:text-base"></i>
                 </button>
 
-                <button onclick="resetConversation()" class="p-1.5 sm:p-2 rounded-xl bg-slate-900/10 dark:bg-slate-900 hover:opacity-85 border border-slate-300 dark:border-slate-800 transition" title="Reset Conversation">
+                <button type="button" onclick="resetConversation()" class="p-1.5 sm:p-2 rounded-xl bg-slate-900/10 dark:bg-slate-900 hover:opacity-85 border border-slate-300 dark:border-slate-800 transition shrink-0" title="Reset Conversation">
                     <i class="ph ph-arrows-counter-clockwise text-sm sm:text-base"></i>
                 </button>
             </div>
         </div>
 
-        <div class="flex md:hidden items-center justify-between gap-2 mt-2 pt-2 border-t border-slate-300/40 dark:border-slate-800/70">
-            <span class="text-[11px] font-medium flex items-center gap-1 shrink-0 opacity-80">
-                <i class="ph-fill ph-mask-happy text-emerald-500"></i> Wit Mode:
+        <div class="flex md:hidden items-center justify-between gap-1.5 mt-2 pt-2 border-t border-slate-300/40 dark:border-slate-800/70">
+            <span class="text-[10px] font-medium flex items-center gap-1 shrink-0 opacity-80">
+                <i class="ph-fill ph-mask-happy text-emerald-500"></i> Wit:
             </span>
             <div class="grid grid-cols-3 gap-1 flex-1">
-                <button onclick="setWitLevel('mild')" id="mobile-top-wit-mild" class="text-[11px] py-1 px-1 rounded-lg bg-white/60 dark:bg-slate-900/90 border border-slate-300 dark:border-slate-800 transition flex items-center justify-center gap-1 truncate">
+                <button type="button" onclick="setWitLevel('mild')" id="mobile-top-wit-mild" class="text-[10px] py-1 px-1 rounded-lg bg-white/60 dark:bg-slate-900 border border-slate-300 dark:border-slate-800 transition flex items-center justify-center gap-0.5 truncate">
                     <span>☕</span> <span>Polite</span>
                 </button>
-                <button onclick="setWitLevel('medium')" id="mobile-top-wit-medium" class="text-[11px] py-1 px-1 rounded-lg bg-emerald-600 text-white font-semibold border border-emerald-500 shadow-sm transition flex items-center justify-center gap-1 truncate">
+                <button type="button" onclick="setWitLevel('medium')" id="mobile-top-wit-medium" class="text-[10px] py-1 px-1 rounded-lg bg-emerald-600 text-white font-semibold border border-emerald-500 shadow-sm transition flex items-center justify-center gap-0.5 truncate">
                     <span>😊</span> <span>Classic</span>
                 </button>
-                <button onclick="setWitLevel('spicy')" id="mobile-top-wit-spicy" class="text-[11px] py-1 px-1 rounded-lg bg-white/60 dark:bg-slate-900/90 border border-slate-300 dark:border-slate-800 transition flex items-center justify-center gap-1 truncate">
+                <button type="button" onclick="setWitLevel('spicy')" id="mobile-top-wit-spicy" class="text-[10px] py-1 px-1 rounded-lg bg-white/60 dark:bg-slate-900 border border-slate-300 dark:border-slate-800 transition flex items-center justify-center gap-0.5 truncate">
                     <span>🔥</span> <span>Spicy</span>
                 </button>
             </div>
@@ -223,17 +229,17 @@
 
     <main class="flex-1 max-w-7xl w-full mx-auto grid grid-cols-1 lg:grid-cols-12 gap-3 sm:gap-6 p-2 sm:p-6 items-stretch">
 
-        <!-- LEFT COLUMN (Mobile Tab 1 by default: Studio / Avatar & Radar) -->
+        <!-- LEFT COLUMN (Mobile Tab 1: Avatar & Visual Studio) -->
         <aside id="mobile-panel-studio" class="flex lg:col-span-5 flex-col gap-3.5 sm:gap-4 order-1 min-w-0">
 
             <div id="persona-stage-card" class="glass-panel rounded-2xl p-3.5 sm:p-5 shadow-xl relative overflow-hidden transition-all duration-500">
                 <div id="avatar-ambient-glow" class="absolute -right-8 -top-8 w-44 h-44 bg-emerald-500/15 rounded-full blur-3xl pointer-events-none transition-all duration-500"></div>
 
-                <div class="flex flex-col sm:flex-row items-center gap-5 sm:gap-4 relative z-10">
-                    <div class="relative shrink-0 group cursor-pointer mb-2 sm:mb-0" onclick="cycleWitLevel()" title="Click smiley avatar to switch Wit Level">
+                <div class="flex flex-col sm:flex-row items-center gap-4 relative z-10">
+                    <div class="relative shrink-0 group cursor-pointer mb-2 sm:mb-0" onclick="cycleWitLevel()" title="Click avatar to switch Wit Level">
                         <div id="hero-avatar-frame" class="w-28 h-28 sm:w-32 sm:h-32 rounded-3xl bg-gradient-to-b from-emerald-500/25 via-slate-900 to-slate-950 border-2 border-emerald-500/50 shadow-2xl flex items-center justify-center overflow-hidden relative transition-all duration-500">
                             <div id="hero-avatar-container" class="w-full h-full flex items-center justify-center avatar-float">
-                                <!-- Smiley Ball Avatar injected dynamically -->
+                                <!-- Smiley Avatar -->
                             </div>
                         </div>
                         <div id="avatar-speech-pill" class="absolute -bottom-3 left-1/2 -translate-x-1/2 whitespace-nowrap px-2.5 py-0.5 rounded-full text-[10px] font-mono font-semibold bg-emerald-600 text-white shadow-lg border border-emerald-400/40 flex items-center gap-1 z-20">
@@ -265,15 +271,9 @@
                                 <div id="wit-meter-bar" class="h-full rounded-full bg-gradient-to-r from-teal-400 via-emerald-500 to-cyan-400 transition-all duration-500" style="width: 60%"></div>
                             </div>
                             <div class="grid grid-cols-3 gap-1 mt-2">
-                                <button onclick="setWitLevel('mild')" id="stage-wit-mild" class="text-[11px] py-1 rounded-lg border border-transparent opacity-75 hover:opacity-100 transition flex items-center justify-center gap-1">
-                                    ☕ Polite
-                                </button>
-                                <button onclick="setWitLevel('medium')" id="stage-wit-medium" class="text-[11px] py-1 rounded-lg bg-emerald-600/20 border border-emerald-500/40 text-emerald-800 dark:text-emerald-200 font-semibold transition flex items-center justify-center gap-1">
-                                    😊 Classic
-                                </button>
-                                <button onclick="setWitLevel('spicy')" id="stage-wit-spicy" class="text-[11px] py-1 rounded-lg border border-transparent opacity-75 hover:opacity-100 transition flex items-center justify-center gap-1">
-                                    🔥 Spicy
-                                </button>
+                                <button type="button" onclick="setWitLevel('mild')" id="stage-wit-mild" class="text-[11px] py-1 rounded-lg border border-transparent opacity-75 hover:opacity-100 transition flex items-center justify-center gap-1">☕ Polite</button>
+                                <button type="button" onclick="setWitLevel('medium')" id="stage-wit-medium" class="text-[11px] py-1 rounded-lg bg-emerald-600/20 border border-emerald-500/40 text-emerald-800 dark:text-emerald-200 font-semibold transition flex items-center justify-center gap-1">😊 Classic</button>
+                                <button type="button" onclick="setWitLevel('spicy')" id="stage-wit-spicy" class="text-[11px] py-1 rounded-lg border border-transparent opacity-75 hover:opacity-100 transition flex items-center justify-center gap-1">🔥 Spicy</button>
                             </div>
                         </div>
                     </div>
@@ -289,14 +289,14 @@
                         </h3>
                     </div>
                     <div class="grid grid-cols-3 sm:flex items-center bg-slate-900/10 dark:bg-slate-900 border border-slate-300 dark:border-slate-800 rounded-xl p-1 text-[11px] w-full sm:w-auto gap-1">
-                        <button onclick="switchVizTab('radar')" id="viz-tab-radar" class="px-2 py-1.5 sm:px-2.5 sm:py-1 rounded-lg bg-emerald-600 text-white font-medium transition flex items-center justify-center gap-1 truncate">
-                            <i class="ph ph-polygon shrink-0"></i> <span>Skill Radar</span>
+                        <button type="button" onclick="switchVizTab('radar')" id="viz-tab-radar" class="px-2 py-1.5 sm:px-2.5 sm:py-1 rounded-lg bg-emerald-600 text-white font-medium transition flex items-center justify-center gap-1 truncate">
+                            <i class="ph ph-polygon shrink-0"></i> <span>Radar</span>
                         </button>
-                        <button onclick="switchVizTab('journey')" id="viz-tab-journey" class="px-2 py-1.5 sm:px-2.5 sm:py-1 rounded-lg opacity-75 hover:opacity-100 transition flex items-center justify-center gap-1 truncate">
+                        <button type="button" onclick="switchVizTab('journey')" id="viz-tab-journey" class="px-2 py-1.5 sm:px-2.5 sm:py-1 rounded-lg opacity-75 hover:opacity-100 transition flex items-center justify-center gap-1 truncate">
                             <i class="ph ph-git-branch shrink-0"></i> <span>Career Arc</span>
                         </button>
-                        <button onclick="switchVizTab('chunks')" id="viz-tab-chunks" class="px-2 py-1.5 sm:px-2.5 sm:py-1 rounded-lg opacity-75 hover:opacity-100 transition flex items-center justify-center gap-1 truncate">
-                            <i class="ph ph-waveform shrink-0"></i> <span>RAG Vectors</span>
+                        <button type="button" onclick="switchVizTab('chunks')" id="viz-tab-chunks" class="px-2 py-1.5 sm:px-2.5 sm:py-1 rounded-lg opacity-75 hover:opacity-100 transition flex items-center justify-center gap-1 truncate">
+                            <i class="ph ph-waveform shrink-0"></i> <span>Vectors</span>
                         </button>
                     </div>
                 </div>
@@ -320,11 +320,11 @@
                                          stroke="#4ade80"
                                          stroke-width="2.2" />
 
-                                <circle id="radar-dot-0" cx="110" cy="30" r="4" fill="#fbbf24" />
-                                <circle id="radar-dot-1" cx="180" cy="82" r="4" fill="#4ade80" />
-                                <circle id="radar-dot-2" cx="153" cy="162" r="4" fill="#34d399" />
-                                <circle id="radar-dot-3" cx="68" cy="160" r="4" fill="#f472b6" />
-                                <circle id="radar-dot-4" cx="42" cy="83" r="4" fill="#38bdf8" />
+                                <circle cx="110" cy="30" r="4" fill="#fbbf24" />
+                                <circle cx="180" cy="82" r="4" fill="#4ade80" />
+                                <circle cx="153" cy="162" r="4" fill="#34d399" />
+                                <circle cx="68" cy="160" r="4" fill="#f472b6" />
+                                <circle cx="42" cy="83" r="4" fill="#38bdf8" />
 
                                 <text x="110" y="14" text-anchor="middle" fill="currentColor" font-size="8.5" font-family="JetBrains Mono" font-weight="600">PRODUCT STRATEGY</text>
                                 <text x="191" y="83" text-anchor="start" fill="currentColor" font-size="8" font-family="JetBrains Mono">SWE & ARCH</text>
@@ -349,7 +349,7 @@
                     <div class="bg-slate-900/5 dark:bg-slate-900/70 border border-slate-300/60 dark:border-slate-800/80 rounded-xl p-3">
                         <div class="flex items-center justify-between gap-2 mb-2">
                             <span class="text-[10px] sm:text-[11px] font-mono uppercase tracking-wider font-semibold flex items-center gap-1.5 truncate">
-                                <span class="w-2 h-2 rounded-full bg-emerald-500 dark:bg-emerald-400 animate-pulse shrink-0"></span>
+                                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shrink-0"></span>
                                 <span class="truncate">Live Semantic Retrieval</span>
                             </span>
                             <span id="rag-status-pill" class="text-[10px] font-mono px-2 py-0.5 rounded-md bg-slate-900/10 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 shrink-0">
@@ -371,8 +371,8 @@
                     <div class="relative mb-2.5">
                         <i class="ph ph-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 opacity-50 text-sm"></i>
                         <input type="text" id="chunk-filter-input" oninput="renderChunksList()"
-                               placeholder="Filter chunks (e.g. Ooty, Instagram, Way.com, Team Everest)..."
-                               class="w-full bg-slate-900/5 dark:bg-slate-900/90 border border-slate-300 dark:border-slate-800 focus:border-emerald-500 rounded-xl pl-9 pr-3 py-2 text-xs placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none transition">
+                               placeholder="Filter chunks (Ooty, Instagram, Way.com, Team Everest)..."
+                               class="w-full bg-slate-900/5 dark:bg-slate-900/90 border border-slate-300 dark:border-slate-800 focus:border-emerald-500 rounded-xl pl-9 pr-3 py-2 text-xs placeholder-slate-400 focus:outline-none transition">
                     </div>
                     <div id="rag-chunks-container" class="space-y-2.5 overflow-y-auto max-h-[360px] pr-1 flex-1"></div>
                 </div>
@@ -384,7 +384,7 @@
 
             <div class="px-3 py-2 sm:px-4 sm:py-3 bg-slate-900/5 dark:bg-slate-900/70 border-b border-slate-300/40 dark:border-slate-800/80 flex items-center justify-between gap-2 shrink-0">
                 <div class="flex items-center gap-2 min-w-0">
-                    <div id="chat-subbar-avatar" onclick="switchMobilePrimaryView('studio')" class="w-7 h-7 rounded-lg bg-slate-800 border border-emerald-500/40 overflow-hidden flex items-center justify-center shrink-0 cursor-pointer" title="Tap to view Nitin's Visual Studio">
+                    <div id="chat-subbar-avatar" onclick="switchMobilePrimaryView('studio')" class="w-7 h-7 rounded-lg bg-slate-800 border border-emerald-500/40 overflow-hidden flex items-center justify-center shrink-0 cursor-pointer" title="Tap to view Visual Studio">
                         <!-- Smiley Avatar -->
                     </div>
                     <div class="min-w-0 flex items-center gap-1.5 flex-wrap">
@@ -394,12 +394,12 @@
                         </span>
                     </div>
                 </div>
-                <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
-                    <button onclick="switchMobilePrimaryView('studio')" class="lg:hidden text-[11px] px-2 py-1 rounded-lg bg-emerald-500/15 text-emerald-800 dark:text-emerald-300 border border-emerald-500/30 flex items-center gap-1 font-medium">
+                <div class="flex items-center gap-1.5 shrink-0">
+                    <button type="button" onclick="switchMobilePrimaryView('studio')" class="lg:hidden text-[11px] px-2 py-1 rounded-lg bg-emerald-500/15 text-emerald-800 dark:text-emerald-300 border border-emerald-500/30 flex items-center gap-1 font-medium">
                         <i class="ph-fill ph-chart-polar"></i> <span>Studio</span>
                     </button>
-                    <button onclick="openKnowledgeModal()" class="text-[11px] sm:text-xs text-emerald-700 dark:text-emerald-400 hover:opacity-85 flex items-center gap-1 font-medium transition px-1.5 py-1 rounded-lg hover:bg-slate-900/10">
-                        <i class="ph ph-plus-circle"></i> <span class="hidden sm:inline">Add Bio/Insta Post</span><span class="sm:hidden">Add Bio</span>
+                    <button type="button" onclick="openKnowledgeModal()" class="text-[11px] sm:text-xs text-emerald-700 dark:text-emerald-400 hover:opacity-85 flex items-center gap-1 font-medium transition px-1.5 py-1 rounded-lg">
+                        <i class="ph ph-plus-circle"></i> <span class="hidden sm:inline">Add Bio/Insta</span><span class="sm:hidden">Add</span>
                     </button>
                 </div>
             </div>
@@ -421,10 +421,10 @@
                         placeholder="Ask about Ooty roots, Instagram @tintin_tn43, Way.com, Team Everest..."
                         onkeydown="handleTextareaKey(event)"
                         oninput="autoResizeTextarea(this)"
-                        class="w-full bg-white dark:bg-slate-950 border border-slate-300 dark:border-slate-700/80 focus:border-emerald-500 rounded-xl pl-3 pr-3 py-2.5 sm:py-3 text-base sm:text-sm placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none transition resize-none max-h-24 leading-snug"></textarea>
+                        class="w-full bg-white dark:bg-slate-950 border border-slate-300 dark:border-slate-700/80 focus:border-emerald-500 rounded-xl pl-3 pr-3 py-2.5 sm:py-3 text-base sm:text-sm placeholder-slate-400 focus:outline-none transition resize-none max-h-24 leading-snug"></textarea>
                 </div>
                 <button type="submit" id="send-btn"
-                    class="px-3.5 py-2.5 sm:px-4 sm:py-3 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:opacity-90 text-white font-semibold text-xs sm:text-sm shadow-lg shadow-emerald-600/25 flex items-center justify-center gap-1.5 sm:gap-2 transition disabled:opacity-50 disabled:cursor-not-allowed shrink-0 h-[42px] sm:h-auto">
+                    class="px-3.5 py-2.5 sm:px-4 sm:py-3 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:opacity-90 text-white font-semibold text-xs sm:text-sm shadow-lg shadow-emerald-600/25 flex items-center justify-center gap-1.5 transition disabled:opacity-50 disabled:cursor-not-allowed shrink-0 h-[42px] sm:h-auto">
                     <span>Ask</span>
                     <span class="hidden sm:inline">Nitin</span>
                     <i class="ph-bold ph-paper-plane-right"></i>
@@ -448,7 +448,7 @@
                 class="flex-1 py-1.5 rounded-xl flex flex-col items-center justify-center gap-0.5 opacity-70 hover:opacity-100 transition">
             <div class="relative flex items-center justify-center">
                 <i class="ph-fill ph-waveform text-lg"></i>
-                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 dark:bg-emerald-400 absolute -top-0.5 -right-1.5"></span>
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 absolute -top-0.5 -right-1.5"></span>
             </div>
             <span class="text-[10px]">Vectors</span>
         </button>
@@ -466,9 +466,7 @@
                     <i class="ph-fill ph-key text-amber-500"></i>
                     AI Key Configuration & Built-In Key
                 </h3>
-                <button onclick="closeApiKeyModal()" class="p-1.5 rounded-lg opacity-70 hover:opacity-100 transition">
-                    <i class="ph ph-x text-lg"></i>
-                </button>
+                <button type="button" onclick="closeApiKeyModal()" class="p-1.5 rounded-lg opacity-70 hover:opacity-100 transition"><i class="ph ph-x text-lg"></i></button>
             </div>
             <div class="p-5 space-y-3 text-xs opacity-90">
                 <p class="leading-relaxed">
@@ -479,14 +477,14 @@
                     <div class="flex gap-2">
                         <input id="custom-api-key-input" type="password" placeholder="AIzaSy..."
                             class="flex-1 bg-white dark:bg-slate-950 border border-slate-300 dark:border-slate-800 rounded-xl px-3.5 py-2.5 text-xs focus:border-emerald-500 focus:outline-none font-mono">
-                        <button onclick="populateDefaultKey()" class="px-3 py-2 rounded-xl bg-slate-200 dark:bg-slate-800 hover:opacity-85 text-[11px] font-mono transition whitespace-nowrap" title="Populate Default Key">Use Default</button>
+                        <button type="button" onclick="populateDefaultKey()" class="px-3 py-2 rounded-xl bg-slate-200 dark:bg-slate-800 hover:opacity-85 text-[11px] font-mono transition whitespace-nowrap">Use Default</button>
                     </div>
                 </div>
                 <div class="flex items-center justify-between pt-2">
-                    <span id="apikey-save-status" class="text-[11px] text-emerald-500 dark:text-emerald-400 opacity-0 transition">Saved!</span>
+                    <span id="apikey-save-status" class="text-[11px] text-emerald-500 opacity-0 transition">Saved!</span>
                     <div class="flex gap-2">
-                        <button onclick="clearCustomApiKey()" class="px-3 py-1.5 rounded-lg bg-slate-200 dark:bg-slate-800 hover:opacity-85 text-xs transition">Clear</button>
-                        <button onclick="saveCustomApiKey()" class="px-4 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs transition">Save Key</button>
+                        <button type="button" onclick="clearCustomApiKey()" class="px-3 py-1.5 rounded-lg bg-slate-200 dark:bg-slate-800 hover:opacity-85 text-xs transition">Clear</button>
+                        <button type="button" onclick="saveCustomApiKey()" class="px-4 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs transition">Save Key</button>
                     </div>
                 </div>
             </div>
@@ -505,9 +503,7 @@
                         View, edit, or paste raw text from your LinkedIn profile or Instagram posts (`@tintin_tn43`) to expand the RAG vector index.
                     </p>
                 </div>
-                <button onclick="closeKnowledgeModal()" class="p-1.5 rounded-lg opacity-70 hover:opacity-100 transition">
-                    <i class="ph ph-x text-lg"></i>
-                </button>
+                <button type="button" onclick="closeKnowledgeModal()" class="p-1.5 rounded-lg opacity-70 hover:opacity-100 transition"><i class="ph ph-x text-lg"></i></button>
             </div>
 
             <div class="p-5 overflow-y-auto space-y-5 flex-1">
@@ -540,8 +536,8 @@
                             class="w-full bg-white dark:bg-slate-950 border border-slate-300 dark:border-slate-800 rounded-lg p-3 text-xs focus:border-emerald-500 focus:outline-none"></textarea>
                     </div>
                     <div class="flex justify-between items-center">
-                        <span id="chunk-save-feedback" class="text-xs text-emerald-500 dark:text-emerald-400 opacity-0 transition">Chunk indexed into RAG!</span>
-                        <button onclick="addCustomChunk()" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg text-xs font-semibold transition flex items-center gap-1.5">
+                        <span id="chunk-save-feedback" class="text-xs text-emerald-500 opacity-0 transition">Chunk indexed into RAG!</span>
+                        <button type="button" onclick="addCustomChunk()" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg text-xs font-semibold transition flex items-center gap-1.5">
                             <i class="ph-bold ph-upload-simple"></i> Index Chunk into RAG
                         </button>
                     </div>
@@ -549,21 +545,39 @@
 
                 <div>
                     <div class="flex items-center justify-between mb-2">
-                        <h4 class="text-xs font-mono uppercase tracking-wider opacity-75 font-semibold">
-                            Indexed Profile Chunks
-                        </h4>
-                        <button onclick="resetDefaultKnowledge()" class="text-xs text-rose-500 dark:text-rose-400 hover:underline">
-                            Restore Default Profile Data
-                        </button>
+                        <h4 class="text-xs font-mono uppercase tracking-wider opacity-75 font-semibold">Indexed Profile Chunks</h4>
+                        <button type="button" onclick="resetDefaultKnowledge()" class="text-xs text-rose-500 hover:underline">Restore Default Profile Data</button>
                     </div>
                     <div id="modal-chunks-list" class="space-y-2.5"></div>
                 </div>
             </div>
 
             <div class="px-5 py-3 border-t border-slate-300 dark:border-slate-800 bg-slate-900/10 dark:bg-slate-900/80 flex justify-end">
-                <button onclick="closeKnowledgeModal()" class="px-4 py-2 rounded-xl bg-slate-200 dark:bg-slate-800 hover:opacity-85 text-xs font-semibold transition">
-                    Done
-                </button>
+                <button type="button" onclick="closeKnowledgeModal()" class="px-4 py-2 rounded-xl bg-slate-200 dark:bg-slate-800 hover:opacity-85 text-xs font-semibold transition">Done</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- PWA Install Modal / Instructions -->
+    <div id="pwa-install-modal" class="fixed inset-0 z-[60] hidden items-center justify-center bg-slate-950/85 backdrop-blur-sm p-3 sm:p-4">
+        <div class="glass-panel border rounded-2xl max-w-md w-full flex flex-col shadow-2xl overflow-hidden">
+            <div class="px-5 py-4 border-b border-slate-300 dark:border-slate-800 flex items-center justify-between bg-slate-900/10 dark:bg-slate-900/80">
+                <h3 class="text-sm font-bold flex items-center gap-2">
+                    <i class="ph-bold ph-download-simple text-emerald-500"></i>
+                    Install Ask Nitin.AI App / PWA
+                </h3>
+                <button type="button" onclick="closePwaModal()" class="p-1.5 rounded-lg opacity-70 hover:opacity-100 transition"><i class="ph ph-x text-lg"></i></button>
+            </div>
+            <div class="p-5 space-y-3 text-xs opacity-90 leading-relaxed">
+                <p>You can install this Witty RAG Assistant as a native desktop plugin or mobile app:</p>
+                <ol class="list-decimal pl-4 space-y-2 font-medium">
+                    <li><strong>Google Chrome (Desktop):</strong> Click the install icon (➕ or computer with down arrow) in the right side of your browser address bar, or open the browser menu (⋮) and select <strong>"Install Ask Nitin.AI..."</strong>.</li>
+                    <li><strong>Android (Chrome / Brave):</strong> Tap the browser menu (⋮) and choose <strong>"Install app"</strong> or <strong>"Add to Home screen"</strong>.</li>
+                    <li><strong>iPhone / iPad (Safari):</strong> Tap the Share button (<svg class="w-3.5 h-3.5 inline" fill="currentColor" viewBox="0 0 24 24"><path d="M16 5l-4-4-4 4h3v8h2V5h3zm-7 12v2h10v-2H9zm-2-8v11h14V9H7z"/></svg>) and select <strong>"Add to Home Screen"</strong>.</li>
+                </ol>
+                <div class="pt-2 flex justify-end">
+                    <button type="button" onclick="closePwaModal()" class="px-4 py-2 rounded-xl bg-emerald-600 text-white font-semibold text-xs transition">Got It</button>
+                </div>
             </div>
         </div>
     </div>
@@ -574,6 +588,49 @@
         try {
             userProvidedApiKey = localStorage.getItem('nitin_gemini_api_key') || "";
         } catch (e) {}
+
+        // PWA Installation prompt handling
+        let deferredPrompt = null;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            const btn = document.getElementById('pwa-install-btn');
+            if (btn) btn.classList.remove('hidden');
+        });
+
+        async function triggerPwaInstall() {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                if (outcome === 'accepted') {
+                    document.getElementById('pwa-install-btn')?.classList.add('hidden');
+                }
+                deferredPrompt = null;
+            } else {
+                const modal = document.getElementById('pwa-install-modal');
+                if (modal) {
+                    modal.classList.remove('hidden');
+                    modal.classList.add('flex');
+                }
+            }
+        }
+
+        function closePwaModal() {
+            document.getElementById('pwa-install-modal')?.classList.add('hidden');
+        }
+
+        // Register Service Worker for offline PWA capabilities
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                const swBlob = new Blob([`
+                    self.addEventListener('install', e => e.waitUntil(self.skipWaiting()));
+                    self.addEventListener('activate', e => e.waitUntil(self.clients.claim()));
+                    self.addEventListener('fetch', e => e.respondWith(fetch(e.request).catch(() => caches.match(e.request))));
+                `], { type: 'text/javascript' });
+                const swUrl = URL.createObjectURL(swBlob);
+                navigator.serviceWorker.register(swUrl).catch(() => {});
+            });
+        }
 
         const DEFAULT_KNOWLEDGE_CHUNKS = [
             {
@@ -822,10 +879,10 @@
             if (stateChip) {
                 if (action === 'thinking') {
                     stateChip.className = "inline-flex items-center gap-1 text-[10px] font-mono text-amber-600 dark:text-amber-300 bg-amber-500/15 border border-amber-500/30 px-2 py-0.5 rounded-full";
-                    stateChip.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-amber-500 animate-ping"></span> Scanning Ooty Vectors...`;
+                    stateChip.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-amber-500 animate-ping"></span> Scanning RAG Vectors...`;
                 } else {
                     stateChip.className = "inline-flex items-center gap-1 text-[10px] font-mono text-emerald-600 dark:text-emerald-300 bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded-full";
-                    stateChip.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-emerald-500 dark:bg-emerald-400 animate-ping"></span> Online (${cfg.label})`;
+                    stateChip.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping"></span> Online (${cfg.label})`;
                 }
             }
 
@@ -897,7 +954,7 @@
             if (!container) return;
             container.innerHTML = CAREER_TIMELINE.map(item => `
                 <div onclick="triggerTimelineQuery('${escapeHtml(item.query.replace(/'/g, "\\'"))}')"
-                     class="relative group cursor-pointer bg-slate-900/5 dark:bg-slate-900/75 hover:bg-slate-900/10 dark:hover:bg-slate-900 border border-slate-300/60 dark:border-slate-800/90 hover:border-emerald-500/60 rounded-xl p-3 transition-all">
+                     class="relative group cursor-pointer bg-slate-900/5 dark:bg-slate-900/75 hover:bg-slate-900/10 border border-slate-300/60 dark:border-slate-800/90 hover:border-emerald-500/60 rounded-xl p-3 transition-all">
                     <span class="absolute -left-[27px] top-4 w-3.5 h-3.5 rounded-full bg-white dark:bg-slate-950 border-2 border-emerald-500 group-hover:scale-125 group-hover:bg-emerald-500 transition"></span>
                     <div class="flex items-center justify-between gap-2 mb-1">
                         <span class="text-[10px] font-mono opacity-75">${escapeHtml(item.year)}</span>
@@ -998,7 +1055,7 @@
 
         function initKnowledgeBase() {
             try {
-                const saved = localStorage.getItem('nitin_rag_chunks_v5');
+                const saved = localStorage.getItem('nitin_rag_chunks_v6');
                 if (saved) {
                     knowledgeChunks = JSON.parse(saved);
                 } else {
@@ -1013,7 +1070,7 @@
 
         function saveKnowledgeBase() {
             try {
-                localStorage.setItem('nitin_rag_chunks_v5', JSON.stringify(knowledgeChunks));
+                localStorage.setItem('nitin_rag_chunks_v6', JSON.stringify(knowledgeChunks));
             } catch (e) {}
             updateChunkBadge();
             renderChunksList();
@@ -1108,11 +1165,11 @@
             container.innerHTML = displayList.map(chunk => {
                 const activeClasses = chunk.isRetrieved
                     ? 'border-emerald-500/80 bg-emerald-500/10 chunk-highlight'
-                    : 'border-slate-300/60 dark:border-slate-800/80 bg-slate-900/5 dark:bg-slate-900/60 hover:opacity-100';
+                    : 'border-slate-300/60 dark:border-slate-800/80 bg-slate-900/5 dark:bg-slate-900/60';
 
                 const badgeHtml = chunk.isRetrieved
                     ? `<span class="text-[10px] font-mono font-semibold px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30 flex items-center gap-1">
-                         <i class="ph-fill ph-check-circle"></i> Retrieved (${chunk.similarity}% match)
+                         <i class="ph-fill ph-check-circle"></i> Retrieved (${chunk.similarity}%)
                        </span>`
                     : `<span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-slate-900/10 dark:bg-slate-800 opacity-75">Indexed</span>`;
 
@@ -1123,7 +1180,7 @@
                             ${badgeHtml}
                         </div>
                         <h4 class="text-xs font-bold mb-1">${escapeHtml(chunk.title)}</h4>
-                        <p class="text-xs opacity-75 leading-relaxed line-clamp-3 hover:line-clamp-none transition-all cursor-pointer" title="Click to expand">${escapeHtml(chunk.content)}</p>
+                        <p class="text-xs opacity-75 leading-relaxed line-clamp-3">${escapeHtml(chunk.content)}</p>
                     </div>
                 `;
             }).join('');
@@ -1166,9 +1223,9 @@
                 const mobTopBtn = document.getElementById(`mobile-top-wit-${l}`);
                 if (mobTopBtn) {
                     if (l === level) {
-                        mobTopBtn.className = "text-[11px] py-1 px-1 rounded-lg bg-emerald-600 text-white font-semibold border border-emerald-500 shadow-sm transition flex items-center justify-center gap-1";
+                        mobTopBtn.className = "text-[10px] py-1 px-1 rounded-lg bg-emerald-600 text-white font-semibold border border-emerald-500 shadow-sm transition flex items-center justify-center gap-0.5";
                     } else {
-                        mobTopBtn.className = "text-[11px] py-1 px-1 rounded-lg bg-white/60 dark:bg-slate-900/90 border border-slate-300 dark:border-slate-800 transition flex items-center justify-center gap-1";
+                        mobTopBtn.className = "text-[10px] py-1 px-1 rounded-lg bg-white/60 dark:bg-slate-900 border border-slate-300 dark:border-slate-800 transition flex items-center justify-center gap-0.5";
                     }
                 }
             });
@@ -1242,7 +1299,7 @@ ${contextString}`;
             const introHooks = {
                 mild: `Vanakkam from the Nilgiri hills! Pulling straight from my **${primary.category}** notes on LinkedIn and Instagram (\`@tintin_tn43\`), with a touch of Ooty mountain clarity:`,
                 medium: `Great question! Welcoming that question with open arms (and a breath of crisp mountain air from Ooty, plus some IG highlights from @tintin_tn43)—here is the exact receipt from my career and personal life backlog:`,
-                spicy: ` Buckle up—no 45-slide deck required. Here is the unfiltered truth straight from my **${primary.category}** track record:`
+                spicy: `Buckle up—no 45-slide deck required. Here is the unfiltered truth straight from my **${primary.category}** track record:`
             };
 
             return `${introHooks[currentWitLevel]}\n\n**${primary.title}**\n${primary.content}\n\n${secondary && secondary.similarity >= 72 ? `**Connected Milestone — ${secondary.title}:**\n${secondary.content}\n\n` : ''}Would you like to explore more of my Ooty background, my Instagram snaps (@tintin_tn43), my journey at Way.com, or my NGO work at Team Everest?`;
@@ -1356,7 +1413,7 @@ ${contextString}`;
                         <div class="w-2 h-2 bg-emerald-500 rounded-full typing-dot"></div>
                         <div class="w-2 h-2 bg-emerald-500 rounded-full typing-dot"></div>
                     </div>
-                    <span class="text-xs font-mono opacity-75 ml-1">Brewing Nilgiri tea & scanning RAG vectors...</span>
+                    <span class="text-xs font-mono opacity-75 ml-1">Brewing Nilgiri tea & scanning vectors...</span>
                 </div>
             `;
             container.appendChild(indicator);
@@ -1448,7 +1505,7 @@ ${contextString}`;
                         </div>
                         <p class="text-xs opacity-75 leading-relaxed">${escapeHtml(chunk.content)}</p>
                     </div>
-                    <button onclick="deleteChunk('${chunk.id}')" class="p-1.5 opacity-60 hover:text-rose-500 transition" title="Delete Chunk">
+                    <button type="button" onclick="deleteChunk('${chunk.id}')" class="p-1.5 opacity-60 hover:text-rose-500 transition" title="Delete Chunk">
                         <i class="ph ph-trash text-base"></i>
                     </button>
                 </div>
